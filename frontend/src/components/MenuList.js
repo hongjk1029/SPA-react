@@ -13,7 +13,7 @@ export const MenuList = () => {
     axios
       .get(`${baseURL}/menu/`, {
         headers: {
-          headers,
+          "Content-type": "application/json",
         },
       })
       .then((response) => {
@@ -29,7 +29,7 @@ export const MenuList = () => {
     axios
       .delete(`${baseURL}/menu/${id}/`, {
         headers: {
-          headers,
+          "Content-type": "application/json",
         },
       })
       .then((response) => {

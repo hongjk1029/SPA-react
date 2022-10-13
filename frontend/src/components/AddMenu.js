@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { baseURL, headers } from "./../services/menu.service";
+import { baseURL } from "./../services/menu.service";
 
 export const AddMenu = () => {
   const initialMenuState = {
@@ -27,7 +27,7 @@ export const AddMenu = () => {
 
     axios.post(`${baseURL}/menu/`, data, {
         headers: {
-          headers,
+          "Content-type": "application/json",
         },
       })
       .then((response) => {
