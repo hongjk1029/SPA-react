@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'storages',
     'user',
 ]
 
@@ -81,8 +82,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'spadb',
+        'USER': 'spaadmin',
+        'PASSWORD': 'Password1',
+        'HOST': '20.78.124.119',
+        'PORT': '5432',
     }
 }
 
@@ -132,8 +137,17 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_WHITELIST = [
-    "https://example.com",
-    "https://sub.example.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000"
 ]
+
+DEFAULT_FILE_STORAGE = 'core.custom_azure.AzureMediaStorage'
+STATICFILES_STORAGE = 'core.custom_azure.AzureStaticStorage'
+
+STATIC_LOCATION = "staticfile"
+MEDIA_LOCATION = "media"
+
+AZURE_ACCOUNT_NAME = "spadevstorage"
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
