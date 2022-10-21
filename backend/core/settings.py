@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'storages',
     'user',
+    'vehicle',
 ]
 
 MIDDLEWARE = [
@@ -80,17 +81,26 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'spadb',
-        'USER': 'spaadmin',
-        'PASSWORD': 'Password1',
-        'HOST': '20.78.124.119',
-        'PORT': '5432',
-    }
-}
+database_switch = 1
 
+if database_switch == 1:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'spadb',
+            'USER': 'spaadmin',
+            'PASSWORD': 'Password1',
+            'HOST': '20.78.124.119',
+            'PORT': '5432',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
