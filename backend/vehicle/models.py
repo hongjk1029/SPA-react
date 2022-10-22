@@ -6,6 +6,9 @@ class VehicleBrand(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.brand_name
+
 sales_type = [
     ('Sales','Sales'),
     ('Rent','Rent'),
@@ -16,11 +19,6 @@ fuel_type = [
     ('Hybrid','Hybrid'),
     ('EV','EV'),
 ]
-
-class VehicleImage(models.Model):   
-    vehical_image = models.ImageField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
 
 class VehicleDetails(models.Model):
     fuel_type = models.CharField(max_length=255)
@@ -50,26 +48,31 @@ class VehicleRent(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+class Vehicle(models.Model):
+    vehicle = models.CharField(max_length=255)
+    vehicle_brand = models.ForeignKey(VehicleBrand, on_delete=models.CASCADE)
+    vehicle_overview = models.CharField(max_length=255)  
+    number_plate = models.CharField(max_length=10)
+    is_active = models.BooleanField(default=True)
+    # vehicle_rent_active = models.OneToOneField(VehicleRent,on_delete=models.CASCADE)
+    # price_of_cost = models.DecimalField(max_digits=999,decimal_places=2)
+    # price_of_sale = models.DecimalField(max_digits=999,decimal_places=2)
+    # vehicle_details = models.OneToOneField(VehicleDetails, on_delete=models.CASCADE)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.vehicle
 
 class VehicleDocument(models.Model):
-    document = models.FileField()
+    document = models.FileField(null=True)
+    vehicle = models.ForeignKey(Vehicle, related_name='documents', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-
-class Vehicle(models.Model):
-    vehical_name = models.CharField(max_length=255)
-    vehical_brand = models.ForeignKey(VehicleBrand, on_delete=models.CASCADE)
-    vehical_overview = models.CharField(max_length=255)  
-    number_plate = models.CharField(max_length=10)
-    is_active = models.BooleanField()
-    vehical_image = models.ForeignKey(VehicleImage, on_delete=models.CASCADE)
-    vehicle_rent_active = models.OneToOneField(VehicleRent,on_delete=models.CASCADE)
-    price_of_cost = models.DecimalField(max_digits=999,decimal_places=2)
-    price_of_sale = models.DecimalField(max_digits=999,decimal_places=2)
-    vehicle_details = models.OneToOneField(VehicleDetails, on_delete=models.CASCADE)
-    vehicle_document = models.ForeignKey(VehicleDocument, on_delete=models.CASCADE)
-
+class VehicleImage(models.Model):   
+    vehical_image = models.ImageField()
+    vehicle = models.ForeignKey(Vehicle, related_name='vehicle_image', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-

@@ -84,6 +84,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 database_switch = 1
 
 if database_switch == 1:
+    # locahost database
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -91,6 +92,7 @@ if database_switch == 1:
         }
     }
 else:
+    # Production database
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
