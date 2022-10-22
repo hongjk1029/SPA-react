@@ -7,10 +7,16 @@ from rest_framework.response import Response
 
 # Vehicle Brand Here
 class VehicleBrandList(generics.ListCreateAPIView):
+    """
+    create and view list for vehicle
+    """
     queryset = VehicleBrand.objects.all()
     serializer_class = VehicleBrandSerializer
 
 class VehicleBrandDetails(generics.RetrieveUpdateDestroyAPIView):
+    """
+    
+    """
     queryset = VehicleBrand.objects.all()
     serializer_class = VehicleBrandSerializer
 
