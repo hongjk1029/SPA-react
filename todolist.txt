@@ -1,29 +1,14 @@
 TO DO LIST :
+Admin able to add new car
+    add document details
+admin able to view car list
+admin able to view car details
+admin able to update car details
+admin able to delete car details
 
-Admin:
-- Admin will see dashboard
-- Admin will see a list of inventory
-- Admin will be able to Add, Edit and Delete cars from inventory
+customer able to view car list
+customer able to view car details
+customer able to fliter car details(brand and etc)
+customer able to contact seller with whatsapp
+customer able to view about us page
 
-- Add car model 
-- Add car brand 
-- Add car car plate 
-- Add car version (1.0/2.0)
-- Add car year manufactured
-- Add car seating capacity
-- Add car mileage
-- Add car fuel type
-- Add car manual/ auto
-- Add car images
-- Add car Feature list
-- Add car price
-- Add car sale price
-- Add car rent price
-
-
-Frontend customer :
-- User will see list of cars
-- User will see different filters in order to browse particular type of car
-- User will click on car from list and will see detailed information about that car
-- User will see a whatsapp message form to send an interest for car 
-- contact us page 

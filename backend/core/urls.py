@@ -19,5 +19,7 @@ from user.routers import router
     
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include((router.urls, 'restaurant'), namespace='restaurant'))
+    # path('api/', include((router.urls, 'restaurant'), namespace='restaurant')),
+    path('api/vehicle/', include('vehicle.urls')),
+
 ]
