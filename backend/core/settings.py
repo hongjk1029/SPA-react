@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'storages',
     'user',
     'vehicle',
+    'feedback'
 ]
 
 MIDDLEWARE = [
