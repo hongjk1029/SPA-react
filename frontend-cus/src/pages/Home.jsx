@@ -37,21 +37,6 @@ const Home = () => {
           </Container>
         </div>
       </section>
-      {/* =========== about section ================ */}
-      <AboutSection />
-      {/* ========== services section ============ */}
-      <section>
-        <Container>
-          <Row>
-            <Col lg="12" className="mb-5 text-center">
-              <h6 className="section__subtitle">See our</h6>
-              <h2 className="section__title">Popular Services</h2>
-            </Col>
-
-            <ServicesList />
-          </Row>
-        </Container>
-      </section>
       {/* =========== car offer section ============= */}
       <section>
         <Container>
@@ -67,33 +52,18 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-      {/* =========== become a driver section ============ */}
-      <BecomeDriverSection />
-
-      {/* =========== testimonial section =========== */}
-      <section>
-        <Container>
-          <Row>
-            <Col lg="12" className="mb-4 text-center">
-              <h6 className="section__subtitle">Our clients says</h6>
-              <h2 className="section__title">Testimonials</h2>
-            </Col>
-
-            <Testimonial />
-          </Row>
-        </Container>
-      </section>
-
-      {/* =============== blog section =========== */}
+      {/* =========== about section ================ */}
+      <AboutSection />
+      {/* ========== services section ============ */}
       <section>
         <Container>
           <Row>
             <Col lg="12" className="mb-5 text-center">
-              <h6 className="section__subtitle">Explore our blogs</h6>
-              <h2 className="section__title">Latest Blogs</h2>
+              <h6 className="section__subtitle">See our</h6>
+              <h2 className="section__title">Popular Services</h2>
             </Col>
 
-            <BlogList />
+            <ServicesList />
           </Row>
         </Container>
       </section>
