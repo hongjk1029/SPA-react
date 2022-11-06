@@ -6,22 +6,29 @@ import "../../styles/header.css";
 
 const navLinks = [
   {
-    path: "/home",
-    display: "Home",
+    path: "/admin/dashboard",
+    display: "Dashboard",
   },
   {
-    path: "/about",
-    display: "About",
+    path: "/admin/brands",
+    display: "Brands",
   },
   {
-    path: "/cars",
-    display: "Cars",
+    path: "/admin/vehicles",
+    display: "Vehicles",
   },
-
   {
-    path: "/contact",
-    display: "Contact",
+    path: "/admin/manage-query",
+    display: "Manage Query",
   },
+  {
+    path: "/admin/manage-pages",
+    display: "Manage Pages",
+  },
+  {
+    path: "/admin/contact-info",
+    display: "Contact Info",
+  }
 ];
 
 const Header = () => {
@@ -106,11 +113,11 @@ const Header = () => {
               sm="0"
               className=" d-flex align-items-center justify-content-end "
             >
-              <button className="header__btn btn ">
+              {/* <button className="header__btn btn ">
                 <Link to="/contact">
                   <i class="ri-phone-line"></i> Request a call
                 </Link>
-              </button>
+              </button> */}
             </Col>
           </Row>
         </Container>
@@ -142,12 +149,12 @@ const Header = () => {
             </div>
 
             <div className="nav__right">
-              <div className="search__box">
+              {/* <div className="search__box">
                 <input type="text" placeholder="Search" />
                 <span>
                   <i class="ri-search-line"></i>
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         </Container>
