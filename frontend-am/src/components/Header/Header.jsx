@@ -125,7 +125,7 @@ const Header = () => {
 
       {/* ========== main navigation =========== */}
 
-      <div className="main__navbar">
+      {/* <div className="main__navbar">
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
             <span className="mobile__menu">
@@ -149,16 +149,16 @@ const Header = () => {
             </div>
 
             <div className="nav__right">
-              {/* <div className="search__box">
+              <div className="search__box">
                 <input type="text" placeholder="Search" />
                 <span>
                   <i class="ri-search-line"></i>
                 </span>
-              </div> */}
+              </div>
             </div>
           </div>
         </Container>
-      </div>
+      </div> */}
     </header>
   );
 };

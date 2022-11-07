@@ -1,15 +1,13 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import Helmet from "../components/Helmet/Helmet";
-
-import "../styles/dashboard.css";
 import { FiArrowRight } from "react-icons/fi";
 import dashboardData from "../assets/data/dashboardData";
 
+import "../styles/dashboard.css";
+
 const Dashboard = () => {
   return (
-    <Helmet title="Home">
-    <section>
+  <section>
     <Container>
       <Row>
         <h2>Dashboard</h2>
@@ -30,7 +28,6 @@ const Dashboard = () => {
       </Row>
     </Container>
   </section>
-  </Helmet>
 
   );
 };
