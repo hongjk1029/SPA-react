@@ -16,8 +16,11 @@ const Layout = () => {
     <Fragment>
       <Header />
       <Row>
-        <Col md="2" sm="2" lg="auto" xs="2" class="">
-          <Sidebar backgroundColor="#212529" overlayColor="#C70039">
+        <Col lg="auto">
+          <Sidebar backgroundColor="#212529">
+            <div class="px-3 pt-3 pb-1">
+             <label class="text-secondary">MAIN</label>
+            </div>
             <Menu>
             {navLinks.map((item) => {
               if(item.hasChild){

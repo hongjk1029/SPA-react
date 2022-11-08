@@ -2,3 +2,22 @@
     height: 60px;
     width: 60px;
 }
+
+.btnWhatsapp{
+    font-family: sans-serif;
+    text-decoration: none;
+    margin: 1em auto;
+    color: #fff;
+    font-size: 0.9em;
+    padding: 1em 2em 1em 2em;
+    border-radius: 2em;
+    font-weight: bold;
+    background: #25d366;
+    background-size: 1.6em;
+    border: none;
+    vertical-align: middle;
+}
+
+.iconWhatsapp{
+    color: #fff;
+}

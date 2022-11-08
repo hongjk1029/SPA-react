@@ -12,15 +12,16 @@ import Contact from "../pages/Contact";
 const Routers = () => {
   return (
     <Routes>
+      {/* Level 1 path */}
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/cars" element={<CarListing />} />
-      <Route path="/cars/:slug" element={<CarDetails />} />
-      <Route path="/blogs" element={<Blog />} />
-      <Route path="/blogs/:slug" element={<BlogDetails />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
+
+      {/* Level 2 path */}
+      <Route path="/cars/:slug" element={<CarDetails />} />
     </Routes>
   );
 };

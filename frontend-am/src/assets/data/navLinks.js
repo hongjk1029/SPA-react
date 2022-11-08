@@ -4,7 +4,7 @@ const brandLinks = [
       childDisplay: "Add Brand",
     },
     {
-      childPath: "/admin/brands/edit",
+      childPath: "/admin/brands",
       childDisplay: "Manage Brands",
     }
   ]
@@ -15,7 +15,7 @@ const brandLinks = [
       childDisplay: "Add Vehicle",
     },
     {
-      childPath: "/admin/vehicles/edit",
+      childPath: "/admin/vehicles",
       childDisplay: "Manage Vehicles",
     },
   ]
