@@ -4,6 +4,7 @@ import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import CarItem from "../components/UI/CarItem";
 import carData from "../assets/data/carData";
+import FindCarForm from "../components/UI/FindCarForm";
 
 const CarListing = () => {
   return (
@@ -12,6 +13,18 @@ const CarListing = () => {
 
       <section>
         <Container>
+          <Row className="form__row" lg="12">
+            <Col lg="4" md="4">
+              <div className="find__cars-left">
+                <h2>Find your best car here</h2>
+              </div>
+            </Col>
+
+            <Col lg="8" md="8" sm="12">
+              <FindCarForm />
+            </Col>
+          </Row>
+          <br></br><br></br>
           <Row>
             <Col lg="12">
               <div className=" d-flex align-items-center gap-3 mb-5">

@@ -6,22 +6,29 @@ import "../../styles/header.css";
 
 const navLinks = [
   {
-    path: "/home",
-    display: "Home",
+    path: "/admin/dashboard",
+    display: "Dashboard",
   },
   {
-    path: "/about",
-    display: "About",
+    path: "/admin/brands",
+    display: "Brands",
   },
   {
-    path: "/cars",
-    display: "Cars",
+    path: "/admin/vehicles",
+    display: "Vehicles",
   },
-
   {
-    path: "/contact",
-    display: "Contact",
+    path: "/admin/manage-query",
+    display: "Manage Query",
   },
+  {
+    path: "/admin/manage-pages",
+    display: "Manage Pages",
+  },
+  {
+    path: "/admin/contact-info",
+    display: "Contact Info",
+  }
 ];
 
 const Header = () => {
@@ -69,7 +76,7 @@ const Header = () => {
                   <Link to="/home" className=" d-flex align-items-center gap-2">
                     <i class="ri-car-line"></i>
                     <span>
-                      Smart Power Auto <br />Automotive
+                      Smart Power Auto <br />Automotive : Admin
                     </span>
                   </Link>
                 </h1>
@@ -118,7 +125,7 @@ const Header = () => {
 
       {/* ========== main navigation =========== */}
 
-      <div className="main__navbar">
+      {/* <div className="main__navbar">
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
             <span className="mobile__menu">
@@ -141,17 +148,17 @@ const Header = () => {
               </div>
             </div>
 
-            {/* <div className="nav__right">
+            <div className="nav__right">
               <div className="search__box">
                 <input type="text" placeholder="Search" />
                 <span>
                   <i class="ri-search-line"></i>
                 </span>
               </div>
-            </div> */}
+            </div>
           </div>
         </Container>
-      </div>
+      </div> */}
     </header>
   );
 };

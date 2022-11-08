@@ -45,8 +45,9 @@ const Contact = () => {
                 <FormGroup className="contact__form">
                   <textarea
                     rows="5"
+                    className="form-control"
+                    id="textAreaMessage"
                     placeholder="Message"
-                    className="textarea"
                   ></textarea>
                 </FormGroup>
 
@@ -70,20 +71,6 @@ const Contact = () => {
                 <div className=" d-flex align-items-center gap-2">
                   <h6 className="mb-0 fs-6">Email:</h6>
                   <p className="section__description mb-0">example@gmail.com</p>
-                </div>
-
-                <h6 className="fw-bold mt-4">Follow Us</h6>
-
-                <div className=" d-flex align-items-center gap-4 mt-3">
-                  {socialLinks.map((item, index) => (
-                    <Link
-                      to={item.url}
-                      key={index}
-                      className="social__link-icon"
-                    >
-                      <i class={item.icon}></i>
-                    </Link>
-                  ))}
                 </div>
               </div>
             </Col>
