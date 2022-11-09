@@ -23,14 +23,15 @@ https://docs.docker.com/desktop/install/windows-install/
 ## Start the project
 git clone
 
-cd to frontend dicterotory
+cd to frontend directory
 npm install
 npm start
 
 make another new terminal
 cd backend
-python -m venv env
-source env/Script/activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+python -m venv env (CREATE a new environment)
+source env/Script/activate (go into the environment)
+pip install -r requirements.txt (install required packages)
+python manage.py makemigrations (sync with db)
+python manage.py migrate (update changes)
+python manage.py runserver (RUN server)
