@@ -12,6 +12,8 @@ import UpdateBrands from "../components/UI/UpdateBrands";
 import AddVehicles from "../components/UI/AddVehicles";
 import UpdateVehicles from "../components/UI/UpdateVehicles";
 
+import UpdatePassword from "../components/UI/UpdatePassword";
+
 const Routers = () => {
   return (
     <Routes>
@@ -24,12 +26,16 @@ const Routers = () => {
       <Route path="/admin/manage-pages" element={<ManagePages />} />
       <Route path="/admin/contact-info" element={<ContactInfo />} />
 
+
       {/* Level 2 */}
       <Route path="/admin/brands/new" element={<AddBrands />} />
       <Route path="/admin/brands/edit" element={<UpdateBrands />} />
 
       <Route path="/admin/vehicles/new" element={<AddVehicles />} />
       <Route path="/admin/vehicles/edit" element={<UpdateVehicles />} />
+
+      {/* Admin Change Password */}
+      <Route path="/admin/password/edit" element={<UpdatePassword />} />
     </Routes>
   );
 };

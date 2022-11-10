@@ -53,10 +53,17 @@ const brandLinks = [
     },
     {
       path: "/admin/contact-info",
-      display: "Contact Info",
+      display: "Update Contact Info",
       hasChild: false,
       child: [],
-    }
+    },
+    {
+      path: "/admin/password/edit",
+      display: "Change Admin Password",
+      hasChild: false,
+      child: [],
+    },
   ];
+
 
   export default navLinks;
