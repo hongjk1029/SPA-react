@@ -60,7 +60,7 @@ const ManageQuery = () => {
     <section>
       <Container>
         <Row>
-          <h2>Manage Brands</h2>
+          <h2>Manage Query</h2>
           <hr class="style1 text-secondary"></hr>
           <BootstrapTable 
             bootstrap4
