@@ -86,8 +86,8 @@ const AddVehicles = () => {
                 <label for="status">Status</label>
                 <select id="status" class="form-control" required>
                     <option value="" selected>--Select--</option>
-                    <option value="active" selected>Active</option>
-                    <option value="inactive" selected>Inactive</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
                 </select>
             </div>
 
@@ -95,11 +95,17 @@ const AddVehicles = () => {
             
             {/* 7th row */}
             <h5>Upload Images</h5>
-            <input class="form-control mt-2" type="file" id="formFileMultiple" multiple />
+            <input class="form-control mt-2" type="file" id="formFileMultipleImages" multiple />
                 
             <hr class="style1 mt-4 section-line"></hr>
 
             {/* 8th row */}
+            <h5>Upload Document Images</h5>
+            <input class="form-control mt-2" type="file" id="formFileMultipleDocuments" multiple />
+                
+            <hr class="style1 mt-4 section-line"></hr>
+
+            {/* 9th row */}
             <h5>Accessories</h5>
                 {accessoriesData.map((option) => (
                     <div class="form-check form-check-inline col-md-3 mt-3">
