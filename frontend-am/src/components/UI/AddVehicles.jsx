@@ -26,9 +26,7 @@ const AddVehicles = () => {
           <div class="form-group col-md-5">
             <label for="brand">Select Brand</label>
             <select id="brand" class="form-control" required>
-              <option value="" selected>
-                --Select--
-              </option>
+              <option value="" selected> --Select-- </option>
               {carBrand.map((option) => (
                 <option value={option.value}>{option.value}</option>
               ))}
@@ -40,12 +38,7 @@ const AddVehicles = () => {
           {/* 2nd row */}
           <div class="form-group col-md-11">
             <label for="overview">Vehicle Overview</label>
-            <textarea
-              rows="3"
-              className="form-control"
-              id="overview"
-              required
-            ></textarea>
+            <textarea rows="3" className="form-control" id="overview" required ></textarea>
           </div>
 
           {/* 3rd row */}
@@ -130,9 +123,7 @@ const AddVehicles = () => {
           <div class="form-group col-md-5 mt-3">
             <label for="status">Status</label>
             <select id="status" class="form-control" required>
-              <option value="" selected>
-                --Select--
-              </option>
+              <option value="" selected> --Select-- </option>
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
@@ -142,23 +133,13 @@ const AddVehicles = () => {
 
           {/* 8th row */}
           <h5>Upload Images</h5>
-          <input
-            class="form-control mt-2"
-            type="file"
-            id="formFileMultipleImages"
-            multiple
-          />
+          <input class="form-control mt-2" type="file" id="formFileMultipleImages" multiple />
 
           <hr class="style1 mt-4 section-line"></hr>
 
           {/* 9th row */}
           <h5>Upload Document Images</h5>
-          <input
-            class="form-control mt-2"
-            type="file"
-            id="formFileMultipleDocuments"
-            multiple
-          />
+          <input class="form-control mt-2" type="file" id="formFileMultipleDocuments" multiple />
 
           <hr class="style1 mt-4 section-line"></hr>
 
@@ -166,12 +147,7 @@ const AddVehicles = () => {
           <h5>Accessories</h5>
           {accessoriesData.map((option) => (
             <div class="form-check form-check-inline col-md-3 mt-3">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id={option.value}
-                value={option.value}
-              />
+              <input class="form-check-input" type="checkbox" id={option.value} value={option.value} />
               <label class="form-check-label" for={option.value}>
                 {option.value}
               </label>
@@ -180,12 +156,8 @@ const AddVehicles = () => {
 
           <hr class="style1 mt-4 section-line"></hr>
         </Row>
-        <button type="submit" class="btn btn-secondary float-end">
-          Cancel
-        </button>
-        <button type="submit" class="btn btn-primary float-end mx-2">
-          Save Changes
-        </button>
+        <button type="submit" class="btn btn-secondary float-end"> Cancel </button>
+        <button type="submit" class="btn btn-primary float-end mx-2"> Save Changes </button>
       </Container>
     </section>
   );
