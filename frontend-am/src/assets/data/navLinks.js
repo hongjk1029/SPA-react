@@ -57,12 +57,12 @@ const brandLinks = [
       hasChild: false,
       child: [],
     },
-    {
-      path: "/admin/password/edit",
-      display: "Change Admin Password",
-      hasChild: false,
-      child: [],
-    },
+    // {
+    //   path: "/admin/password/edit",
+    //   display: "Change Admin Password",
+    //   hasChild: false,
+    //   child: [],
+    // },
   ];
 
 

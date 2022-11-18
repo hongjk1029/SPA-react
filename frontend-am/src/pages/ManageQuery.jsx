@@ -1,5 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
+import { FiEdit } from "react-icons/fi";
+import { IoMdClose } from "react-icons/io";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import contactData from "../assets/data/contactData";
@@ -43,10 +45,32 @@ const columns = [
     headerClasses: 'pointer'
   },
   {
+    dataField: 'active',
+    text: 'Status',
+    sort: true,
+    headerClasses: 'pointer',
+    formatter: (cellContent, row) => {
+      if (row.active) {
+        return (
+          <span class="badge bg-success">Active</span>
+        );
+      }
+      return (
+        <span class="badge bg-danger">Inactive</span>
+      );
+    }
+  },
+  {
     dataField: 'action',
     text: 'Action',
-    sort: true,
-    headerClasses: 'pointer'
+    formatter: (cellContent, row) => {
+      return (
+        <div>
+          <FiEdit class="text-primary btnEdit" role="button"/>
+          <IoMdClose class="text-danger" role="button"/>
+        </div>
+      );
+    }
   }
 ];
 

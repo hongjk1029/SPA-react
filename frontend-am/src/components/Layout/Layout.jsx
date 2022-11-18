@@ -17,7 +17,7 @@ const Layout = () => {
       <Header />
       <Row>
         <Col lg="auto">
-          <Sidebar backgroundColor="#212529">
+          <Sidebar backgroundColor="#212529">   
             <div class="px-3 pt-3 pb-1">
              <label class="text-secondary">MAIN</label>
             </div>
@@ -44,7 +44,12 @@ const Layout = () => {
                 )
               }
             })}
+            <hr />
+            <MenuItem routerLink={<Link to= "/admin/password/edit" />} > Change Admin Password </MenuItem>
             </Menu>
+            <div style={{position: 'absolute' ,bottom: 25 ,left: 25}}>
+            <button type="button" class="btn btn-secondary btn-lg" onClick={{}}>Sign Out</button>
+            </div>
           </Sidebar>
         </Col>
         
@@ -53,7 +58,7 @@ const Layout = () => {
             <Routers />
           </div>
         </Col>
-      </Row>
+      </Row>  
       <Footer />
     </Fragment>
   );
