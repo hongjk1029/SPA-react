@@ -4,7 +4,7 @@ import { FiEdit } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import contactData from "../assets/data/contactData";
+import brandData from "../assets/adminData/brandData";
 import "../styles/common-section.css";
 
 const columns = [
@@ -16,49 +16,21 @@ const columns = [
   }, 
   {
     dataField: 'name',
-    text: 'Name',
+    text: 'Brand Name',
     sort: true,
     headerClasses: 'pointer'
   }, 
   {
-    dataField: 'email',
-    text: 'Email',
+    dataField: 'createdDate',
+    text: 'Created Date',
     sort: true,
     headerClasses: 'pointer'
   },
   {
-    dataField: 'contactNo',
-    text: 'Contact No',
+    dataField: 'modifiedDate',
+    text: 'Modified Date',
     sort: true,
     headerClasses: 'pointer'
-  },
-  {
-    dataField: 'message',
-    text: 'Message',
-    sort: true,
-    headerClasses: 'pointer'
-  },
-  {
-    dataField: 'postingDate',
-    text: 'Posting Date',
-    sort: true,
-    headerClasses: 'pointer'
-  },
-  {
-    dataField: 'active',
-    text: 'Status',
-    sort: true,
-    headerClasses: 'pointer',
-    formatter: (cellContent, row) => {
-      if (row.active) {
-        return (
-          <span class="badge bg-success">Active</span>
-        );
-      }
-      return (
-        <span class="badge bg-danger">Inactive</span>
-      );
-    }
   },
   {
     dataField: 'action',
@@ -79,17 +51,17 @@ const defaultSorted = [{
   order: 'asc'
 }];
 
-const ManageQuery = () => {
+const Brands = () => { 
   return(
     <section>
       <Container>
         <Row>
-          <h2>Manage Query</h2>
+          <h2>Manage Brands</h2>
           <hr class="style1 text-secondary"></hr>
           <BootstrapTable 
             bootstrap4
             keyField='id' 
-            data={ contactData } 
+            data={ brandData } 
             columns={ columns } 
             defaultSorted={ defaultSorted } 
             pagination={ paginationFactory() } 
@@ -103,6 +75,6 @@ const ManageQuery = () => {
       </Container>
     </section>
   )
-};
+}
 
-export default ManageQuery;
+export default Brands;

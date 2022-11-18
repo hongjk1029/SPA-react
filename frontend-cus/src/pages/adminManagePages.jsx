@@ -1,7 +1,7 @@
 import React ,{useState, useRef}from "react";
 import { Container, Row, Col } from "reactstrap";
 import "../styles/common-section.css";
-import page from "../assets/data/pageData.js";
+import page from "../assets/adminData/pageData.js";
 
 const ManagePages = () => {
   const select = useRef();

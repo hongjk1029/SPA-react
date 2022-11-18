@@ -1,20 +1,20 @@
 // import all images from assets/images directory
-import img01 from "../all-images/cars-img/nissan-offer.png";
-import img02 from "../all-images/cars-img/offer-toyota.png";
-import img03 from "../all-images/cars-img/bmw-offer.png";
-import img04 from "../all-images/cars-img/nissan-offer.png";
-import img05 from "../all-images/cars-img/offer-toyota.png";
-import img06 from "../all-images/cars-img/mercedes-offer.png";
-import img07 from "../all-images/cars-img/toyota-offer-2.png";
-import img08 from "../all-images/cars-img/mercedes-offer.png";
+import img01 from "../admin-all-images/cars-img/nissan-offer.png";
+import img02 from "../admin-all-images/cars-img/offer-toyota.png";
+import img03 from "../admin-all-images/cars-img/bmw-offer.png";
+import img04 from "../admin-all-images/cars-img/nissan-offer.png";
+import img05 from "../admin-all-images/cars-img/offer-toyota.png";
+import img06 from "../admin-all-images/cars-img/mercedes-offer.png";
+import img07 from "../admin-all-images/cars-img/toyota-offer-2.png";
+import img08 from "../admin-all-images/cars-img/mercedes-offer.png";
 
-import img01overall from "../all-images/cars-img/tesla-overall.webp";
-import img01front from "../all-images/cars-img/tesla-front.webp";
-import img01back from "../all-images/cars-img/tesla-back.webp";
-import img01logo from "../all-images/cars-img/tesla-logo.webp";
-import img01interior1 from "../all-images/cars-img/tesla-interior1.webp";
-import img01interior2 from "../all-images/cars-img/tesla-interior2.webp";
-import img01interior3 from "../all-images/cars-img/tesla-interior3.webp";
+import img01overall from "../admin-all-images/cars-img/tesla-overall.webp";
+import img01front from "../admin-all-images/cars-img/tesla-front.webp";
+import img01back from "../admin-all-images/cars-img/tesla-back.webp";
+import img01logo from "../admin-all-images/cars-img/tesla-logo.webp";
+import img01interior1 from "../admin-all-images/cars-img/tesla-interior1.webp";
+import img01interior2 from "../admin-all-images/cars-img/tesla-interior2.webp";
+import img01interior3 from "../admin-all-images/cars-img/tesla-interior3.webp";
 
 const car1Images = [
   {

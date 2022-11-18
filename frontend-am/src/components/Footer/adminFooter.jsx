@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
-import "../../styles/footer.css";
+import "../../styles/adminFooter.css";
 
 const quickLinks = [
   {
@@ -25,7 +25,7 @@ const quickLinks = [
   },
 ];
 
-const Footer = () => {
+const adminFooter = () => {
   const date = new Date();
   const year = date.getFullYear();
   return (
@@ -100,4 +100,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default adminFooter;

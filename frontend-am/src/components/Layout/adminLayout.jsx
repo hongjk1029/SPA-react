@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
 
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import Header from "../Header/adminHeader";
+import Footer from "../Footer/adminFooter";
 import Routers from "../../routers/Routers";
-import navLinks from "../../assets/data/navLinks";
+import navLinks from "../../assets/adminData/navLinks";
 import { Link } from 'react-router-dom';
 
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Row, Col } from "reactstrap";
 
-import "../../styles/sidebar.css";
+import "../../styles/adminSidebar.css";
 
 const Layout = () => {
   return (

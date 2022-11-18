@@ -1,18 +1,16 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
-import Brands from "../pages/Brands";
-import Vehicles from "../pages/Vehicles";
-import ManageQuery from "../pages/ManageQuery";
-import ManagePages from "../pages/ManagePages";
-import ContactInfo from "../pages/ContactInfo";
-
-import AddBrands from "../components/UI/AddBrands";
-import UpdateBrands from "../components/UI/UpdateBrands";
-import AddVehicles from "../components/UI/AddVehicles";
-import UpdateVehicles from "../components/UI/UpdateVehicles";
-
-import UpdatePassword from "../components/UI/UpdatePassword";
+import Dashboard from "../pages/adminDashboard";
+import Brands from "../pages/adminBrands";
+import Vehicles from "../pages/adminVehicles";
+import ManageQuery from "../pages/adminManageQuery";
+import ManagePages from "../pages/adminManagePages";
+import ContactInfo from "../pages/adminContactInfo";
+import AddBrands from "../components/UI/adminAddBrands";
+import UpdateBrands from "../components/UI/adminUpdateBrands";
+import AddVehicles from "../components/UI/adminAddVehicles";
+import UpdateVehicles from "../components/UI/adminUpdateVehicles";
+import UpdatePassword from "../components/UI/adminUpdatePassword";
 
 const Routers = () => {
   return (

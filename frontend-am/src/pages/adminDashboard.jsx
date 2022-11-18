@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import { FiArrowRight } from "react-icons/fi";
-import dashboardData from "../assets/data/dashboardData";
+import dashboardData from "../assets/adminData/dashboardData";
 
-import "../styles/dashboard.css";
+import "../styles/adminDashboard.css";
 
 const Dashboard = () => {
   return (

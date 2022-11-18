@@ -1,8 +1,8 @@
 import React ,{useState, useRef}from "react";
 import { Container, Row, Col } from "reactstrap";
-import "../../styles/common-section.css";
-import carBrand from "../../assets/data/carBrand.js";
-import accessoriesData from "../../assets/data/accessoriesData.js";
+import "../../styles/admin-common-section.css";
+import carBrand from "../../assets/adminData/carBrand.js";
+import accessoriesData from "../../assets/adminData/accessoriesData.js";
 
 
 const AddVehicles = () => { 
