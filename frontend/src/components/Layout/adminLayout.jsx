@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Row, Col } from "reactstrap";
 
-import "../../styles/sidebar.css";
+import "../../styles/adminSidebar.css";
 
 const Layout = () => {
   return (
