@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
     'storages',
     'user',
     'vehicle',
@@ -85,13 +86,23 @@ WSGI_APPLICATION = 'core.wsgi.application'
 database_switch = 1
 
 if database_switch == 1:
-    # locahost database
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+    # locahost database
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #         'NAME': 'spadb',
+    #         'USER': 'postgres',
+    #         'PASSWORD': 'postgres',
+    #         'HOST': 'db-net',
+    #         'PORT': '5432',
+    #     }
+    # }
 else:
     # Production database
     DATABASES = {
@@ -164,3 +175,9 @@ AZURE_ACCOUNT_NAME = "spadevstorage"
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
