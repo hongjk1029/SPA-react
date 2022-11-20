@@ -5,6 +5,7 @@ admin able to view car list
 admin able to view car details
 admin able to update car details
 admin able to delete car details
+admin able to edit about us
 
 customer able to view car list
 customer able to view car details
