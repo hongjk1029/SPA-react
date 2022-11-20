@@ -1,4 +1,4 @@
-.header__top {
+.admin_header__top {
   padding: 10px 0px;
   /* background: #000d6b;  */
   background: #C70039;
@@ -41,7 +41,7 @@
 
 /* ============ header middle style =========== */
 
-.header__middle {
+.admin_header__middle {
   padding: 20px 0px;
   background: #C70039;
 }
