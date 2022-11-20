@@ -1,7 +1,6 @@
 backend/env/**
-package-lock.json
 package.json
+package-lock.json
 .gitignore
-frontend-am/node_modules
-frontend-cus/node_modules
+frontend/node_modules
 data/

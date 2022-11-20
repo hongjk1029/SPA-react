@@ -29,15 +29,6 @@
   font-size: 0.7rem;
 }
 
-.header__top__right a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 0.9rem;
-}
-
-.header__top__right a:hover {
-  color: #fff;
-}
 
 /* ============ header middle style =========== */
 
@@ -103,7 +94,7 @@
 
 /* ================ main navbar styles =========== */
 
-.main__navbar {
+.admin_main__navbar {
   padding: 15px 0px;
   background: #212529;
 }
@@ -124,13 +115,7 @@
   column-gap: 2.7rem;
 }
 
-.nav__item {
-  color: #fff;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.nav__item:hover {
+.header_nav__item:hover {
   color: #C70039;
 }
 
@@ -159,9 +144,6 @@
   cursor: pointer;
 }
 
-.nav__active {
-  color: #C70039;
-}
 
 @media only screen and (max-width: 768px) {
   .header__top,

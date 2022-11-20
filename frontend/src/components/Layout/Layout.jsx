@@ -15,7 +15,7 @@ import { Row, Col } from "reactstrap";
 import "../../styles/adminSidebar.css";
 
 const Layout = () => {
-  const [isLogin, setLogin] = useState(true);
+  const [isLogin, setLogin] = useState(false);
 
   if (isLogin) {
     return (
@@ -54,7 +54,8 @@ const Layout = () => {
             <MenuItem routerLink={<Link to= "/admin/password/edit" />} > Change Admin Password </MenuItem>
             </Menu>
             <div style={{position: 'absolute' ,bottom: 25 ,left: 25}}>
-            <button type="button" class="btn btn-secondary btn-lg" onClick={{}}>Sign Out</button>
+            {/* <button type="button" style={{}}> Sign Out</button> */}
+            <a class="btn btn-primary" role="button">Sign Out</a>
             </div>
           </Sidebar>
         </Col>
@@ -71,11 +72,11 @@ const Layout = () => {
   } else {
     return (
       <Fragment>
-        <Header backgroundColor="#0D1F2D"/>
+        <Header />
         <div>
           <CustomerRouters />
         </div>
-        <Footer backgroundColor="#0D1F2D"/>
+        <Footer />
       </Fragment>
 
     )

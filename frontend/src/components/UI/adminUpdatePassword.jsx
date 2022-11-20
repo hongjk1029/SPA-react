@@ -14,16 +14,11 @@ const UpdatePassword = () => {
             <input type="password" className="form-control" id="oldPassword" required/>
           </div>
 
-          <hr class="style1 mt-4 section-line"></hr>
-
           <div class="form-group col-md-11">
             <label for="newPassword">New Password :</label>
             <input type="password" className="form-control" id="newPassword" required/>
           </div>
-
-          <hr class="style1 mt-4 section-line"></hr>
-
-          {/* 3rd row */}
+          
           <div class="form-group col-md-11">
             <label for="newPassword2">Confirm Password:</label>
             <input type="password" className="form-control" id="newPassword2" required/>

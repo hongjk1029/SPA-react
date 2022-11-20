@@ -1,11 +1,11 @@
 const dashboardData = [
-  {
-    id: 1001,
-    amount: 1,
-    displayName: "REG USERS",
-    redirectUrl: "#",
-    background: "card-header pt-4 bg-primary"
-  },
+  // {
+  //   id: 1001,
+  //   amount: 1,
+  //   displayName: "REG USERS",
+  //   redirectUrl: "#",
+  //   background: "card-header pt-4 bg-primary"
+  // },
   {
     id: 1002,
     amount: 7,
@@ -20,13 +20,13 @@ const dashboardData = [
     redirectUrl: "/admin/brands",
     background: "card-header pt-4 bg-success"
   },
-  {
-    id: 1004,
-    amount: 13,
-    displayName: "SUBSCRIBERS",
-    redirectUrl: "#",
-    background: "card-header pt-4 bg-danger"
-  },
+  // {
+  //   id: 1004,
+  //   amount: 13,
+  //   displayName: "SUBSCRIBERS",
+  //   redirectUrl: "#",
+  //   background: "card-header pt-4 bg-danger"
+  // },
   {
     id: 1005,
     amount: 1,
