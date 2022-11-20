@@ -38,13 +38,13 @@ class VehicleDetails(models.Model):
     central_locking = models.BooleanField()
     crash_sensor = models.BooleanField()
     leather_seat = models.BooleanField()
-    accessory = ArrayField(
-        ArrayField(
-            models.CharField(max_length=10, blank=True),
-            size=8,
-        ),
-        size=8,
-    )
+    # accessory = ArrayField(
+    #     ArrayField(
+    #         models.CharField(max_length=10, blank=True),
+    #         size=8,
+    #     ),
+    #     size=8,
+    # )
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
