@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.9'
 services:
   # redis:
   #   restart: always
@@ -19,6 +19,11 @@ services:
     ports:
       - "5432:5432"
     container_name: db
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d postgres'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
   backend:
     container_name: spa_backend
@@ -29,14 +34,13 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - POSTGRES_NAME=spadb
+      - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     restart: on-failure
     depends_on:
-      - db
-    links: 
-      - db
+      db:
+        condition: service_healthy
 
   # frontend:
   #   restart: always
