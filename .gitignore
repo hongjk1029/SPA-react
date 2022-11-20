@@ -4,3 +4,4 @@ package.json
 .gitignore
 frontend-am/node_modules
 frontend-cus/node_modules
+data/
