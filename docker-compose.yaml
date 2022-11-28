@@ -1,0 +1,62 @@
+version: '3.9'
+services:
+  # redis:
+  #   restart: always
+  #   image: redis:5
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - db-net
+
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    container_name: db
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d postgres'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  backend:
+    container_name: spa_backend
+    command : "python manage.py runserver 0.0.0.0:8000"
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # frontend:
+  #   restart: always
+  #   command : npm start
+  #   container_name: front
+  #   build:
+  #     context: ./frontend/
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   stdin_open: true
+  #   depends_on:
+  #     - api
+  #   networks:
+  #     - db-net
+
+networks:
+  db-net:
+    driver: bridge
