@@ -1,0 +1,13 @@
+.sidebar{
+    min-height:700px;
+    height:100%;
+    color:#fff;
+}
+
+.ps-submenu-content {
+    background-color: #212529 !important;
+}
+
+/* .row{
+    --bs-gutter-x: 0;
+} */
