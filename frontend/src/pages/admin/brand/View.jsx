@@ -3,9 +3,13 @@ import { Container, Row, Col } from "reactstrap";
 import { FiEdit } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import BootstrapTable from 'react-bootstrap-table-next';
+import ToolkitProvider, { Search, } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import paginationFactory from 'react-bootstrap-table2-paginator';
+
 import brandData from "../../../assets/data/brandData";
 import "../../../styles/common-section.css";
+
+const { SearchBar } = Search;
 
 const columns = [
   {
@@ -58,7 +62,30 @@ const ViewBrands = () => {
         <Row>
           <h2>Manage Brands</h2>
           <hr className="style1 text-secondary"></hr>
-          <BootstrapTable 
+          <ToolkitProvider keyField="id" data={brandData} columns={columns} search >
+              {(props) => (
+                <div>
+                  <SearchBar srText='' {...props.searchProps} />
+                  {"   "}
+                  {"   "}
+                  <button onClick={props.searchProps.onClear} className="btn btn-secondary btn-sm" style={{position: "relative", top: "-2px"}} > Clear </button>
+                  <br />
+                  <br />
+                  <BootstrapTable
+                    {...props.baseProps}
+                    bootstrap4
+                    defaultSorted={defaultSorted}
+                    pagination={paginationFactory()}
+                    striped
+                    hover
+                    condensed
+                    noDataIndication={"no results found"}
+                    headerClasses="noselect"
+                  />
+                </div>
+              )}
+            </ToolkitProvider>
+          {/* <BootstrapTable 
             bootstrap4
             keyField='id' 
             data={ brandData } 
@@ -70,7 +97,7 @@ const ViewBrands = () => {
             condensed
             noDataIndication={ 'no results found' }
             headerClasses="noselect"
-          />
+          /> */}
         </Row>
       </Container>
     </section>
