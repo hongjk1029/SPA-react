@@ -1,44 +1,44 @@
 const serviceData = [
   {
     id: 1,
-    title: "City Transfer",
-    icon: "ri-map-pin-2-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    title: "On Site Car Survey",
+    icon: "ri-customer-service-line",
+    desc: "Car purchase satisfaction surveys are perfect to receive feedback. Build long-term relationships, and help customers fall in love with you and your cars.",
   },
 
   {
     id: 2,
-    title: "Whole  City Tour",
-    icon: "ri-community-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    title: "End to End Service",
+    icon: "ri-service-line",
+    desc: "The traditional vehicle-buying journey – researching cars, visiting dealerships to view and test-drive vehicles and spending hours at a dealer completing the purchase.",
   },
 
   {
     id: 3,
-    title: "Unlimited Miles Car Rental",
+    title: "Inspection Service",
     icon: "ri-roadster-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "The vehicle inspection service will be conducted to help buyer get a peace of mind buying the used car and meet the customer satisfication.",
   },
 
   {
     id: 4,
-    title: "Fast & Easy Booking",
-    icon: "ri-timer-flash-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    title: "Insurance Service",
+    icon: "ri-shield-check-line",
+    desc: "Vehicle insurance and assistance service will be provided such as renew the vehicle insurance and roadtax to protect customers.",
   },
 
   {
     id: 5,
-    title: "Many Pickup Locations",
-    icon: "ri-map-pin-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    title: "Trade In Service",
+    icon: "ri-arrow-left-right-line",
+    desc: "Be it buy or sell; we provide efficient and transparent services to meet your needs.",
   },
 
   {
     id: 6,
-    title: "Airport Transfer",
-    icon: "ri-flight-takeoff-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    title: "Consignment Service",
+    icon: "ri-price-tag-3-line",
+    desc: "As a retailer or a middleman between the seller and potential buyers during the car selling process.",
   },
 ];
 

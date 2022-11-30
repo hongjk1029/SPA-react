@@ -24,6 +24,8 @@ import About from "../pages/customer/About";
 import CarListing from "../pages/customer/CarListing";
 import CarDetails from "../pages/customer/CarDetails";
 import Contact from "../pages/customer/Contact";
+import PrivacyPolicy from "../pages/customer/PrivacyPolicy";
+import TermsCondition from "../pages/customer/TermsCondition";
 
 const Routers = ({isAdmin}) => {
   if(isAdmin){
@@ -60,6 +62,8 @@ const Routers = ({isAdmin}) => {
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/cars" element={<CarListing />} />
+          <Route path="/policy" element={<PrivacyPolicy/>} />
+          <Route path="/terms" element={<TermsCondition/>} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
   
