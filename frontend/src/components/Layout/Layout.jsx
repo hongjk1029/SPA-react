@@ -15,7 +15,7 @@ import "../../styles/sidebar.css";
 const Layout = () => {
 
   useEffect(()=> {
-    currentPath.pathname === "/admin/sign-in" ? document.body.style.overflow = "hidden": document.body.style.overflow = "auto"
+    currentPath.pathname !== "/admin/sign-in" ? document.body.style.overflow = "auto": document.body.style.overflow = "overflow"
   },[])
 
   const currentPath = useLocation();
@@ -25,7 +25,7 @@ const Layout = () => {
   if (isLogin) {
     return (
       <Fragment>
-        <Header isLogin={isLogin}/>
+        <Header isLogin={isLogin} />
         <Row>
           <Col lg="auto">
             <Sidebar backgroundColor="#212529" className="sidebar">

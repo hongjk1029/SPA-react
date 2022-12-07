@@ -37,7 +37,35 @@ const Header = ({isLogin}) => {
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
 
-  if(isAdmin){
+  if(currentPath.pathname === "/admin/sign-in"){
+    return (
+      <header className="header">
+      {/* =============== header middle =========== */}
+      <div className="header__middle">
+        <Container>
+          <Row>
+            <Col lg="4" md="3" sm="4">
+              <div className="logo">
+                <h1>
+                  <Link to="/home" className=" d-flex align-items-center gap-2">
+                    <i className="ri-car-line"></i>
+                    <span>
+                      Smart Power Auto <br />Automotive
+                    </span>
+                  </Link>
+                </h1>
+              </div>
+            </Col>
+            <Col lg="3" md="3" sm="4"> </Col>
+            <Col lg="3" md="3" sm="4"> </Col>
+            <Col lg="2" md="3" sm="0"> </Col>
+          </Row>
+        </Container>
+      </div>
+    </header>
+    )
+  }
+  else if(isAdmin){
     return (
       <header className="header">
         {/* ============ header top ============ */}
@@ -69,7 +97,7 @@ const Header = ({isLogin}) => {
               <Col lg="3" md="3" sm="4"></Col>
   
               <Col lg="2" md="3" sm="0" >
-            <button class="btnSignout rounded-3" type="button" style={{height:'50px', marginTop:'-20px', float:'right'}}>
+              <button className="btnSignout rounded-3" type="button" style={{height:'50px', marginTop:'-20px', float:'right'}} onClick={{}}>
             <RiShutDownLine />
               {' '}Sign Out 
             </button>
@@ -80,69 +108,6 @@ const Header = ({isLogin}) => {
       </header>
     );
   }
-  else{
-    if(currentPath.pathname === "/admin/sign-in"){
-      return (
-        <header className="header">
-        {/* =============== header middle =========== */}
-        <div className="header__middle">
-          <Container>
-            <Row>
-              <Col lg="4" md="3" sm="4">
-                <div className="logo">
-                  <h1>
-                    <Link to="/home" className=" d-flex align-items-center gap-2">
-                      <i className="ri-car-line"></i>
-                      <span>
-                        Smart Power Auto <br />Automotive
-                      </span>
-                    </Link>
-                  </h1>
-                </div>
-              </Col>
-  
-              <Col lg="3" md="3" sm="4">
-                {/* <div className="header__location d-flex align-items-center gap-2">
-                  <span>
-                    <i className="ri-earth-line"></i>
-                  </span>
-                  <div className="header__location-content">
-                    <h4></h4>
-                    <h6>Sylhet City, Bangladesh</h6>
-                  </div>
-                </div> */}
-              </Col>
-  
-              <Col lg="3" md="3" sm="4">
-                {/* <div className="header__location d-flex align-items-center gap-2">
-                  <span>
-                    <i className="ri-time-line"></i>
-                  </span>
-                  <div className="header__location-content">
-                    <h4>Sunday to Friday</h4>
-                    <h6>10am - 7pm</h6>
-                  </div>
-                </div> */}
-              </Col>
-  
-              <Col
-                lg="2"
-                md="3"
-                sm="0"
-                className=" d-flex align-items-center justify-content-end "
-              >
-                <button className="header__btn btn ">
-                  <Link to="/contact">
-                    <i className="ri-phone-line"></i> Request a call
-                  </Link>
-                </button>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      </header>
-      )
-    }
     else{
       return (
         <header className="header">
@@ -259,7 +224,6 @@ const Header = ({isLogin}) => {
       </header>
       )
     }
-  }
 };
 
 export default Header;
