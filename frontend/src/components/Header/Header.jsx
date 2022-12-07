@@ -3,6 +3,7 @@ import React, { useRef,useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/header.css";
+import logo1 from "../../assets/all-images/logo1.svg";
 
 const navLinks = [
   {
@@ -45,14 +46,15 @@ const Header = ({isLogin}) => {
           <Container>
             <Row>
               <Col lg="4" md="3" sm="4">
-                <div className="logo">
+                <div className="logo" style={{height:'50px', marginTop:'-20px'}}>
                   <h1>
                     <Link to="/home" className=" d-flex align-items-center gap-2">
-                      <i className="ri-car-line"></i>
+                      {/* <i className="ri-car-line"></i>
                       <span>
                         Smart Power Auto <br />
                         Automotive : Admin
-                      </span>
+                      </span> */}
+                       <img src={logo1} alt="" />
                     </Link>
                   </h1>
                 </div>
@@ -152,11 +154,11 @@ const Header = ({isLogin}) => {
                 sm="0"
                 className=" d-flex align-items-center justify-content-end "
               >
-                {/* <button className="header__btn btn ">
+                <button className="header__btn btn ">
                   <Link to="/contact">
                     <i className="ri-phone-line"></i> Request a call
                   </Link>
-                </button> */}
+                </button>
               </Col>
             </Row>
           </Container>

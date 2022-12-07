@@ -27,31 +27,32 @@ const About = () => {
             <Col lg="6" md="6" sm="12">
               <div className="about__page-content">
                 <h2 className="section__title">
-                  We Are Committed To Provide Safe Ride Solutions
+                  WHAT WE DO FOR CUSTOMER AND DEALER
                 </h2>
 
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                  Transparent and secure :<br></br> 
+                  No commissions, no pressure and no hidden fees. We offer a complete transparent car selling process and guarantee cash for your car.
                 </p>
 
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                  Nationwide Coverage :<br></br> 
+                  No matter where the vehicle is from, we will make sure that the vehicle is delivered to wherever you are.
+                </p>
+
+                <p className="section__description">
+                  Purchasing Made Easy :<br></br> 
+                  Smart Power Auto has a large vehicle listing up for grabs with full comprehensive inspection report and pictures available for viewing.
                 </p>
 
                 <div className=" d-flex align-items-center gap-3 mt-4">
                   <span className="fs-4">
-                    <i className="ri-phone-line"></i>
+                    <i class="ri-phone-line"></i>
                   </span>
 
                   <div>
                     <h6 className="section__subtitle">Need Any Help?</h6>
-                    <h4>+00123456789</h4>
+                    <h4>+60123160808</h4>
                   </div>
                 </div>
               </div>
@@ -60,16 +61,6 @@ const About = () => {
         </Container>
       </section>
 
-      <section>
-        <Container>
-          <Row>
-            <Col lg="12" className="mb-5 text-center">
-              <h6 className="section__subtitle">Experts</h6>
-              <h2 className="section__title">Our Members</h2>
-            </Col>
-          </Row>
-        </Container>
-      </section>
     </Helmet>
   );
 };
