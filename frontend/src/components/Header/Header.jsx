@@ -3,7 +3,9 @@ import React, { useRef,useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "../../styles/header.css";
+import { RiShutDownLine } from "react-icons/ri";
 import logo1 from "../../assets/all-images/logo1.svg";
+
 
 const navLinks = [
   {
@@ -45,8 +47,8 @@ const Header = ({isLogin}) => {
   
         {/* =============== header middle =========== */}
         <div className="header__middle">
-          <Container>
-            <Row>
+          <Container style={{height:'100%'}}>
+            <Row >
               <Col lg="4" md="3" sm="4">
                 <div className="logo" style={{height:'50px', marginTop:'-20px'}}>
                   <h1>
@@ -66,7 +68,12 @@ const Header = ({isLogin}) => {
   
               <Col lg="3" md="3" sm="4"></Col>
   
-              <Col lg="2" md="3" sm="0" className=" d-flex align-items-center justify-content-end " ></Col>
+              <Col lg="2" md="3" sm="0" >
+            <button class="btnSignout rounded-3" type="button" style={{height:'50px', marginTop:'-20px', float:'right'}}>
+            <RiShutDownLine />
+              {' '}Sign Out 
+            </button>
+              </Col>
             </Row>
           </Container>
         </div>
