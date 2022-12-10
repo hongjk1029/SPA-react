@@ -1,8 +1,11 @@
-FROM python:3
-ENV PYTHONUNBUFFERED 1
-WORKDIR /app/api
-COPY requirements.txt ./
+FROM python:3.8
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+RUN apt-get -y update
+WORKDIR /app
+COPY requirements.txt /app/
 RUN pip install -r requirements.txt
-RUN python manage.py migrate
-COPY . ./
+COPY . /app/
 EXPOSE 8000
+STOPSIGNAL SIGINT
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
