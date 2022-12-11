@@ -1,7 +1,7 @@
 import React, { useRef,useState } from "react";
 
 import { Container, Row, Col } from "reactstrap";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, useNavigate, NavLink, useLocation } from "react-router-dom";
 import "../../styles/header.css";
 import { RiShutDownLine } from "react-icons/ri";
 import logo1 from "../../assets/all-images/logo1.svg";
@@ -28,14 +28,18 @@ const navLinks = [
 ];
 
 
-const Header = ({isLogin}) => {
+const Header = ({isLogin, setLogin}) => {
   const [isAdmin, setAdmin] = useState(isLogin);
 
   const currentPath = useLocation();
 
+  const navigate = useNavigate();
+
   const menuRef = useRef(null);
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
+
+  const handleSignOut = () => { setLogin(false) ; navigate("/admin/sign-in")}
 
   if(currentPath.pathname === "/admin/sign-in"){
     return (
@@ -97,7 +101,7 @@ const Header = ({isLogin}) => {
               <Col lg="3" md="3" sm="4"></Col>
   
               <Col lg="2" md="3" sm="0" >
-              <button className="btnSignout rounded-3" type="button" style={{height:'50px', marginTop:'-20px', float:'right'}} onClick={{}}>
+              <button className="btnSignout rounded-3" type="button" style={{height:'50px', marginTop:'-20px', float:'right'}} onClick={handleSignOut}>
             <RiShutDownLine />
               {' '}Sign Out 
             </button>

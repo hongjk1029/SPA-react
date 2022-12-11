@@ -27,7 +27,7 @@ const adminData = [
   },
 ];
 
-const SignIn = () => {
+const SignIn = ({setIsAdminLogin}) => {
 
 
   const [isAdmin, setIsAdmin] = useState()
@@ -44,7 +44,8 @@ const SignIn = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    navigate('/admin')
+    navigate('/')
+    setIsAdminLogin(true)
 
 
 
