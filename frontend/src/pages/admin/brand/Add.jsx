@@ -12,7 +12,7 @@ const AddBrands = () => {
           <form className="d-flex form-inline">
             <Col lg="6">
               <div className="form-group mb-3 textbox">
-                <input type="text" className="form-control" id="inputBrand" placeholder="Brand" />
+                <input type="text" className="form-control" id="inputBrand" placeholder="Brand" required/>
               </div>
             </Col>
 

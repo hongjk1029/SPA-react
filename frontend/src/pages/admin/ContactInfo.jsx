@@ -10,18 +10,18 @@ const ContactInfo = () => {
         <h2>Update Contact Info</h2>
           <hr className="style1 text-secondary"></hr>
           <div className="form-group col-md-11">
-            <label htmlFor="oldPassoword">Address :</label>
+            <label htmlFor="oldPassoword">Address : <span style={{color: "red"}}>*</span></label>
             <textarea className="form-control" id="address" required/>
           </div>
 
           <div className="form-group col-md-11 mt-4">
-            <label htmlFor="newPassword">Email :</label>
+            <label htmlFor="newPassword">Email : <span style={{color: "red"}}>*</span></label>
             <input type="email" className="form-control" id="email" required/>
           </div>
 
           {/* 3rd row */}
           <div className="form-group col-md-11 mt-4">
-            <label htmlFor="newPassword2">Contact Number:</label>
+            <label htmlFor="newPassword2">Contact Number: <span style={{color: "red"}}>*</span></label>
             <input type="text" className="form-control" id="phoneNumber" required/>
           </div>
         </Row>

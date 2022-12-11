@@ -37,10 +37,10 @@ const Contact = () => {
 
               <Form>
                 <FormGroup className="contact__form">
-                  <Input placeholder="Your Name" type="text" />
+                  <Input placeholder="Your Name" type="text" required/>
                 </FormGroup>
                 <FormGroup className="contact__form">
-                  <Input placeholder="Email" type="email" />
+                  <Input placeholder="Email" type="email" required/>
                 </FormGroup>
                 <FormGroup className="contact__form">
                   <textarea
@@ -48,7 +48,7 @@ const Contact = () => {
                     className="form-control"
                     id="textAreaMessage"
                     placeholder="Message"
-                  ></textarea>
+                  required></textarea>
                 </FormGroup>
 
                 <button className=" contact__btn" type="submit">

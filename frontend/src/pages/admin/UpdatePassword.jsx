@@ -10,17 +10,17 @@ const UpdatePassword = () => {
         <h2>Change Admin Password</h2>
           <hr className="style1 text-secondary"></hr>
           <div className="form-group col-md-11">
-            <label htmlFor="oldPassoword">Old Password :</label>
+            <label htmlFor="oldPassoword">Old Password : <span style={{color: "red"}}>*</span></label>
             <input type="password" className="form-control" id="oldPassword" required/>
           </div>
 
           <div className="form-group col-md-11 mt-4">
-            <label htmlFor="newPassword">New Password :</label>
+            <label htmlFor="newPassword">New Password : <span style={{color: "red"}}>*</span></label>
             <input type="password" className="form-control" id="newPassword" required/>
           </div>
 
           <div className="form-group col-md-11 mt-4">
-            <label htmlFor="newPassword2">Confirm Password:</label>
+            <label htmlFor="newPassword2">Confirm Password: <span style={{color: "red"}}>*</span></label>
             <input type="password" className="form-control" id="newPassword2" required/>
           </div>
 

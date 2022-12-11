@@ -12,7 +12,7 @@ import { Row, Col } from "reactstrap";
 import "../../styles/sidebar.css";
 
 const Layout = () => {
-  const [isLogin, setLogin] = useState(false);
+  const [isLogin, setLogin] = useState(true);
 
   if (isLogin) {
     return (
