@@ -129,14 +129,15 @@ const Footer = ({isLogin}) => {
       <footer className="footer">
         <Container>
           <Row>
-            <Col lg="4" md="4" sm="12">
+          <Col lg="4" md="4" sm="12">
               <div className="logo footer__logo">
                 <h1>
                   <Link to="/home" className=" d-flex align-items-center gap-2">
-                    <i className="ri-car-line"></i>
+                    {/* <i className="ri-car-line"></i>
                     <span>
-                      Smart Power Auto <br />Automotive
-                    </span>
+                      Smart Power Auto <br />Automotive : Admin
+                    </span> */}
+                    <img src={logo1} alt="" />
                   </Link>
                 </h1>
               </div>
@@ -161,12 +162,12 @@ const Footer = ({isLogin}) => {
             <Col lg="3" md="4" sm="6">
               <div className="mb-4">
                 <h5 className="footer__link-title mb-4">Main Office</h5>
-                <p className="office__info">Address: HQ address</p>
-                <p className="office__info">Phone: HQ phone</p>
+                <p className="office__info">Address: No.11, Lot 6015, Jalan Ipoh Batu 7 1/2, Taman Selayang Makmur, 68100 Selayang, Selangor</p>
+                <p className="office__info">Phone: +60123160808</p>
   
-                <p className="office__info">Email: HQ email</p>
+                <p className="office__info">Email: smartpowerauto@yahoo.com</p>
   
-                <p className="office__info">Office Time: HQ working time</p>
+                <p className="office__info">Office Time: Monday till Saturday 9AM-5PM</p>
               </div>
             </Col>
   
@@ -185,7 +186,7 @@ const Footer = ({isLogin}) => {
   
             <Col lg="12">
               <div className="footer__bottom">
-                <p className="section__description d-flex align-items-center justify-content-center gap-1 pt-4">
+                <p className="footer__description d-flex align-items-center justify-content-center gap-1 pt-4">
                   <i className="ri-copyright-line"></i>Copyright 2022, Developed by
                   SPA tech team. All rights reserved.
                 </p>

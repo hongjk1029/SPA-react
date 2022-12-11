@@ -39,27 +39,30 @@ const Header = ({isLogin, setLogin}) => {
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
 
-  const handleSignOut = () => { setLogin(false) ; navigate("/admin/sign-in")}
+  const handleSignOut = () => { setLogin(false); navigate("/admin/sign-in")}
 
   if(currentPath.pathname === "/admin/sign-in"){
     return (
       <header className="header">
       {/* =============== header middle =========== */}
+      <div className="header__top"></div>
       <div className="header__middle">
         <Container>
           <Row>
-            <Col lg="4" md="3" sm="4">
-              <div className="logo">
-                <h1>
-                  <Link to="/home" className=" d-flex align-items-center gap-2">
-                    <i className="ri-car-line"></i>
-                    <span>
-                      Smart Power Auto <br />Automotive
-                    </span>
-                  </Link>
-                </h1>
-              </div>
-            </Col>
+          <Col lg="4" md="3" sm="4">
+                <div className="logo" style={{height:'50px', marginTop:'-20px'}}>
+                  <h1>
+                    <Link to="/home" className=" d-flex align-items-center gap-2">
+                      {/* <i className="ri-car-line"></i>
+                      <span>
+                        Smart Power Auto <br />
+                        Automotive : Admin
+                      </span> */}
+                       <img src={logo1} alt="" />
+                    </Link>
+                  </h1>
+                </div>
+              </Col>
             <Col lg="3" md="3" sm="4"> </Col>
             <Col lg="3" md="3" sm="4"> </Col>
             <Col lg="2" md="3" sm="0"> </Col>
@@ -147,14 +150,16 @@ const Header = ({isLogin, setLogin}) => {
         <div className="header__middle">
           <Container>
             <Row>
-              <Col lg="4" md="3" sm="4">
-                <div className="logo">
+            <Col lg="4" md="3" sm="4">
+                <div className="logo" style={{height:'50px', marginTop:'-20px'}}>
                   <h1>
                     <Link to="/home" className=" d-flex align-items-center gap-2">
-                      <i className="ri-car-line"></i>
+                      {/* <i className="ri-car-line"></i>
                       <span>
-                        Smart Power Auto <br />Automotive
-                      </span>
+                        Smart Power Auto <br />
+                        Automotive : Admin
+                      </span> */}
+                       <img src={logo1} alt="" />
                     </Link>
                   </h1>
                 </div>
