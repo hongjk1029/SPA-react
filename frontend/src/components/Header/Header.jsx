@@ -58,11 +58,6 @@ const Header = ({isLogin, setLogin}) => {
                 <div className="logo" style={{height:'50px', marginTop:'-20px'}}>
                   <h1>
                     <Link to="/home" className=" d-flex align-items-center gap-2">
-                      {/* <i className="ri-car-line"></i>
-                      <span>
-                        Smart Power Auto <br />
-                        Automotive : Admin
-                      </span> */}
                        <img src={logo1} alt="" />
                     </Link>
                   </h1>
@@ -93,11 +88,6 @@ const Header = ({isLogin, setLogin}) => {
                 <div className="logo" style={{height:'50px', marginTop:'-20px'}}>
                   <h1>
                     <Link to="/home" className=" d-flex align-items-center gap-2">
-                      {/* <i className="ri-car-line"></i>
-                      <span>
-                        Smart Power Auto <br />
-                        Automotive : Admin
-                      </span> */}
                        <img src={logo1} alt="" />
                     </Link>
                   </h1>

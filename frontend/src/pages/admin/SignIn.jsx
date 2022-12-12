@@ -46,20 +46,6 @@ const SignIn = ({setIsAdminLogin}) => {
     event.preventDefault();
     navigate('/')
     setIsAdminLogin(true)
-
-
-
-    // const isAdmin = adminData.filter(
-    //   (i) => i.email === email && i.password === password
-    // );
-    // console.log(isAdmin);
-    // if (isAdmin.length > 0) {
-    //   setErrorMessage("")
-    //   setSuccessMessage("Login Successfully!");
-    // } else {
-    //   setSuccessMessage("");
-    //   setErrorMessage( "Invalid credentials. Please contact the site owner if you forgot password" );
-    // }
   }
 
   return (
@@ -86,7 +72,6 @@ const SignIn = ({setIsAdminLogin}) => {
                         </div>
                         <div className="d-grid">
                           <button type="submit" className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"> Sign in </button>
-                          {/* disabled={!validateForm()}      #####paste above to disable button if no input entered*/}
                         </div>
                       </form>
                     </div>
