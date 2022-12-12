@@ -115,7 +115,7 @@ const ViewVehicles = () => {
         <Row>
           <h2>Manage Vehicles</h2>
           <hr className="style1 text-secondary"></hr>
-          <ToolkitProvider keyField="id" data={vehicleData} columns={columns} search >
+          <ToolkitProvider keyField="id" data={vehicles} columns={columns} search >
               {(props) => (
                 <div>
                   <SearchBar srText='' {...props.searchProps} />
