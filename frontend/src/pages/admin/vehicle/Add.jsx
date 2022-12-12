@@ -6,7 +6,7 @@ import "../../../styles/common-section.css";
 
 const AddVehicles = () => { 
     const salesTypeData = [ { id: 1, name: "Rental", }, { id: 2, name: "Sale", }, ];
-    const [chosenSalesType, setChosenSalesType] = useState("");
+    const [chosenSalesType, setChosenSalesType] = useState("Rental");
     const select = useRef();
     
   return (
@@ -113,14 +113,14 @@ const AddVehicles = () => {
             </>
           ) : <></>}
 
-          {/* 7th row */}
+          {/* 7th row 
           <div className="form-group col-md-5 mt-3">
             <label htmlFor="status">Status</label>
             <select id="status" className="form-control" required>
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
-          </div>
+          </div> */}
 
           <hr className="style1 mt-4 section-line"></hr>
 

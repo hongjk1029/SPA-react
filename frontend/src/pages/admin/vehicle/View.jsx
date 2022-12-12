@@ -4,9 +4,12 @@ import { FiEdit } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import ToolkitProvider, { Search, } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import vehicleData from "../../../assets/data/vehicleData";
 import "../../../styles/common-section.css";
 import { getVehicles } from "../../../services/api/Provider";
+
+const { SearchBar } = Search;
 
 const columns = [
   {
@@ -112,19 +115,30 @@ const ViewVehicles = () => {
         <Row>
           <h2>Manage Vehicles</h2>
           <hr className="style1 text-secondary"></hr>
-          <BootstrapTable 
-            bootstrap4
-            keyField='id' 
-            data={ vehicles } 
-            columns={ columns } 
-            defaultSorted={ defaultSorted } 
-            pagination={ paginationFactory() } 
-            striped
-            hover
-            condensed
-            noDataIndication={ 'no results found' }
-            headerClasses="noselect"
-          />
+          <ToolkitProvider keyField="id" data={vehicleData} columns={columns} search >
+              {(props) => (
+                <div>
+                  <SearchBar srText='' {...props.searchProps} />
+                  {"   "}
+                  {"   "}
+                  <button onClick={props.searchProps.onClear} className="btn btn-secondary btn-sm" style={{position: "relative", top: "-2px"}} > Clear </button>
+                  <br />
+                  <br />
+                  <BootstrapTable
+                    {...props.baseProps}
+                    bootstrap4
+                    defaultSorted={defaultSorted}
+                    pagination={paginationFactory()}
+                    striped
+                    hover
+                    condensed
+                    noDataIndication={"no results found"}
+                    headerClasses="noselect"
+                  />
+                </div>
+              )}
+            </ToolkitProvider>
+          {/* <BootstrapTable bootstrap4 keyField='id' data={ vehicleData } columns={ columns } defaultSorted={ defaultSorted } pagination={ paginationFactory() } striped hover condensed noDataIndication={ 'no results found' } headerClasses="noselect" /> */}
         </Row>
       </Container>
     </section>

@@ -206,3 +206,24 @@
     display: block;
   }
 }
+
+.btnSignout{
+  font-family: sans-serif;
+  text-decoration: none;
+  margin: 1em auto;
+  color: #0a0a23;
+  font-size: 0.9em;
+  padding: 1em 2em 1em 2em;
+  border-radius: 2em;
+  font-weight: bold;
+  background: #fff;
+  background-size: 1.6em;
+  border: none;
+  vertical-align: middle;
+}
+
+.btnSignout:hover {
+  background-color: #c70039;;
+  color: #fff;;
+  transition: 0.3s;
+}
