@@ -76,7 +76,7 @@ const ViewBrands = () => {
         <Row>
           <h2>Manage Brands</h2>
           <hr className="style1 text-secondary"></hr>
-          <ToolkitProvider keyField="id" data={brandData} columns={columns} search >
+          <ToolkitProvider keyField="id" data={brands} columns={columns} search >
               {(props) => (
                 <div>
                   <SearchBar srText='' {...props.searchProps} />
