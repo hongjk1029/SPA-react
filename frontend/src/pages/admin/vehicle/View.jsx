@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import { Container, Row, Col } from "reactstrap";
 import { FiEdit } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
@@ -7,6 +7,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import ToolkitProvider, { Search, } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import vehicleData from "../../../assets/data/vehicleData";
 import "../../../styles/common-section.css";
+import { getVehicles } from "../../../services/api/Provider";
 
 const { SearchBar } = Search;
 
@@ -18,13 +19,13 @@ const columns = [
     headerClasses: 'pointer'
   }, 
   {
-    dataField: 'name',
+    dataField: 'vehicle',
     text: 'Vehicle Title',
     sort: true,
     headerClasses: 'pointer'
   }, 
   {
-    dataField: 'brand',
+    dataField: 'vehicle_brand.brand_name',
     text: 'Brand',
     sort: true,
     headerClasses: 'pointer'
@@ -60,12 +61,12 @@ const columns = [
     headerClasses: 'pointer'
   },
   {
-    dataField: 'active',
+    dataField: 'is_active',
     text: 'Status',
     sort: true,
     headerClasses: 'pointer',
     formatter: (cellContent, row) => {
-      if (row.active) {
+      if (row.is_active) {
         return (
           <span className="badge bg-success">Active</span>
         );
@@ -95,6 +96,19 @@ const defaultSorted = [{
 }];
 
 const ViewVehicles = () => {
+  const [vehicles, setVehicles] = useState([]);
+
+  useEffect(() => {
+    _getVehicles();
+ }, []);
+
+  function _getVehicles() {
+    getVehicles().then((res) => {
+      let arr = res;
+      setVehicles(arr);
+    });
+  }
+
   return(
     <section>
       <Container>

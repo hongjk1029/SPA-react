@@ -3,27 +3,32 @@ import "../../styles/find-car-form.css";
 import "../../styles/find-car-form.css";
 import { Form, FormGroup } from "reactstrap";
 import carBrand from "../../assets/data/carBrand";
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://localhost:8000" 
-});
+import { getBrands, getModels } from "../../services/api/Provider";
 
 const FindCarForm = (props) => {
   let {fromHome} = props
-
-  // Get API
   const [brands, setBrands] = useState([]);
+  const [models, setModels] = useState([]);
 
   useEffect(() => {
-    api.get("/vehicle/vehicle_brand_list/")
-      .then((response) => {
-        setBrands(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
-    });
+    _getBrands();
+    _getModels();
  }, []);
+
+  function _getBrands() {
+    getBrands().then((res) => {
+      let arr = res;
+      setBrands(arr);
+    });
+  }
+
+  function _getModels() {
+    getModels().then((res) => {
+      let arr = res;
+      setModels(arr);
+    });
+  }
+
 
   if(fromHome){
     return (
@@ -33,7 +38,7 @@ const FindCarForm = (props) => {
             <select>
               <option value="none">-- Car Brand --</option>
               {brands.map((option, index) => (
-                <option key={index} value={option.value}>{option.value}</option>
+                <option key={index} value={option.brand_name}>{option.brand_name}</option>
               ))}
             </select>
           </FormGroup>
@@ -41,7 +46,9 @@ const FindCarForm = (props) => {
           <FormGroup className="select__group">
             <select>
               <option value="none">-- Car Model --</option>
-              <option value=""></option>
+              {models.map((option, index) => (
+                <option key={index} value={option.vehicle}>{option.vehicle}</option>
+              ))}
             </select>
           </FormGroup>
 
@@ -71,8 +78,8 @@ const FindCarForm = (props) => {
           <FormGroup className="select__group">
             <select>
               <option value="none">-- Car Brand --</option>
-              {carBrand.map((option, index) => (
-                <option key={index} value={option.value}>{option.value}</option>
+              {brands.map((option, index) => (
+                <option key={index} value={option.brand_name}>{option.brand_name}</option>
               ))}
             </select>
           </FormGroup>
@@ -80,7 +87,9 @@ const FindCarForm = (props) => {
           <FormGroup className="select__group">
             <select>
               <option value="none">-- Car Model --</option>
-              <option value=""></option>
+              {models.map((option, index) => (
+                <option key={index} value={option.vehicle}>{option.vehicle}</option>
+              ))}
             </select>
           </FormGroup>
           
