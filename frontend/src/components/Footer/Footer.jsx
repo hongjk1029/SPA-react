@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 
 import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -48,6 +48,11 @@ const quickLinksCustomer = [
 ];
 
 const Footer = ({isLogin}) => {
+
+  useEffect(()=> {
+    setAdmin(isLogin)
+  },[isLogin])
+
   const [isAdmin, setAdmin] = useState(isLogin);
   const date = new Date();
   const year = date.getFullYear();
@@ -60,10 +65,6 @@ const Footer = ({isLogin}) => {
               <div className="logo footer__logo">
                 <h1>
                   <Link to="/home" className=" d-flex align-items-center gap-2">
-                    {/* <i className="ri-car-line"></i>
-                    <span>
-                      Smart Power Auto <br />Automotive : Admin
-                    </span> */}
                     <img src={logo1} alt="" />
                   </Link>
                 </h1>
@@ -100,14 +101,6 @@ const Footer = ({isLogin}) => {
   
             <Col lg="3" md="4" sm="12">
               <div className="mb-4">
-                {/* <h5 className="footer__link-title">Newsletter</h5>
-                <p className="section__description">Subscribe our newsletter</p>
-                <div className="newsletter">
-                  <input type="email" placeholder="Email" />
-                  <span>
-                    <i className="ri-send-plane-line"></i>
-                  </span>
-                </div> */}
               </div>
             </Col>
   
@@ -133,10 +126,6 @@ const Footer = ({isLogin}) => {
               <div className="logo footer__logo">
                 <h1>
                   <Link to="/home" className=" d-flex align-items-center gap-2">
-                    {/* <i className="ri-car-line"></i>
-                    <span>
-                      Smart Power Auto <br />Automotive : Admin
-                    </span> */}
                     <img src={logo1} alt="" />
                   </Link>
                 </h1>
@@ -173,14 +162,6 @@ const Footer = ({isLogin}) => {
   
             <Col lg="3" md="4" sm="12">
               <div className="mb-4">
-                {/* <h5 className="footer__link-title">Newsletter</h5>
-                <p className="section__description">Subscribe our newsletter</p>
-                <div className="newsletter">
-                  <input type="email" placeholder="Email" />
-                  <span>
-                    <i className="ri-send-plane-line"></i>
-                  </span>
-                </div> */}
               </div>
             </Col>
   

@@ -15,11 +15,12 @@ import "../../styles/sidebar.css";
 const Layout = () => {
 
   useEffect(()=> {
-    currentPath.pathname !== "/admin/sign-in" ? document.body.style.overflow = "auto": document.body.style.overflow = "hidden"
-  },[])
+    currentPath.pathname === "/admin/sign-in" ? document.body.style.overflow = "hidden": document.body.style.overflow = "auto"
+  })
 
+  
   const currentPath = useLocation();
-
+  
   const [isLogin, setLogin] = useState(true);
 
   if (isLogin) {
