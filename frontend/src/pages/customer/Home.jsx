@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import { Container, Row, Col } from "reactstrap";
 
 import HeroSlider from "../../components/UI/HeroSlider";
@@ -7,10 +7,24 @@ import CarItem from "../../components/UI/CarItem";
 import FindCarForm from "../../components/UI/FindCarForm";
 import AboutSection from "../../components/UI/AboutSection";
 import ServicesList from "../../components/UI/ServicesList";
+import { getVehicles } from "../../services/api/Provider";
 
 import carData from "../../assets/data/carData";
 
 const Home = () => {
+  const [vehicles, setVehicles] = useState([]);
+
+  useEffect(() => {
+    _getVehicles();
+ }, []);
+
+  function _getVehicles() {
+    getVehicles().then((res) => {
+      let arr = res;
+      setVehicles(arr);
+    });
+  }
+
   return (
     <Helmet title="Home">
       {/* ============= hero section =========== */}
@@ -42,7 +56,7 @@ const Home = () => {
               <h2 className="section__title">Hot Offers</h2>
             </Col>
 
-            {carData.slice(0, 6).map((item) => (
+            {vehicles.slice(0, 6).map((item) => (
               <CarItem item={item} key={item.id} />
             ))}
           </Row>
