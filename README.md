@@ -23,10 +23,12 @@ https://docs.docker.com/desktop/install/windows-install/
 ## Start the project
 git clone
 
+### Frontend - React
 cd to frontend directory
 npm install
 npm start
 
+### Backend - Django Rest Framework
 make another new terminal
 cd backend
 python -m venv env (CREATE a new environment)
@@ -35,3 +37,7 @@ pip install -r requirements.txt (install required packages)
 python manage.py makemigrations (sync with db)
 python manage.py migrate (update changes)
 python manage.py runserver (RUN server)
+
+### Database - Postgres
+please install docker, docker-compose and WSL (Window)
+docker-compose up db
