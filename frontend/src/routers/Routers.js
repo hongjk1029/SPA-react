@@ -1,9 +1,10 @@
-import React from "react";
+import React , { useState }from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import NotFound from "../pages/NotFound";
 
 // Admin Routes
+import SignIn from "../pages/admin/SignIn";
 import Dashboard from "../pages/admin/Dashboard";
 import ManageQuery from "../pages/admin/ManageQuery";
 import ManagePages from "../pages/admin/ManagePages";
@@ -27,7 +28,11 @@ import Contact from "../pages/customer/Contact";
 import PrivacyPolicy from "../pages/customer/PrivacyPolicy";
 import TermsCondition from "../pages/customer/TermsCondition";
 
-const Routers = ({isAdmin}) => {
+const Routers = ({isAdmin , setLogin}) => {
+  const [isAdminLogin, setIsAdminLogin] = useState()
+
+  if(isAdminLogin){ setLogin(isAdminLogin)} 
+
   if(isAdmin){
     return (
       <Routes>
@@ -70,6 +75,8 @@ const Routers = ({isAdmin}) => {
           {/* Level 2 path */}
           <Route path="/cars/:slug" element={<CarDetails />} />
   
+          {/* Admin Sign In path */}
+          <Route path="/admin/sign-in" element={<SignIn setIsAdminLogin={setIsAdminLogin}/>} />
       </Routes>
     );
   }
