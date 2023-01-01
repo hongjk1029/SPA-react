@@ -6,7 +6,7 @@ urlpatterns = [
     # get, post feedback list
     path('feedback_details/', views.Feedback.as_view()),
     # get, put, delete feedback details with ID
-    path('feedback_details/<int:pk>/', views.Feedback.as_view()),
+    path('feedback_details/<pk>/', views.Feedback.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

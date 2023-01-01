@@ -3,13 +3,15 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from vehicle import views
 
 urlpatterns = [
-    # get, post vehicle list
-    path('vehicle_brand_list/', views.VehicleBrandList.as_view()),
-    # get, put, delete vehicle details with ID
-    path('vehicle_brand_details/<int:pk>/', views.VehicleBrandDetails.as_view()),
-    
-    path('vehicle_list/', views.VehicleList.as_view()),
-
+    # Add and View Brand list
+    path('brand/', views.BrandList.as_view()),
+    # View, Update and Delete Brand details with ID
+    path('brand/<pk>/', views.BrandDetails.as_view()),
+    # Add and View Car list
+    path('vehicle/', views.VehicleList.as_view()),
+    # View, Update, Delete Car Details
+    path('vehicle/<pk>/', views.VehicleDetails.as_view()),
+    # Add and View Document
     path('vehicle_document_list/', views.VehicleDocumentList.as_view())
 ]
 
