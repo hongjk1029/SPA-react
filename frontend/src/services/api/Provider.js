@@ -2,8 +2,8 @@ import axios from 'axios';
 import { handleResponse, handleError } from './Response'; 
 
 const BASE_URL = 'http://localhost:8000'; 
-const BRANDS_URL = 'vehicle/vehicle_brand_list/'; 
-const VEHICLE_URL = 'vehicle/vehicle_list/'; 
+const BRANDS_URL = 'vehicle/brand'; 
+const VEHICLE_URL = 'vehicle/vehicle'; 
 
 // Brands
 export function getBrands(){ 
