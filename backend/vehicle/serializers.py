@@ -19,9 +19,15 @@ class VehicleImageSerializer(serializers.ModelSerializer):
         model = VehicleImage
         fields = '__all__'
 
+class VehicleDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehicleDetails
+        fields = '__all__'
+
 class VehicleSerializer(serializers.ModelSerializer):
     vehicle_brand = VehicleBrandSerializer(read_only=True)
     documents = VehicleDocumentSerializer(many=True)
+    vehicle_details = VehicleDetailSerializer()
     vehicle_image = VehicleImageSerializer(many=True)
 
     class Meta:
