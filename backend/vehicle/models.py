@@ -20,35 +20,6 @@ fuel_type = [
     ('Hybrid','Hybrid'),
     ('EV','EV'),
 ]
-
-class VehicleDetails(models.Model):
-    fuel_type = models.CharField(max_length=255)
-    model_year = models.IntegerField()
-    vehicle_milleage = models.IntegerField()
-    seating_capacity = models.IntegerField()
-    air_conditioner = models.BooleanField()
-    power_door_locks = models.BooleanField()
-    anti_lock_brake = models.BooleanField()
-    brake_assist = models.BooleanField()
-    power_steering = models.BooleanField()
-    driver_airbag = models.BooleanField()
-    passenger_airbag = models.BooleanField()
-    power_window = models.BooleanField()
-    cd_player = models.BooleanField()
-    central_locking = models.BooleanField()
-    crash_sensor = models.BooleanField()
-    leather_seat = models.BooleanField()
-    # accessory = ArrayField(
-    #     ArrayField(
-    #         models.CharField(max_length=10, blank=True),
-    #         size=8,
-    #     ),
-    #     size=8,
-    # )
-
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
 class VehicleRent(models.Model):
     rent_active = models.BooleanField(default=False)
     price_per_week = models.DecimalField(default=0, max_digits=999,decimal_places=2)
@@ -63,10 +34,9 @@ class Vehicle(models.Model):
     number_plate = models.CharField(max_length=10)
     is_active = models.BooleanField(default=True)
     # vehicle_rent_active = models.OneToOneField(VehicleRent,on_delete=models.CASCADE)
-    # price_of_cost = models.DecimalField(max_digits=999,decimal_places=2)
-    # price_of_sale = models.DecimalField(max_digits=999,decimal_places=2)
-    # vehicle_details = models.OneToOneField(VehicleDetails, on_delete=models.CASCADE)
-
+    price_of_cost = models.DecimalField(default=0, max_digits=999,decimal_places=2)
+    price_of_sale = models.DecimalField(default=0, max_digits=999,decimal_places=2)
+    vehicle_details = ArrayField(models.CharField(max_length=200), blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
