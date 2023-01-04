@@ -85,15 +85,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-database_switch = 1
+database_switch = 2
 
 if database_switch == 1:
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.sqlite3',
-    #         'NAME': BASE_DIR / 'db.sqlite3',
-    #     }
-    # }
     # locahost database
     DATABASES = {
         'default': {
@@ -109,12 +103,12 @@ else:
     # Production database
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'spadb',
-            'USER': 'spaadmin',
-            'PASSWORD': 'Password1',
-            'HOST': '20.78.124.119',
-            'PORT': '5432',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'smartp85_spa_db',
+            'USER': 'smartp85_daniel',
+            'PASSWORD': '@5d76o=XG8(&',
+            'HOST': '103.6.244.18',
+            'PORT': 3306,
         }
     }
 
