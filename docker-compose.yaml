@@ -30,7 +30,7 @@ services:
         # condition: service_healthy
 
   db:
-    image: mysql:5.7
+    image: mysql:8.0.31
     volumes:
       - todo-mysql-data:/var/lib/mysql
     ports:
