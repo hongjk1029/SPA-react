@@ -1,4 +1,5 @@
 from django.db import models
+from django_mysql.models import ListCharField
 
 # Create your models here.
 class VehicleBrand(models.Model):
@@ -36,6 +37,11 @@ class Vehicle(models.Model):
     price_of_cost = models.DecimalField(default=0, max_digits=65,decimal_places=2)
     price_of_sale = models.DecimalField(default=0, max_digits=65,decimal_places=2)
     # vehicle_details = ArrayField(models.CharField(max_length=200), blank=True)
+    vehicle_details = ListCharField(
+        base_field=models.CharField(max_length=10),
+        size=6,
+        max_length=100,  # 6 * 10 character nominals, plus commas
+    )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
