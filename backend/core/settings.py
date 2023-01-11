@@ -85,18 +85,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-database_switch = 2
+database_switch = 1
 
 if database_switch == 1:
     # locahost database
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'spadb',
+            'USER': 'root',
+            'PASSWORD': 'root',
             'HOST': 'db',
-            'PORT': 5432,
+            'PORT': 3306,
         }
     }
 else:
