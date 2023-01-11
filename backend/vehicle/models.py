@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 class VehicleBrand(models.Model):
@@ -22,8 +21,8 @@ fuel_type = [
 ]
 class VehicleRent(models.Model):
     rent_active = models.BooleanField(default=False)
-    price_per_week = models.DecimalField(default=0, max_digits=999,decimal_places=2)
-    price_per_month = models.DecimalField(default=0, max_digits=999,decimal_places=2)
+    price_per_week = models.DecimalField(default=0, max_digits=65,decimal_places=2)
+    price_per_month = models.DecimalField(default=0, max_digits=65,decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -34,9 +33,9 @@ class Vehicle(models.Model):
     number_plate = models.CharField(max_length=10)
     is_active = models.BooleanField(default=True)
     # vehicle_rent_active = models.OneToOneField(VehicleRent,on_delete=models.CASCADE)
-    price_of_cost = models.DecimalField(default=0, max_digits=999,decimal_places=2)
-    price_of_sale = models.DecimalField(default=0, max_digits=999,decimal_places=2)
-    vehicle_details = ArrayField(models.CharField(max_length=200), blank=True)
+    price_of_cost = models.DecimalField(default=0, max_digits=65,decimal_places=2)
+    price_of_sale = models.DecimalField(default=0, max_digits=65,decimal_places=2)
+    # vehicle_details = ArrayField(models.CharField(max_length=200), blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
