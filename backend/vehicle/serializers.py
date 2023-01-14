@@ -22,8 +22,14 @@ class VehicleImageSerializer(serializers.ModelSerializer):
 class VehicleSerializer(serializers.ModelSerializer):
     vehicle_brand = VehicleBrandSerializer(read_only=True)
     # documents = VehicleDocumentSerializer(many=True)
-    # vehicle_image = VehicleImageSerializer(many=True)
+    vehicle_image = VehicleImageSerializer(many=True)
 
     class Meta:
         model = Vehicle
         fields = '__all__'
+
+    # def create(self, validated_data):
+    #     car_image_data = validated_data.pop('profile')
+    #     user = Vehicle.objects.create(**validated_data)
+    #     VehicleImage.objects.create(user=user, **car_image_data)
+    #     return user
