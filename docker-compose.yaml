@@ -10,7 +10,7 @@ services:
 
   backend:
     container_name: spa_backend
-    command : "python manage.py runserver 0.0.0.0:8000"
+    command: "python manage.py runserver 0.0.0.0:8000"
     build:
       context: ./backend/
       dockerfile: Dockerfile
@@ -26,36 +26,40 @@ services:
 
     restart: on-failure
     depends_on:
-      - db
-        # condition: service_healthy
+      db:
+        condition: service_healthy
 
   db:
-    image: mysql:8.0.31
+    image: mysql:8.0.32
     volumes:
       - todo-mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
-    environment: 
+    environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: spadb
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
 
 volumes:
   todo-mysql-data:
 
-  # frontend:
-  #   restart: always
-  #   command : npm start
-  #   container_name: front
-  #   build:
-  #     context: ./frontend/
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3000:3000"
-  #   stdin_open: true
-  #   depends_on:
-  #     - api
-  #   networks:
-  #     - db-net
+    # frontend:
+    #   restart: always
+    #   command : npm start
+    #   container_name: front
+    #   build:
+    #     context: ./frontend/
+    #     dockerfile: Dockerfile
+    #   ports:
+    #     - "3000:3000"
+    #   stdin_open: true
+    #   depends_on:
+    #     - api
+    #   networks:
+    #     - db-net
 
 networks:
   db-net:
