@@ -161,16 +161,16 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000"
 ]
 
-DEFAULT_FILE_STORAGE = 'core.custom_azure.AzureMediaStorage'
-STATICFILES_STORAGE = 'core.custom_azure.AzureStaticStorage'
+# DEFAULT_FILE_STORAGE = 'core.custom_azure.AzureMediaStorage'
+# STATICFILES_STORAGE = 'core.custom_azure.AzureStaticStorage'
 
-STATIC_LOCATION = "staticfile"
-MEDIA_LOCATION = "media"
+# STATIC_LOCATION = "staticfile"
+# MEDIA_LOCATION = "media"
 
-AZURE_ACCOUNT_NAME = "spadevstorage"
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+# AZURE_ACCOUNT_NAME = "spadevstorage"
+# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+# STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+# MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
