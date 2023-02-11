@@ -30,7 +30,7 @@ jobs:
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
-          ftp-server: 
-          ftp-username: 
+          ftp-server:  ftp.smartpowerautosdnbhd.com
+          ftp-username: smartp85_deploy@smartpowerautosdnbhd.com
           ftp-password: ${{ secrets.FTP_PASSWORD }}
           local-dir: build/
