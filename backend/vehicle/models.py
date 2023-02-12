@@ -6,6 +6,7 @@ class VehicleBrand(models.Model):
     brand_name = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    removed = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.brand_name
@@ -44,6 +45,7 @@ class Vehicle(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    removed = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.vehicle
@@ -53,6 +55,7 @@ class VehicleDocument(models.Model):
     vehicle = models.ForeignKey(Vehicle, related_name='documents', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    removed = models.DateTimeField(null=True, blank=True)
 
 class VehicleImage(models.Model):   
     vehical_image = models.ImageField()

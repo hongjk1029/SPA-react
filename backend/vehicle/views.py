@@ -1,6 +1,7 @@
 from vehicle.models import Vehicle, VehicleBrand, VehicleDocument
 from rest_framework import generics
 from vehicle.serializers import VehicleBrandSerializer, VehicleDocumentSerializer, VehicleSerializer
+from datetime import datetime
 
 # Vehicle Brand Here
 class BrandList(generics.ListCreateAPIView):
@@ -19,6 +20,10 @@ class BrandDetails(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = VehicleBrand.objects.all()
     serializer_class = VehicleBrandSerializer
+
+    def perform_destroy(self, instance):
+        instance.removed = datetime.now()
+        return instance.save()
 
 # Vehicle Here
 class VehicleList(generics.ListCreateAPIView):
