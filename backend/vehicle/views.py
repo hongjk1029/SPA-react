@@ -9,7 +9,7 @@ class BrandList(generics.ListCreateAPIView):
     Create New Brand
     View All Brand in a List
     """
-    queryset = VehicleBrand.objects.all()
+    queryset = VehicleBrand.objects.exclude(removed__isnull=False)
     serializer_class = VehicleBrandSerializer
 
 class BrandDetails(generics.RetrieveUpdateDestroyAPIView):
