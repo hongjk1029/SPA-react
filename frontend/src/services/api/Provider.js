@@ -20,6 +20,20 @@ export function addBrand(brandName){
     .catch(handleError); 
 }; 
 
+export function updateBrand(id, brandName){ 
+  return axios 
+    .put(`${BASE_URL}/${BRANDS_URL}${id}/`, {brand_name: brandName}) 
+    .then(handleResponse) 
+    .catch(handleError); 
+}; 
+
+export function deleteBrand(id){ 
+  return axios 
+    .delete(`${BASE_URL}/${BRANDS_URL}${id}/`) 
+    .then(handleResponse) 
+    .catch(handleError); 
+}; 
+
 // Vehicles
 export function getModels(){ 
   return axios 

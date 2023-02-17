@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import { FiEdit } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search, } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 
-import brandData from "../../../assets/data/brandData";
 import "../../../styles/common-section.css";
-import { getBrands } from "../../../services/api/Provider";
+import { getBrands, deleteBrand, updateBrand } from "../../../services/api/Provider";
 
 const { SearchBar } = Search;
 
-const columns = [
+async function _deleteBrand(id) {
+  console.log(id)
+  await deleteBrand(id)
+  window.location.reload(false);
+}
+
+const columns =  [
   {
     dataField: 'id',
     text: '#',
@@ -43,8 +50,7 @@ const columns = [
     formatter: (cellContent, row) => {
       return (
         <div>
-          <FiEdit className="text-primary btnEdit" role="button"/>
-          <IoMdClose className="text-danger" role="button"/>
+          <IoMdClose className="text-danger" role="button" type="button" onClick={() => _deleteBrand(row.id)}/>
         </div>
       );
     }
@@ -70,6 +76,17 @@ const ViewBrands = () => {
   });
 }
 
+// function beforeSaveCell(row, done) {
+//   setTimeout(() => {
+//     if (window.confirm('Accept this change?')) {
+//       done(true);
+//       updateBrand(row.id, )
+//     } else {
+//       done(false);
+//     }
+//   }, 0);
+//   return { async: true };
+// }
   return(
     <section>
       <Container>
@@ -95,6 +112,22 @@ const ViewBrands = () => {
                     condensed
                     noDataIndication={"no results found"}
                     headerClasses="noselect"
+                    cellEdit={ cellEditFactory({
+                      mode: 'dbclick',
+                      blurToSave: true,
+                      beforeSaveCell: (oldValue, newValue, row, column) => { 
+                        setTimeout(() => {
+                            if (window.confirm('Do you want to change ' + oldValue + ' to ' + newValue)) {
+                              updateBrand(row.id, newValue)
+                              window.location.reload(false);
+                            } 
+                            else{
+                              window.location.reload(false);
+                            }
+                          }, 0);
+                          return { async: true };
+                      }
+                    }) }
                   />
                 </div>
               )}
