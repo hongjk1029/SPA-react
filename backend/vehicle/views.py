@@ -31,7 +31,7 @@ class VehicleList(generics.ListCreateAPIView):
     Create New Car
     View All Car in a List
     """
-    queryset = Vehicle.objects.all()
+    queryset = Vehicle.objects.exclude(removed__isnull=False)
     serializer_class = VehicleSerializer
 
 class VehicleDetails(generics.RetrieveUpdateDestroyAPIView):

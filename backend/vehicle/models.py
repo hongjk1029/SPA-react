@@ -58,7 +58,7 @@ class VehicleDocument(models.Model):
     removed = models.DateTimeField(null=True, blank=True)
 
 class VehicleImage(models.Model):   
-    vehical_image = models.ImageField()
+    vehicle_image = models.ImageField()
     vehicle = models.ForeignKey(Vehicle, related_name='vehicle_image', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
