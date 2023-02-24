@@ -12,7 +12,7 @@ class VehicleBrandSerializer(serializers.ModelSerializer):
 class VehicleDocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehicleDocument
-        fields = '__all__'
+        fields = ['id', 'document']
 
 class VehicleImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,16 +20,23 @@ class VehicleImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class VehicleSerializer(serializers.ModelSerializer):
-    vehicle_brand = VehicleBrandSerializer(read_only=True)
-    # documents = VehicleDocumentSerializer(many=True)
-    vehicle_image = VehicleImageSerializer(many=True)
+    vehicle_documents = serializers.ListField(write_only=True, required=False)
 
     class Meta:
         model = Vehicle
-        fields = '__all__'
+        fields = ['id', 'vehicle', 'vehicle_brand', 'vehicle_overview', 'number_plate', 'price_of_cost', 'price_of_sale', 'vehicle_details', 'vehicle_documents',]
 
-    # def create(self, validated_data):
-    #     car_image_data = validated_data.pop('profile')
-    #     user = Vehicle.objects.create(**validated_data)
-    #     VehicleImage.objects.create(user=user, **car_image_data)
-    #     return user
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['vehicle_brand'] = VehicleBrandSerializer(instance.vehicle_brand).data
+        representation['vehicle_documents'] = VehicleDocumentSerializer(instance.documents.all(), many=True).data
+        return representation
+
+    def create(self, validated_data):
+        car_doc = validated_data.pop('vehicle_documents', [])
+        create_vehicle = super().create(validated_data)
+    
+        if car_doc:
+            create_vehicle_doc = create_vehicle.documents.bulk_create([VehicleDocument(document=doc, vehicle=create_vehicle) for doc in car_doc])
+
+        return create_vehicle
