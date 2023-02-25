@@ -5,6 +5,7 @@ import { Link, useNavigate, NavLink, useLocation } from "react-router-dom";
 import "../../styles/header.css";
 import { RiShutDownLine } from "react-icons/ri";
 import logo1 from "../../assets/all-images/logo1.svg";
+import { Helmet } from 'react-helmet';
 
 
 const navLinks = [
@@ -27,8 +28,12 @@ const navLinks = [
   },
 ];
 
+const NotAdminPage = () => {
+  const location = useLocation();
+  return !location.pathname.includes('/admin');
+};
 
-const Header = ({isLogin, setLogin}) => {
+const Header = ({ isLogin, setLogin}) => {
   
   useEffect(()=> {
     setAdmin(isLogin)
@@ -43,6 +48,8 @@ const Header = ({isLogin, setLogin}) => {
   const menuRef = useRef(null);
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
+
+
 
   const handleSignOut = () => { setLogin(false); navigate("/admin/sign-in")}
 
@@ -75,6 +82,7 @@ const Header = ({isLogin, setLogin}) => {
   else if(isAdmin){
     return (
       <header className="header">
+
         {/* ============ header top ============ */}
         <div className="header__top">
           <Container></Container>
@@ -113,6 +121,11 @@ const Header = ({isLogin, setLogin}) => {
     else{
       return (
         <header className="header">
+          {NotAdminPage() && (
+            <Helmet>
+              <script defer src="https://widget.tochat.be/bundle.js?key=76872d3b-f925-4359-b7c1-5f94ef9dbe95" />
+            </Helmet>
+          )}
         {/* ============ header top ============ */}
         <div className="header__top">
           <Container>
