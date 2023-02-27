@@ -48,3 +48,18 @@ export function getVehicles(){
     .then(handleResponse) 
     .catch(handleError); 
 }; 
+
+export function addVehicle(vehicleName, brandName, overview, numberPlate, cost, sale, details){ 
+  return axios 
+    .post(`${BASE_URL}/${VEHICLE_URL}`, {
+      vehicle: vehicleName, 
+      vehicle_brand: brandName, 
+      vehicle_overview: overview, 
+      number_plate: numberPlate, 
+      price_of_cost: cost, 
+      price_of_sale: sale, 
+      vehicle_details: details
+    }) 
+    .then(handleResponse) 
+    .catch(handleError); 
+}; 
