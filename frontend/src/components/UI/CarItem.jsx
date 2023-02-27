@@ -11,7 +11,7 @@ const CarItem = (props) => {
     <Col lg="4" md="4" sm="6" className="mb-5">
       <div className="car__item">
         <div className="car__img">
-          <img src={vehicle_image[0].vehical_image} alt="" className="w-100" />
+          {/* <img src={vehicle_image[0].vehical_image} alt="" className="w-100" /> */}
         </div>
 
         <div className="car__item-content mt-4">

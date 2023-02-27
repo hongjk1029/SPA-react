@@ -31,22 +31,52 @@ const columns = [
     headerClasses: 'pointer'
   },
   {
-    dataField: 'saleType',
+    dataField: 'price_of_sale',
     text: 'Sale Type',
     sort: true,
-    headerClasses: 'pointer'
+    headerClasses: 'pointer',
+    formatter: (cellContent, row) => {
+      if (row.price_of_sale != null) {
+        return (
+          "Sale"
+        );
+      }
+      return (
+        "Rental"
+      );
+    }
   },
   {
     dataField: 'rentalPrice',
     text: 'Rental Price(RM)',
     sort: true,
-    headerClasses: 'pointer'
+    headerClasses: 'pointer',
+    formatter: (cellContent, row) => {
+      if (row.rentalPrice != null) {
+        return (
+          row.rentalPrice
+        );
+      }
+      return (
+        "-"
+      );
+    }
   },
   {
-    dataField: 'salePrice',
+    dataField: 'price_of_sale',
     text: 'Sale Price(RM)',
     sort: true,
-    headerClasses: 'pointer'
+    headerClasses: 'pointer',
+    formatter: (cellContent, row) => {
+      if (row.price_of_sale != null) {
+        return (
+          row.price_of_sale
+        );
+      }
+      return (
+        "-"
+      );
+    }
   },
   {
     dataField: 'fuelType',
@@ -61,12 +91,12 @@ const columns = [
     headerClasses: 'pointer'
   },
   {
-    dataField: 'is_active',
+    dataField: 'vehicle_brand.removed',
     text: 'Status',
     sort: true,
     headerClasses: 'pointer',
     formatter: (cellContent, row) => {
-      if (row.is_active) {
+      if (row.vehicle_brand.removed == null) {
         return (
           <span className="badge bg-success">Active</span>
         );
