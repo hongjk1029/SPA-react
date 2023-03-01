@@ -15,10 +15,24 @@ const AddVehicles = () => {
     const [vehiclePlate, setVehiclePlate] = useState('');
     const [priceOfCost, setPriceOfCost] = useState('');
     const [priceOfSale, setPriceOfSale] = useState('');
+    const [modelYear, setModelYear] = useState('');
+    const [seatingCapacity, setSeatingCapacity] = useState('');
+    const [mileage, setMileage] = useState('');
+    const [vehicleImages, setVehicleImages] = useState([]);
+    const [vehicleImageNames, setVehicleImageNames] = useState([]);
+    //const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
 
     useEffect(() => {
       _getBrands();
-    }, []);
+      if (vehicleImages.length < 1) return;
+      const newImageNames = [];
+      vehicleImages.forEach(image => newImageNames.push(image.name))
+      setVehicleImageNames(newImageNames)
+      //const newImageUrls = [];
+      //vehicleImages.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
+      //setVehicleImageURLs(newImageUrls)
+      //console.log(vehicleImageURLs)
+    }, [vehicleImages]);
 
  function _getBrands() {
   getBrands().then((res) => {
@@ -37,12 +51,19 @@ const AddVehicles = () => {
     }
   }
 
+  function onImageChange(e){
+    setVehicleImages([...e.target.files])
+  }
+
   const clearForm = event =>{
     setVehicleName('');
     setVehicleOverview('');
     setVehiclePlate('');
     setPriceOfCost('');
     setPriceOfSale('');
+    setModelYear('');
+    setSeatingCapacity('');
+    setMileage('');
     document.getElementById("vehicleForm").reset()
   }
 
@@ -52,8 +73,7 @@ const AddVehicles = () => {
       alert('Confirm to save?')
       let brandName = document.getElementById("brand").value
       let fuelType = document.getElementById("fuelType").value
-      addVehicle(vehicleName, brandName, vehicleOverview, vehiclePlate, priceOfCost, priceOfSale, "no details");
-      console.log(fuelType)
+      addVehicle(vehicleName, brandName, vehicleOverview, vehiclePlate, priceOfCost, priceOfSale, fuelType, modelYear, seatingCapacity, mileage, vehicleImageNames);
       clearForm();
     }
     else{
@@ -105,12 +125,14 @@ const AddVehicles = () => {
           <Row className="mt-3">
             <Col lg="5">
               <label htmlFor="modelYear">Model Year</label>
-              <input type="text" className="form-control" id="modelYear"/>
+              <input type="text" className="form-control" id="modelYear"
+              onChange={event => setModelYear(event.target.value)} value={modelYear} required/>
             </Col>
             
             <Col lg="5">
               <label htmlFor="capacity">Seating Capacity</label>
-              <input type="text" className="form-control" id="capacity"/>
+              <input type="text" className="form-control" id="capacity"
+              onChange={event => setSeatingCapacity(event.target.value)} value={seatingCapacity} required/>
             </Col>
           </Row>
 
@@ -124,7 +146,8 @@ const AddVehicles = () => {
             
             <Col lg="5">
               <label htmlFor="mileage">Vehicle Mileage (Per KM)</label>
-              <input type="text" className="form-control" id="mileage" />
+              <input type="text" className="form-control" id="mileage" 
+              onChange={event => setMileage(event.target.value)} value={mileage} required/>
             </Col>
           </Row>
 
@@ -206,7 +229,8 @@ const AddVehicles = () => {
           <Row className="mt-2">
           <h5>Upload Images</h5>
             <Col lg="10">
-              <input className="form-control mt-2" type="file" id="formFileMultipleImages" multiple />
+              <input className="form-control mt-2" type="file" id="formFileMultipleImages" multiple 
+              accept="image/*" onChange={onImageChange} required/>
             </Col>
           </Row>
 

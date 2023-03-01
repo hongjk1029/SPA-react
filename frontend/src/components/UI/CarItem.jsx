@@ -5,19 +5,19 @@ import "../../styles/car-item.css";
 
 const CarItem = (props) => {
   // Haven't Mapped for automatic, speed, price
-  const { vehicle_image, vehicle, vehicle_brand, automatic, speed, price } = props.item;
+  const { id, vehicle_images, vehicle, vehicle_brand, automatic, speed, price_of_sale } = props.item;
 
   return (
     <Col lg="4" md="4" sm="6" className="mb-5">
       <div className="car__item">
         <div className="car__img">
-          {/* <img src={vehicle_image[0].vehical_image} alt="" className="w-100" /> */}
+          {<img src={vehicle_images[0].vehicle_image} alt="" className="w-100" />}
         </div>
 
         <div className="car__item-content mt-4">
           <h4 className="section__title text-center">{vehicle_brand.brand_name} {vehicle}</h4>
           <h6 className="rent__price text-center mt-">
-            ${price}.00 <span>/ Day</span>
+            ${price_of_sale}.00 <span>/ Day</span>
           </h6>
 
           <div className="car__item-info d-flex align-items-center justify-content-between mt-3 mb-4">
@@ -33,11 +33,11 @@ const CarItem = (props) => {
           </div>
 
           <button className=" w-50 car__item-btn car__btn-rent">
-            <Link to={`/cars/${vehicle_brand.brand_name}${vehicle}`}>Rent</Link>
+            <Link to={`/cars/${vehicle_brand.brand_name}${vehicle}/${id}`}>Rent</Link>
           </button>
 
           <button className=" w-50 car__item-btn car__btn-details">
-            <Link to={`/cars/${vehicle_brand.brand_name}${vehicle}`}>Details</Link>
+            <Link to={`/cars/${vehicle_brand.brand_name}${vehicle}/${id}`}>Details</Link>
           </button>
         </div>
       </div>

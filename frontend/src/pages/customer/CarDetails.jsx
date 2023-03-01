@@ -5,40 +5,40 @@ import { Container, Row, Col } from "reactstrap";
 import Helmet from "../../components/Helmet/Helmet";
 import { useParams } from "react-router-dom";
 import ImageGallery from 'react-image-gallery';
-import { getVehicles } from "../../services/api/Provider";
+import { getVehiclesById } from "../../services/api/Provider";
 
 import "/node_modules/react-image-gallery/styles/css/image-gallery.css";
 import "../../styles/car-details.css";
 
 const CarDetails = () => {
+  const { id } = useParams();
+
   const [vehicles, setVehicles] = useState([]);
   const [images, setImages] = useState([]);
   const [brand, setBrand] = useState([]);
 
   useEffect(() => {
-    _getVehicles();
+    _getVehiclesById(id);
     window.scrollTo(0, 0);
   }, []);
 
 
-  async function _getVehicles() {
-    getVehicles().then((res) => {
+  async function _getVehiclesById(vehicleId) {
+    getVehiclesById(vehicleId).then((res) => {
       console.log(res)
-      let arr = res[0];
-      let vehicle_brand = arr.vehicle_brand;
+      let vehicle_brand = res.vehicle_brand;
       let brand_name = vehicle_brand.brand_name;
       let temp_images = [...images];
 
-      res.forEach((img)=>{
-        img.vehicle_image.forEach((el)=>{
+        res.vehicle_images.forEach((el)=>{
           temp_images.push({
               original: el.vehical_image,
               thumbnail: el.vehical_image
             });
         })
-      })
       
-      setVehicles(arr);
+      //console.log(temp_images)
+      setVehicles(res);
       setImages(temp_images);
       setBrand(brand_name);
     });
@@ -67,7 +67,7 @@ const CarDetails = () => {
 
                 <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
-                    ${vehicles.price}.00 / Day
+                    ${vehicles.sa}.00 / Day
                   </h6>
 
                   <h6 className="rent__price fw-bold fs-4">

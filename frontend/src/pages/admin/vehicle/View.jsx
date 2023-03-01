@@ -79,13 +79,13 @@ const columns = [
     }
   },
   {
-    dataField: 'fuelType',
+    dataField: 'fuel_type',
     text: 'Fuel Type',
     sort: true,
     headerClasses: 'pointer'
   },
   {
-    dataField: 'modelYear',
+    dataField: 'model_year',
     text: 'Model Year',
     sort: true,
     headerClasses: 'pointer'
