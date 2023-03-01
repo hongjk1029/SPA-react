@@ -148,6 +148,25 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# DEFAULT_FILE_STORAGE = 'core.custom_azure.AzureMediaStorage'
+# STATICFILES_STORAGE = 'core.custom_azure.AzureStaticStorage'
+
+# STATIC_LOCATION = "staticfile"
+# MEDIA_LOCATION = "media"
+
+# AZURE_ACCOUNT_NAME = "spadevstorage"
+# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+# STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+# MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -160,17 +179,6 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://127.0.0.1:3000"
 ]
-
-# DEFAULT_FILE_STORAGE = 'core.custom_azure.AzureMediaStorage'
-# STATICFILES_STORAGE = 'core.custom_azure.AzureStaticStorage'
-
-# STATIC_LOCATION = "staticfile"
-# MEDIA_LOCATION = "media"
-
-# AZURE_ACCOUNT_NAME = "spadevstorage"
-# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-# STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-# MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
