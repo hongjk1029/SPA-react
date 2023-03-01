@@ -6,8 +6,8 @@ import { getBrands, addVehicle } from "../../../services/api/Provider";
 
 
 const AddVehicles = () => { 
-    const salesTypeData = [ { id: 1, name: "Rental", }, { id: 2, name: "Sale", }, ];
-    const [chosenSalesType, setChosenSalesType] = useState("Rental");
+    const salesTypeData = [ /*{ id: 1, name: "Rental", },*/ { id: 2, name: "Sale", }, ];
+    const [chosenSalesType, setChosenSalesType] = useState("Sale");
     const select = useRef();
     const [brands, setBrands] = useState([]);
     const [vehicleName, setVehicleName] = useState('');
@@ -51,7 +51,9 @@ const AddVehicles = () => {
     if(vehicleName.trim().length !== 0){
       alert('Confirm to save?')
       let brandName = document.getElementById("brand").value
+      let fuelType = document.getElementById("fuelType").value
       addVehicle(vehicleName, brandName, vehicleOverview, vehiclePlate, priceOfCost, priceOfSale, "no details");
+      console.log(fuelType)
       clearForm();
     }
     else{
@@ -130,8 +132,11 @@ const AddVehicles = () => {
           <Row className="mt-3">
             <Col lg="5">
               <label htmlFor="fuelType">Select Fuel Type</label>
-              <select id="fuelType" className="form-control" >
-                <option value="">None</option>
+              <select id="fuelType" className="form-control" required>
+                <option value="">--Select One--</option>
+                <option key="fueltype1" value="Petrol">Petrol</option>
+                <option key="fueltype2" value="Electric">Electric</option>
+                <option key="fueltype3" value="Hybrid">Hybrid</option>
               </select>
             </Col>
             
