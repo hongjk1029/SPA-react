@@ -3,6 +3,7 @@ from pkg_resources import require
 from rest_framework import serializers
 import vehicle
 from vehicle.models import *
+from django.core.exceptions import ObjectDoesNotExist
     
 class VehicleBrandSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,9 +11,32 @@ class VehicleBrandSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class VehicleDocumentSerializer(serializers.ModelSerializer):
+    document = serializers.ListField(write_only=True, required=False)
+    vehicle_id = serializers.IntegerField(write_only=True, required=False)
+
     class Meta:
         model = VehicleDocument
-        fields = ['id', 'document']
+        fields = ['id', 'document', 'vehicle_id']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['vehicle_id'] = instance.vehicle_id
+        representation['document'] = instance.document
+
+    def update(self, instance, validated_data):
+        try:
+            check_doc_exist = VehicleDocument.objects.get(id=instance.pk)
+            check_doc_exist.delete()
+        except ObjectDoesNotExist:
+            pass
+        
+        if validated_data != {}:
+            vehicle = validated_data['vehicle_id']
+            get_doc = validated_data['document']
+            get_vehicle = Vehicle.objects.get(id=vehicle)
+            update_doc = VehicleDocument.objects.bulk_create([VehicleDocument(document=doc, vehicle=get_vehicle) for doc in get_doc])
+
+        return instance
 
 class VehicleImageSerializer(serializers.ModelSerializer):
     class Meta:
