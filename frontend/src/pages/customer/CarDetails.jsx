@@ -16,28 +16,29 @@ const CarDetails = () => {
   const [vehicles, setVehicles] = useState([]);
   const [images, setImages] = useState([]);
   const [brand, setBrand] = useState([]);
+  const [priceOfSale, setPriceOfSale] = useState(0);
+
+  const addCommas = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   useEffect(() => {
     _getVehiclesById(id);
     window.scrollTo(0, 0);
   }, []);
 
-
   async function _getVehiclesById(vehicleId) {
     getVehiclesById(vehicleId).then((res) => {
-      console.log(res)
+      setPriceOfSale(addCommas(res.price_of_sale));
       let vehicle_brand = res.vehicle_brand;
       let brand_name = vehicle_brand.brand_name;
       let temp_images = [...images];
 
         res.vehicle_images.forEach((el)=>{
           temp_images.push({
-              original: el.vehical_image,
-              thumbnail: el.vehical_image
+              original: el.vehicle_image,
+              thumbnail: el.vehicle_image
             });
         })
       
-      //console.log(temp_images)
       setVehicles(res);
       setImages(temp_images);
       setBrand(brand_name);
@@ -67,11 +68,11 @@ const CarDetails = () => {
 
                 <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
-                    ${vehicles.sa}.00 / Day
+                    ${priceOfSale} / Day
                   </h6>
 
                   <h6 className="rent__price fw-bold fs-4">
-                    ${vehicles.monthprice}.00 / Month
+                    ${priceOfSale} / Month
                   </h6>
                 </div>
 
@@ -122,7 +123,7 @@ const CarDetails = () => {
                       className="ri-wheelchair-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {vehicles.seatType}
+                    {vehicles.seating_capacity}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">

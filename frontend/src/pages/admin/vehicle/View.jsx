@@ -31,12 +31,12 @@ const columns = [
     headerClasses: 'pointer'
   },
   {
-    dataField: 'price_of_sale',
+    dataField: 'price_of_cost',
     text: 'Sale Type',
     sort: true,
     headerClasses: 'pointer',
     formatter: (cellContent, row) => {
-      if (row.price_of_sale != null) {
+      if (row.price_of_cost != null) {
         return (
           "Sale"
         );

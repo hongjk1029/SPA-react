@@ -56,8 +56,7 @@ export function getVehiclesById(id){
     .catch(handleError); 
 }; 
 
-export function addVehicle(vehicleName, brandName, overview, numberPlate, cost, sale, fuelType, modelYear, seatingCapacity, mileage, vehicleImages){ 
-  console.log(vehicleImages)
+export function addVehicle(vehicleName, brandName, overview, numberPlate, cost, sale, fuelType, modelYear, seatingCapacity, mileage, vehicleImages, accessories){ 
   return axios 
     .post(`${BASE_URL}/${VEHICLE_URL}`, {
       vehicle: vehicleName, 
@@ -70,7 +69,8 @@ export function addVehicle(vehicleName, brandName, overview, numberPlate, cost, 
       model_year: modelYear,
       seating_capacity: seatingCapacity,
       mileage: mileage,
-      vehicle_images: vehicleImages
+      vehicle_images: vehicleImages,
+      accessories: accessories
     }) 
     .then(handleResponse) 
     .catch(handleError); 

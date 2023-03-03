@@ -4,6 +4,7 @@ import accessoriesData from "../../../assets/data/accessoriesData.js";
 import "../../../styles/common-section.css";
 import { getBrands, addVehicle } from "../../../services/api/Provider";
 
+const accessoriesList = []
 
 const AddVehicles = () => { 
     const salesTypeData = [ /*{ id: 1, name: "Rental", },*/ { id: 2, name: "Sale", }, ];
@@ -20,6 +21,7 @@ const AddVehicles = () => {
     const [mileage, setMileage] = useState('');
     const [vehicleImages, setVehicleImages] = useState([]);
     const [vehicleImageNames, setVehicleImageNames] = useState([]);
+    const [accessories, setAccessories] = useState([]);
     //const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
 
     useEffect(() => {
@@ -55,6 +57,19 @@ const AddVehicles = () => {
     setVehicleImages([...e.target.files])
   }
 
+  function onAccessoriesChange(e){
+    if (accessoriesList.includes(e.target.value)){
+      const index = accessoriesList.findIndex(obj => obj == e.target.value)
+      if (index !== -1){
+        accessoriesList.splice(index, 1);
+      }
+    }
+    else{
+      accessoriesList.push(e.target.value)
+    }
+    setAccessories(accessoriesList);
+  }
+
   const clearForm = event =>{
     setVehicleName('');
     setVehicleOverview('');
@@ -69,16 +84,13 @@ const AddVehicles = () => {
 
   const saveVehicle = event =>{
     event.preventDefault();
-    if(vehicleName.trim().length !== 0){
-      alert('Confirm to save?')
-      let brandName = document.getElementById("brand").value
-      let fuelType = document.getElementById("fuelType").value
-      addVehicle(vehicleName, brandName, vehicleOverview, vehiclePlate, priceOfCost, priceOfSale, fuelType, modelYear, seatingCapacity, mileage, vehicleImageNames);
-      clearForm();
-    }
-    else{
-      alert('Form Cannot Be Empty!')
-    }
+    alert('Confirm to save?')
+
+    let brandName = document.getElementById("brand").value
+    let fuelType = document.getElementById("fuelType").value
+    addVehicle(vehicleName, brandName, vehicleOverview, vehiclePlate, priceOfCost, priceOfSale, fuelType, modelYear, seatingCapacity, mileage, vehicleImageNames, accessories);
+
+    clearForm();
   };
   
 
@@ -251,7 +263,7 @@ const AddVehicles = () => {
           <h5>Accessories</h5>
             {accessoriesData.map((option, index) => (
               <div className="form-check form-check-inline col-md-3 mt-3" key={index} >
-                <input className="form-check-input" type="checkbox" id={option.value} value={option.value} />
+                <input className="form-check-input" type="checkbox" id={option.value} value={option.value} onChange={onAccessoriesChange}/>
                 <label className="form-check-label" htmlFor={option.value}>
                   {option.value}
                 </label>

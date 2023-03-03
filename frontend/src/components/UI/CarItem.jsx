@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import "../../styles/car-item.css";
 
+const addCommas = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
 const CarItem = (props) => {
   // Haven't Mapped for automatic, speed, price
   const { id, vehicle_images, vehicle, vehicle_brand, automatic, speed, price_of_sale } = props.item;
+  const [priceOfSale, setPriceOfSale] = useState(0);
+
+  useEffect(() => {
+    setPriceOfSale(addCommas(price_of_sale));
+  }, []);
 
   return (
     <Col lg="4" md="4" sm="6" className="mb-5">
       <div className="car__item">
         <div className="car__img">
-          {<img src={vehicle_images[0].vehicle_image} alt="" className="w-100" />}
+          <img src={vehicle_images[0].vehicle_image} alt="" className="w-100" />
         </div>
 
         <div className="car__item-content mt-4">
           <h4 className="section__title text-center">{vehicle_brand.brand_name} {vehicle}</h4>
           <h6 className="rent__price text-center mt-">
-            ${price_of_sale}.00 <span>/ Day</span>
+            ${priceOfSale} <span>/ Day</span>
           </h6>
 
           <div className="car__item-info d-flex align-items-center justify-content-between mt-3 mb-4">
