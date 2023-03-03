@@ -20,6 +20,7 @@ class VehicleImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'vehicle_image', 'vehicle_id']
 
 class VehicleSerializer(serializers.ModelSerializer):
+    accessories = serializers.ListField(write_only=True)
     vehicle_documents = serializers.ListField(write_only=True, required=False)
     vehicle_images = serializers.ListField(write_only=True)
 
@@ -30,6 +31,7 @@ class VehicleSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['vehicle_brand'] = VehicleBrandSerializer(instance.vehicle_brand).data
+        representation['accessories'] = instance.accessories
         representation['vehicle_documents'] = VehicleDocumentSerializer(instance.documents.all(), many=True).data
         representation['vehicle_images'] = VehicleImageSerializer(instance.vehicle_image.all(), many=True).data
         return representation
