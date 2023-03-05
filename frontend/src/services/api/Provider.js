@@ -1,7 +1,7 @@
 import axios from 'axios'; 
-import { handleResponse, handleError } from './Response'; 
+import { handleResponse, handleError, handleVehiclesResponse, handleVehicleByIdResponse } from './Response'; 
 
-const BASE_URL = 'http://localhost:8000'; 
+export const BASE_URL = 'http://localhost:8000'; 
 const BRANDS_URL = 'vehicle/brand/'; 
 const VEHICLE_URL = 'vehicle/vehicle/'; 
 
@@ -45,14 +45,14 @@ export function getModels(){
 export function getVehicles(){ 
   return axios 
     .get(`${BASE_URL}/${VEHICLE_URL}`) 
-    .then(handleResponse) 
+    .then(handleVehiclesResponse) 
     .catch(handleError); 
 }; 
 
 export function getVehiclesById(id){ 
   return axios 
     .get(`${BASE_URL}/${VEHICLE_URL}${id}/`) 
-    .then(handleResponse) 
+    .then(handleVehicleByIdResponse) 
     .catch(handleError); 
 }; 
 
