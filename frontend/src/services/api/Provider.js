@@ -57,6 +57,7 @@ export function getVehiclesById(id){
 }; 
 
 export function addVehicle(vehicleName, brandName, overview, numberPlate, cost, sale, fuelType, modelYear, seatingCapacity, mileage, vehicleImages, accessories){ 
+  //console.log(vehicleImages)
   return axios 
     .post(`${BASE_URL}/${VEHICLE_URL}`, {
       vehicle: vehicleName, 
@@ -71,7 +72,7 @@ export function addVehicle(vehicleName, brandName, overview, numberPlate, cost, 
       mileage: mileage,
       vehicle_images: vehicleImages,
       accessories: accessories
-    }) 
+    })
     .then(handleResponse) 
     .catch(handleError); 
 }; 

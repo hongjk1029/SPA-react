@@ -20,21 +20,16 @@ const AddVehicles = () => {
     const [seatingCapacity, setSeatingCapacity] = useState('');
     const [mileage, setMileage] = useState('');
     const [vehicleImages, setVehicleImages] = useState([]);
-    const [vehicleImageNames, setVehicleImageNames] = useState([]);
     const [accessories, setAccessories] = useState([]);
     //const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
 
     useEffect(() => {
       _getBrands();
-      if (vehicleImages.length < 1) return;
-      const newImageNames = [];
-      vehicleImages.forEach(image => newImageNames.push(image.name))
-      setVehicleImageNames(newImageNames)
       //const newImageUrls = [];
       //vehicleImages.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
       //setVehicleImageURLs(newImageUrls)
       //console.log(vehicleImageURLs)
-    }, [vehicleImages]);
+    }, []);
 
  function _getBrands() {
   getBrands().then((res) => {
@@ -86,9 +81,17 @@ const AddVehicles = () => {
     event.preventDefault();
     alert('Confirm to save?')
 
+    const fileData = new FormData();
+    vehicleImages.forEach((file) => fileData.append('vehicle_images[]', file, file.name));
+
+  //   for (var pair of fileData.entries()) {
+  //     console.log(pair[0]+ ', ' + pair[1].name); 
+  //    }
+    //console.log(fileData)
+    //console.log(vehicleImages)
     let brandName = document.getElementById("brand").value
     let fuelType = document.getElementById("fuelType").value
-    addVehicle(vehicleName, brandName, vehicleOverview, vehiclePlate, priceOfCost, priceOfSale, fuelType, modelYear, seatingCapacity, mileage, vehicleImageNames, accessories);
+    addVehicle(vehicleName, brandName, vehicleOverview, vehiclePlate, priceOfCost, priceOfSale, fuelType, modelYear, seatingCapacity, mileage, fileData, accessories);
 
     clearForm();
   };
