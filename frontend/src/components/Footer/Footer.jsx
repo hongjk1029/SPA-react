@@ -4,6 +4,7 @@ import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
 import "../../styles/footer.css";
 import logo1 from "../../assets/all-images/logo1.svg";
+import Helmet from "../Helmet/Helmet";
 
 const quickLinksAdmin = [
   {
@@ -175,6 +176,8 @@ const Footer = ({isLogin}) => {
             </Col>
           </Row>
         </Container>
+        <Helmet> <script defer src="https://widget.tochat.be/bundle.js?key=76872d3b-f925-4359-b7c1-5f94ef9dbe95"></script></Helmet>
+       
       </footer>
     );
   }

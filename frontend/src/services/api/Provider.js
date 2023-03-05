@@ -1,7 +1,7 @@
 import axios from 'axios'; 
-import { handleResponse, handleError } from './Response'; 
+import { handleResponse, handleError, handleVehiclesResponse, handleVehicleByIdResponse } from './Response'; 
 
-const BASE_URL = 'http://localhost:8000'; 
+export const BASE_URL = 'http://localhost:8000'; 
 const BRANDS_URL = 'vehicle/brand/'; 
 const VEHICLE_URL = 'vehicle/vehicle/'; 
 
@@ -45,6 +45,33 @@ export function getModels(){
 export function getVehicles(){ 
   return axios 
     .get(`${BASE_URL}/${VEHICLE_URL}`) 
+    .then(handleVehiclesResponse) 
+    .catch(handleError); 
+}; 
+
+export function getVehiclesById(id){ 
+  return axios 
+    .get(`${BASE_URL}/${VEHICLE_URL}${id}/`) 
+    .then(handleVehicleByIdResponse) 
+    .catch(handleError); 
+}; 
+
+export function addVehicle(vehicleName, brandName, overview, numberPlate, cost, sale, fuelType, modelYear, seatingCapacity, mileage, vehicleImages, accessories){ 
+  return axios 
+    .post(`${BASE_URL}/${VEHICLE_URL}`, {
+      vehicle: vehicleName, 
+      vehicle_brand: brandName, 
+      vehicle_overview: overview, 
+      number_plate: numberPlate, 
+      price_of_cost: cost, 
+      price_of_sale: sale, 
+      fuel_type: fuelType,
+      model_year: modelYear,
+      seating_capacity: seatingCapacity,
+      mileage: mileage,
+      vehicle_images: vehicleImages,
+      accessories: accessories
+    }) 
     .then(handleResponse) 
     .catch(handleError); 
 }; 

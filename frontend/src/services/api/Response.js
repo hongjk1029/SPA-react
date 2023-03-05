@@ -1,3 +1,5 @@
+import { BASE_URL } from './Provider'; 
+
 export function handleResponse(response) {
     if (response.results) {
         return response.results;
@@ -15,4 +17,36 @@ export function handleError(error) {
         return error.data;
     }
     return error;
+}
+
+export function handleVehiclesResponse(response) {
+    if (response.results) {
+        return response.results;
+    }
+
+    if (response.data) {
+        response.data.forEach(vehicles => {
+            vehicles.vehicle_images.forEach(vehicle_images => {
+                vehicle_images.vehicle_image = BASE_URL + vehicle_images.vehicle_image;
+            });
+        });
+        return response.data; 
+    }
+
+    return response;
+}
+
+export function handleVehicleByIdResponse(response) {
+    if (response.results) {
+        return response.results;
+    }
+
+    if (response.data) {
+        response.data.vehicle_images.forEach(vehicle_images => {
+            vehicle_images.vehicle_image = BASE_URL + vehicle_images.vehicle_image;
+        });
+        return response.data; 
+    }
+
+    return response;
 }

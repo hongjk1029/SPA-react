@@ -5,8 +5,13 @@ import { Form, FormGroup } from "reactstrap";
 import carBrand from "../../assets/data/carBrand";
 import { getBrands, getModels } from "../../services/api/Provider";
 
+
+
+
 const FindCarForm = (props) => {
   let {fromHome} = props
+  const phoneNumber = '60123160808';
+  const handleClick = () => { window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}`, '_blank');};
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
 
@@ -28,7 +33,6 @@ const FindCarForm = (props) => {
       setModels(arr);
     });
   }
-
 
   if(fromHome){
     return (
@@ -66,7 +70,7 @@ const FindCarForm = (props) => {
 
         </div>
         <FormGroup className="form__group mt-5 float-end">
-            <button className="btn find__car-btn">Find Car</button>
+          <button onClick={handleClick} className="btn find__car-btn">Find Car</button>
         </FormGroup>
       </Form>
     )
@@ -149,4 +153,5 @@ const FindCarForm = (props) => {
   
 };
 
-export default FindCarForm;
+export default FindCarForm ;
+

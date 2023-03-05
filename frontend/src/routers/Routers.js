@@ -73,7 +73,7 @@ const Routers = ({isAdmin , setLogin}) => {
           <Route path="*" element={<NotFound />} />
   
           {/* Level 2 path */}
-          <Route path="/cars/:slug" element={<CarDetails />} />
+          <Route path="/cars/:slug/:id" element={<CarDetails />} />
   
           {/* Admin Sign In path */}
           <Route path="/admin/sign-in" element={<SignIn setIsAdminLogin={setIsAdminLogin}/>} />
