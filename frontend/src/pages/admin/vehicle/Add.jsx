@@ -81,18 +81,25 @@ const AddVehicles = () => {
     event.preventDefault();
     alert('Confirm to save?')
 
-    const fileData = new FormData();
-    vehicleImages.forEach((file) => fileData.append('vehicle_images[]', file, file.name));
-
-  //   for (var pair of fileData.entries()) {
-  //     console.log(pair[0]+ ', ' + pair[1].name); 
-  //    }
-    //console.log(fileData)
-    //console.log(vehicleImages)
     let brandName = document.getElementById("brand").value
     let fuelType = document.getElementById("fuelType").value
-    addVehicle(vehicleName, brandName, vehicleOverview, vehiclePlate, priceOfCost, priceOfSale, fuelType, modelYear, seatingCapacity, mileage, fileData, accessories);
 
+    const fileData = new FormData();
+    vehicleImages.forEach((file) => fileData.append('vehicle_images', file, file.name));
+    accessories.forEach((data) => fileData.append('accessories', data));
+
+    fileData.append('vehicle', vehicleName)
+    fileData.append('vehicle_brand', brandName)
+    fileData.append('vehicle_overview', vehicleOverview)
+    fileData.append('number_plate', vehiclePlate)
+    fileData.append('price_of_cost', priceOfCost)
+    fileData.append('price_of_sale', priceOfSale)
+    fileData.append('fuel_type', fuelType)
+    fileData.append('model_year', modelYear)
+    fileData.append('seating_capacity', seatingCapacity)
+    fileData.append('mileage', mileage)
+
+    addVehicle(fileData);
     clearForm();
   };
   
