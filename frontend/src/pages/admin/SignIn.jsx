@@ -8,7 +8,7 @@ const adminData = [
   {
     id: 0,
     email: "admin@gmail.com",
-    password: "admin",
+    password: "123",
   },
   {
     id: 1,
@@ -38,14 +38,29 @@ const SignIn = ({setIsAdminLogin}) => {
   const [password, setPassword] = useState("");
 
 
-  function validateForm() {
-    return email.length > 0 && password.length > 0;
-  }
+  // function validateForm() {
+  //   return email.length > 0 && password.length > 0;
+  // }
 
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  //   navigate('/admin')
+  //   setIsAdminLogin(true)
+  // }
   function handleSubmit(event) {
     event.preventDefault();
-    navigate('/')
-    setIsAdminLogin(true)
+
+    // Find the user from the adminData array
+    const user = adminData.find((user) => user.email === email && user.password === password);
+
+    // Check if the user exists
+    if (user) {
+      setSuccessMessage("Login successful");
+      setIsAdminLogin(true);
+      navigate("/admin/sign-in");
+    } else {
+      setErrorMessage("Invalid email or password");
+    }
   }
 
   return (

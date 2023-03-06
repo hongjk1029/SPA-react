@@ -19,9 +19,9 @@ const Layout = () => {
   })
 
   
-  const currentPath = useLocation();
+  const currentPath = useLocation("");
   
-  const [isLogin, setLogin] = useState(true);
+  const [isLogin, setLogin] = useState();
 
   if (isLogin) {
     return (
