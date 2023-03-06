@@ -84,7 +84,7 @@ const AddVehicles = () => {
     let brandName = document.getElementById("brand").value
     let fuelType = document.getElementById("fuelType").value
 
-    const fileData = new FormData();
+    const fileData = new FormData();  
     vehicleImages.forEach((file) => fileData.append('vehicle_images', file, file.name));
     accessories.forEach((data) => fileData.append('accessories', data));
 
