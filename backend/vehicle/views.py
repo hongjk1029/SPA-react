@@ -44,28 +44,9 @@ class VehicleDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = VehicleSerializer
 
     def perform_destroy(self, instance):
-        queryset = instance.documents.filter(vehicle_id=instance)
-        queryset.update(removed=timezone.now())
+        queryset_doc = instance.documents.filter(vehicle_id=instance)
+        queryset_images = instance.vehicle_image.filter(vehicle_id=instance)
+        queryset_doc.update(removed=timezone.now())
+        queryset_images.update(removed=timezone.now())
         instance.removed = timezone.now()
         return instance.save()
-
-# vehicle document here
-class VehicleDocumentList(generics.ListCreateAPIView):
-    """
-    View Car Document in a List
-    """
-    queryset = VehicleDocument.objects.all()
-    serializer_class = VehicleDocumentSerializer
-    
-class UpdateVehicleDocument(generics.UpdateAPIView):
-    """
-    Update Car Document
-    """
-    queryset = VehicleDocument.objects.exclude(removed__isnull=False)
-    serializer_class = VehicleDocumentSerializer
-
-# class DeleteVehicleDocument(generics.DestroyAPIView):
-#     """
-#     Delete Car Document
-#     """
-#     queryset = VehicleDocument.objects.all()
