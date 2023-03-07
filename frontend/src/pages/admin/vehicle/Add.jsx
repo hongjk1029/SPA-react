@@ -20,21 +20,16 @@ const AddVehicles = () => {
     const [seatingCapacity, setSeatingCapacity] = useState('');
     const [mileage, setMileage] = useState('');
     const [vehicleImages, setVehicleImages] = useState([]);
-    const [vehicleImageNames, setVehicleImageNames] = useState([]);
     const [accessories, setAccessories] = useState([]);
     //const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
 
     useEffect(() => {
       _getBrands();
-      if (vehicleImages.length < 1) return;
-      const newImageNames = [];
-      vehicleImages.forEach(image => newImageNames.push(image.name))
-      setVehicleImageNames(newImageNames)
       //const newImageUrls = [];
       //vehicleImages.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
       //setVehicleImageURLs(newImageUrls)
       //console.log(vehicleImageURLs)
-    }, [vehicleImages]);
+    }, []);
 
  function _getBrands() {
   getBrands().then((res) => {
@@ -88,8 +83,23 @@ const AddVehicles = () => {
 
     let brandName = document.getElementById("brand").value
     let fuelType = document.getElementById("fuelType").value
-    addVehicle(vehicleName, brandName, vehicleOverview, vehiclePlate, priceOfCost, priceOfSale, fuelType, modelYear, seatingCapacity, mileage, vehicleImageNames, accessories);
 
+    const fileData = new FormData();  
+    vehicleImages.forEach((file) => fileData.append('vehicle_images', file, file.name));
+    accessories.forEach((data) => fileData.append('accessories', data));
+
+    fileData.append('vehicle', vehicleName)
+    fileData.append('vehicle_brand', brandName)
+    fileData.append('vehicle_overview', vehicleOverview)
+    fileData.append('number_plate', vehiclePlate)
+    fileData.append('price_of_cost', priceOfCost)
+    fileData.append('price_of_sale', priceOfSale)
+    fileData.append('fuel_type', fuelType)
+    fileData.append('model_year', modelYear)
+    fileData.append('seating_capacity', seatingCapacity)
+    fileData.append('mileage', mileage)
+
+    addVehicle(fileData);
     clearForm();
   };
   

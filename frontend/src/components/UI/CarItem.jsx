@@ -39,13 +39,17 @@ const CarItem = (props) => {
             </span>
           </div>
 
-          <button className=" w-50 car__item-btn car__btn-rent">
-            <Link to={`/cars/${vehicle_brand.brand_name}${vehicle}/${id}`}>Rent</Link>
-          </button>
+          {/* <Link to={`/cars/${vehicle_brand.brand_name}${vehicle}/${id}`}>
+            <button className=" w-50 car__item-btn car__btn-rent">
+              Rent
+            </button>
+          </Link> */}
 
-          <button className=" w-50 car__item-btn car__btn-details">
-            <Link to={`/cars/${vehicle_brand.brand_name}${vehicle}/${id}`}>Details</Link>
-          </button>
+          <Link to={`/cars/${vehicle_brand.brand_name}${vehicle}/${id}`}>
+            <button className=" w-100 car__item-btn car__btn-details">
+              Details
+            </button>
+          </Link>
         </div>
       </div>
     </Col>
