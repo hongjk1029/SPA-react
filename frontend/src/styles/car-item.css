@@ -45,6 +45,13 @@
   font-weight: 600;
 }
 
+.car__img-adjust {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
 @media only screen and (max-width: 992px) {
   .car__item h4 {
     font-size: 1.1rem;
@@ -69,6 +76,13 @@
     padding: 5px 10px;
     font-size: 0.9rem;
   }
+
+  .car__img-adjust {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -90,5 +104,12 @@
 
   .car__item-btn {
     font-size: 0.8rem;
+  }
+
+  .car__img-adjust {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    object-position: 50% 50%;
   }
 }
