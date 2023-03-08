@@ -67,3 +67,4 @@ class VehicleImage(models.Model):
     vehicle = models.ForeignKey(Vehicle, related_name='vehicle_image', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    removed = models.DateTimeField(null=True, blank=True)

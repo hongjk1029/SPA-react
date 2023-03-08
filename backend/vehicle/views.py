@@ -1,7 +1,7 @@
 from vehicle.models import Vehicle, VehicleBrand, VehicleDocument
 from rest_framework import generics
 from vehicle.serializers import VehicleBrandSerializer, VehicleDocumentSerializer, VehicleSerializer
-from datetime import datetime
+from django.utils import timezone 
 
 # Vehicle Brand Here
 class BrandList(generics.ListCreateAPIView):
@@ -22,7 +22,7 @@ class BrandDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = VehicleBrandSerializer
 
     def perform_destroy(self, instance):
-        instance.removed = datetime.now()
+        instance.removed = timezone.now()
         return instance.save()
 
 # Vehicle Here
@@ -43,8 +43,10 @@ class VehicleDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
-
-# vehicle document here
-class VehicleDocumentList(generics.ListCreateAPIView):
-    queryset = VehicleDocument.objects.all()
-    serializer_class = VehicleDocumentSerializer
+    def perform_destroy(self, instance):
+        queryset_doc = instance.documents.filter(vehicle_id=instance)
+        queryset_images = instance.vehicle_image.filter(vehicle_id=instance)
+        queryset_doc.update(removed=timezone.now())
+        queryset_images.update(removed=timezone.now())
+        instance.removed = timezone.now()
+        return instance.save()
