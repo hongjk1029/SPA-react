@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 services:
   # redis:
   #   restart: always
@@ -7,7 +7,20 @@ services:
   #     - "6379:6379"
   #   networks:
   #     - db-net
-
+  
+  frontend:
+    container_name: spa_frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app/frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - db-net
   backend:
     container_name: spa_backend
     command: "python manage.py runserver 0.0.0.0:8000"
@@ -45,21 +58,6 @@ services:
 
 volumes:
   todo-mysql-data:
-
-    # frontend:
-    #   restart: always
-    #   command : npm start
-    #   container_name: front
-    #   build:
-    #     context: ./frontend/
-    #     dockerfile: Dockerfile
-    #   ports:
-    #     - "3000:3000"
-    #   stdin_open: true
-    #   depends_on:
-    #     - api
-    #   networks:
-    #     - db-net
 
 networks:
   db-net:
