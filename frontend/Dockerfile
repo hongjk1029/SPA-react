@@ -3,6 +3,6 @@ WORKDIR /app/frontend
 COPY package.json ./
 COPY package-lock.json ./
 COPY . /app/frontend
-RUN yarn
+RUN npm install --force
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
