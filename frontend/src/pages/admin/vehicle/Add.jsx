@@ -21,15 +21,14 @@ const AddVehicles = () => {
     const [mileage, setMileage] = useState('');
     const [vehicleImages, setVehicleImages] = useState([]);
     const [accessories, setAccessories] = useState([]);
-    //const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
+    const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
 
     useEffect(() => {
       _getBrands();
-      //const newImageUrls = [];
-      //vehicleImages.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
-      //setVehicleImageURLs(newImageUrls)
-      //console.log(vehicleImageURLs)
-    }, []);
+      const newImageUrls = [];
+      vehicleImages.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
+      setVehicleImageURLs(newImageUrls)
+    }, [vehicleImages]);
 
  function _getBrands() {
   getBrands().then((res) => {
@@ -255,6 +254,17 @@ const AddVehicles = () => {
               accept="image/*" onChange={onImageChange} required/>
             </Col>
           </Row>
+          {vehicleImageURLs?.length > 0 && <Row className="d-flex flex-wrap mt-4">
+            {vehicleImageURLs.map((item, index) => (
+              <Col key={index} lg="auto" sm="auto" md="auto" className="mt-2">
+                <img
+                  src={item}
+                  className="img-fluid img-thumbnail img-preview-size"
+                  alt={item}
+                />
+              </Col>
+            ))}
+          </Row>}
 
           <hr className="style1 mt-4 section-line"></hr>
 

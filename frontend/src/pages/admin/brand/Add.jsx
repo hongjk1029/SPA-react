@@ -13,7 +13,7 @@ const AddBrands = () => {
       setBrandName('');
     }
     else{
-      console.log('Form Cannot Be Empty!')
+      window.alert('Form Cannot Be Empty!')
     }
   };
 

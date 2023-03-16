@@ -13,6 +13,13 @@ export function getBrands(){
     .catch(handleError); 
 }; 
 
+export function getBrandById(id){ 
+  return axios 
+    .get(`${BASE_URL}/${BRANDS_URL}${id}/`) 
+    .then(handleResponse) 
+    .catch(handleError); 
+}; 
+
 export function addBrand(brandName){ 
   return axios 
     .post(`${BASE_URL}/${BRANDS_URL}`, {brand_name: brandName}) 
@@ -63,6 +70,27 @@ export function addVehicle(fileData){
           "Content-Type": "multipart/form-data"
       },
   })
+    .then(handleResponse) 
+    .catch(handleError); 
+}; 
+
+export function updateVehicleById(id, fileData){ 
+  for (var pair of fileData.entries()) {
+    console.log(pair[0]+ ', ' + pair[1]); 
+  }
+  return axios 
+    .put(`${BASE_URL}/${VEHICLE_URL}${id}/`, fileData, {
+      headers: {
+          "Content-Type": "multipart/form-data"
+      },
+  })
+    .then(handleResponse) 
+    .catch(handleError); 
+}; 
+
+export function deleteVehicle(id){ 
+  return axios 
+    .delete(`${BASE_URL}/${VEHICLE_URL}${id}/`) 
     .then(handleResponse) 
     .catch(handleError); 
 }; 
