@@ -14,7 +14,6 @@ import { getBrands, deleteBrand, updateBrand } from "../../../services/api/Provi
 const { SearchBar } = Search;
 
 async function _deleteBrand(id) {
-  console.log(id)
   await deleteBrand(id)
   window.location.reload(false);
 }
