@@ -23,7 +23,7 @@ class VehicleImageSerializer(serializers.ModelSerializer):
 class VehicleSerializer(serializers.ModelSerializer):
     accessories = serializers.ListField(write_only=True)
     vehicle_documents = serializers.ListField(write_only=True, required=False)
-    vehicle_images = serializers.ListField(write_only=True)
+    vehicle_images = serializers.ListField(write_only=True, required=False)
     delete_documents = serializers.ListField(write_only=True, required=False)
     delete_images = serializers.ListField(write_only=True, required=False)
     
