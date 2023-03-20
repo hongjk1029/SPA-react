@@ -1,9 +1,31 @@
 import axios from 'axios'; 
 import { handleResponse, handleError, handleVehiclesResponse, handleVehicleByIdResponse } from './Response'; 
 
-export const BASE_URL = 'http://localhost:8000'; 
+export const BASE_URL = 'http://localhost:8000';
+const AUTH_URL = 'api/token/';
 const BRANDS_URL = 'vehicle/brand/'; 
-const VEHICLE_URL = 'vehicle/vehicle/'; 
+const VEHICLE_URL = 'vehicle/vehicle/';
+
+// Authentication
+export async function getAdminToken(username_data, password_data){
+  console.log("Getting Token")
+  try {
+    const data = { username: username_data, password: password_data };
+    const response = await axios.post(`${BASE_URL}/${AUTH_URL}`, data);
+    if (response.status===200) {
+      console.log("Successful")
+      console.log(response.data)
+      return response.data;
+    } else {
+      console.log("something is wrong")
+      console.log(response.data)
+    }
+    
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 
 // Brands
 export function getBrands(){ 

@@ -6,7 +6,7 @@ import { getBrands, addVehicle } from "../../../services/api/Provider";
 
 const accessoriesList = []
 
-const AddVehicles = () => { 
+const AddVehicles = () => {
     const salesTypeData = [ /*{ id: 1, name: "Rental", },*/ { id: 2, name: "Sale", }, ];
     const [chosenSalesType, setChosenSalesType] = useState("Sale");
     const select = useRef();

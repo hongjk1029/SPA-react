@@ -1,40 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "reactstrap";
+import { getAdminToken } from "../../services/api/Provider";
 
 import "../../styles/login.css";
-
-const adminData = [
-  {
-    id: 0,
-    email: "admin@gmail.com",
-    password: "admin",
-  },
-  {
-    id: 1,
-    email: "xiangyik@gmail.com",
-    password: "xiangyik",
-  },
-  {
-    id: 2,
-    email: "luohwei@gmail.com",
-    password: "luohwei",
-  },
-  {
-    id: 3,
-    email: "zhemin@gmail.com",
-    password: "zhemin",
-  },
-];
 
 const SignIn = ({setIsAdminLogin}) => {
 
 
  // const [isAdmin, setIsAdmin] = useState()
   const navigate = useNavigate()
-  const [successMessage, setSuccessMessage] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
 
@@ -42,26 +18,29 @@ const SignIn = ({setIsAdminLogin}) => {
   //   return email.length > 0 && password.length > 0;
   // }
 
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-  //   navigate('/')
-  //   setIsAdminLogin(true)
-  // }
   function handleSubmit(event) {
+    console.log("Sign In Button is Clicked")
     event.preventDefault();
-
+    getAdminToken()
+    setIsAdminLogin(true);
+    navigate("/admin/dashboard");
     // Find the user from the adminData array
-    const user = adminData.find((user) => user.email === email && user.password === password);
+    // const user = adminData.find((user) => user.email === email && user.password === password);
 
     // Check if the user exists
-    if (user) {
-      setSuccessMessage("Login successful");
-      setIsAdminLogin(true);
-      navigate("/admin/dashboard");
-    } else {
-      setErrorMessage("Invalid email or password");
-    }
+    // if (user) {
+    //   setSuccessMessage("Login successful");
+    //   setIsAdminLogin(true);
+    //   navigate("/admin/dashboard");
+    // } else {
+    //   setErrorMessage("Invalid email or password");
+    // }
   }
+
+  const clearForm = event =>{
+    document.getElementById("vehicleForm").reset()
+  }
+
   return (
     <section>
       <Container>
@@ -75,9 +54,9 @@ const SignIn = ({setIsAdminLogin}) => {
                     <div className="col-lg-10 col-xl-8 mx-auto">
                       <h3 className="display-5">Admin Login</h3>
                       <hr />
-                      <form onSubmit={handleSubmit}>
+                      <form onSubmit={handleSubmit} id="signInForm">
                         <div className="form-group mb-3">
-                          <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email address" required="" autoComplete="on" className="form-control rounded-pill border-0 shadow-sm px-4" ></input>
+                          <input onChange={(e) => setUsername(e.target.value)} type="email" placeholder="Email address" required="" autoComplete="on" className="form-control rounded-pill border-0 shadow-sm px-4" ></input>
                         </div>
                         <div className="form-group mb-3">
                           <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" required="" autoComplete="on" className="form-control rounded-pill border-0 shadow-sm px-4" ></input>
