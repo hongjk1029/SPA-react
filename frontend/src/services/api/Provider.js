@@ -7,25 +7,11 @@ const BRANDS_URL = 'vehicle/brand/';
 const VEHICLE_URL = 'vehicle/vehicle/';
 
 // Authentication
-export async function getAdminToken(username_data, password_data){
-  console.log("Getting Token")
-  try {
-    const data = { username: username_data, password: password_data };
-    const response = await axios.post(`${BASE_URL}/${AUTH_URL}`, data);
-    if (response.status===200) {
-      console.log("Successful")
-      console.log(response.data)
-      return response.data;
-    } else {
-      console.log("something is wrong")
-      console.log(response.data)
-    }
-    
-  } catch (error) {
-    console.error(error);
-  }
-}
 
+const login = async (username, password) => {
+  const response = await axios.post(`${BASE_URL}/${AUTH_URL}`, { username, password });
+  return response.data;
+};
 
 // Brands
 export function getBrands(){ 
@@ -116,3 +102,7 @@ export function deleteVehicle(id){
     .then(handleResponse) 
     .catch(handleError); 
 }; 
+
+export default {
+  login
+}

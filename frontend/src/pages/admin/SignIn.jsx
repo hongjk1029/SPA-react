@@ -1,44 +1,34 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "reactstrap";
-import { getAdminToken } from "../../services/api/Provider";
+import api from "../../services/api/Provider";
 
 import "../../styles/login.css";
 
 const SignIn = ({setIsAdminLogin}) => {
-
-
+  
  // const [isAdmin, setIsAdmin] = useState()
   const navigate = useNavigate()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-
-  // function validateForm() {
-  //   return email.length > 0 && password.length > 0;
-  // }
-
-  function handleSubmit(event) {
-    console.log("Sign In Button is Clicked")
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    getAdminToken()
-    setIsAdminLogin(true);
-    navigate("/admin/dashboard");
-    // Find the user from the adminData array
-    // const user = adminData.find((user) => user.email === email && user.password === password);
-
-    // Check if the user exists
-    // if (user) {
-    //   setSuccessMessage("Login successful");
-    //   setIsAdminLogin(true);
-    //   navigate("/admin/dashboard");
-    // } else {
-    //   setErrorMessage("Invalid email or password");
-    // }
-  }
-
-  const clearForm = event =>{
-    document.getElementById("vehicleForm").reset()
+    try {
+      const data = await api.login(username, password);
+      setIsAdminLogin(true);
+      navigate("/admin/dashboard");
+      setUsername('');
+      setPassword('');
+      // Do something with the response data
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setErrorMessage("Invalid username or password");
+      } else {
+        console.log("something is wrong")
+      }
+    }
   }
 
   return (
@@ -56,12 +46,11 @@ const SignIn = ({setIsAdminLogin}) => {
                       <hr />
                       <form onSubmit={handleSubmit} id="signInForm">
                         <div className="form-group mb-3">
-                          <input onChange={(e) => setUsername(e.target.value)} type="email" placeholder="Email address" required="" autoComplete="on" className="form-control rounded-pill border-0 shadow-sm px-4" ></input>
+                          <input onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Email address" required="" autoComplete="on" className="form-control rounded-pill border-0 shadow-sm px-4" ></input>
                         </div>
                         <div className="form-group mb-3">
                           <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" required="" autoComplete="on" className="form-control rounded-pill border-0 shadow-sm px-4" ></input>
                           {errorMessage ? <><br /> <div className="alert alert-danger rounded-2">{errorMessage}</div></> : <></>}
-                          {successMessage ? <><br /> <div className="alert alert-success rounded-2">{successMessage}</div></> : <></>}
                         </div>
                         <div className="d-grid">
                           <button type="submit" className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"> Sign in </button>
