@@ -17,15 +17,18 @@ const SignIn = ({setIsAdminLogin}) => {
     event.preventDefault();
     try {
       const data = await api.login(username, password);
+      // After receiving the JWT token from the server, store it in local storage
+      localStorage.setItem('token', data['access']);
       setIsAdminLogin(true);
-      navigate("/admin/dashboard");
       setUsername('');
       setPassword('');
-      // Do something with the response data
+      navigate("/admin/dashboard");
+
     } catch (error) {
       if (error.response && error.response.status === 401) {
         setErrorMessage("Invalid username or password");
       } else {
+        console.log(error)
         console.log("something is wrong")
       }
     }

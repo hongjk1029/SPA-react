@@ -51,7 +51,7 @@ const Header = ({ isLogin, setLogin}) => {
 
 
 
-  const handleSignOut = () => { setLogin(false); navigate("/admin/sign-in")}
+  const handleSignOut = () => { localStorage.clear();setLogin(false); navigate("/admin/sign-in")}
 
   if(currentPath.pathname === "/admin/sign-in"){
     return (
