@@ -21,7 +21,16 @@ const Layout = () => {
   
   const currentPath = useLocation();
   
-  const [isLogin, setLogin] = useState(true);
+  const [isLogin, setLogin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  }, []);
 
   if (isLogin) {
     return (

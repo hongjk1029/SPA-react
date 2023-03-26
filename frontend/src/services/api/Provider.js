@@ -1,9 +1,17 @@
 import axios from 'axios'; 
 import { handleResponse, handleError, handleVehiclesResponse, handleVehicleByIdResponse } from './Response'; 
 
-export const BASE_URL = 'http://localhost:8000'; 
+export const BASE_URL = 'http://localhost:8000';
+const AUTH_URL = 'api/token/';
 const BRANDS_URL = 'vehicle/brand/'; 
-const VEHICLE_URL = 'vehicle/vehicle/'; 
+const VEHICLE_URL = 'vehicle/vehicle/';
+
+// Authentication
+
+const login = async (username, password) => {
+  const response = await axios.post(`${BASE_URL}/${AUTH_URL}`, { username, password });
+  return response.data;
+};
 
 // Brands
 export function getBrands(){ 
@@ -94,3 +102,7 @@ export function deleteVehicle(id){
     .then(handleResponse) 
     .catch(handleError); 
 }; 
+
+export default {
+  login
+}
