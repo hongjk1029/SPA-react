@@ -80,6 +80,8 @@
   text-align: center;
   font-size:30px !important;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
 .img {

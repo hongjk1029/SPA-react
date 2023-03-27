@@ -320,9 +320,10 @@ function UpdateVehicles(){
                         alt={item.vehicle_image}
                         onClick={event => onImagePreviewClick(event.target.id)}
                       />
-                      <RiDeleteBin6Line className="text-white delete-icon-middle" id={item.id}
-                        onClick={event => onImagePreviewClick(event.target.id)}
-                      />
+                      <button type="button" className="text-white delete-icon-middle" onClick={() => onImagePreviewClick(item.id)}>
+                        <RiDeleteBin6Line/>
+                      </button>
+                      
                     </div>
                     
                   </Col>
