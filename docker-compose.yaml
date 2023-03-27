@@ -33,9 +33,9 @@ services:
       - "8000:8000"
     environment:
       MYSQL_HOST: db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DB: spadb
+      MYSQL_USER: postgres
+      MYSQL_PASSWORD: postgres
+      MYSQL_DB: postgres
 
     restart: on-failure
     depends_on:
@@ -43,21 +43,24 @@ services:
         condition: service_healthy
 
   db:
-    image: mysql:8.0.32
+    image: postgres
     volumes:
-      - todo-mysql-data:/var/lib/mysql
-    ports:
-      - "3306:3306"
+      - spa-data:/var/lib/postgresql/data
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: spadb
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    container_name: db
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      timeout: 20s
-      retries: 10
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d postgres'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
 volumes:
-  todo-mysql-data:
+  spa-data:
 
 networks:
   db-net:

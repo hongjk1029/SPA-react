@@ -91,12 +91,12 @@ if database_switch == 1:
     # locahost database
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'spadb',
-            'USER': 'root',
-            'PASSWORD': 'root',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
             'HOST': 'db',
-            'PORT': 3306,
+            'PORT': 5432,
         }
     }
 else:

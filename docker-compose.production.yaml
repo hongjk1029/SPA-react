@@ -1,0 +1,86 @@
+version: "3.9"
+services:
+  # redis:
+  #   restart: always
+  #   image: redis:5
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - db-net
+  
+  frontend:
+    container_name: spa_frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app/frontend
+    ports:
+      - "3000:3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.react-app.rule=Host(`example.com`)"
+      - "traefik.http.services.react-app.loadbalancer.server.port=3000"
+    depends_on:
+      - backend
+    networks:
+      - db-net
+  backend:
+    container_name: spa_backend
+    command: "python manage.py runserver 0.0.0.0:8000"
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app/api
+    ports:
+      - "8000:8000"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: spadb
+
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0.32
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: spadb
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+  traefik:
+    image: traefik:v2.5
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  # nginx:
+  #   image: nginx:latest
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.nginx.rule=Host(`example.com`)"
+  #     - "traefik.http.services.nginx.loadbalancer.server.port=80"
+
+volumes:
+  todo-mysql-data:
+
+networks:
+  db-net:
+    driver: bridge
