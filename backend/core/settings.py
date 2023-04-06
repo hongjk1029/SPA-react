@@ -12,21 +12,26 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# mention DJANGO_CONFIG_FILE file in .env
+with open(config('DJANGO_CONFIG_FILE')) as configs_file:
+    configs = json.load(configs_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fvi9g5%_x048l@#4-hzcd@j%hj*%6ij8!io77f4**-$g551@8r'
+SECRET_KEY = configs['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = configs['debug']
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = configs['allowed_hosts']
 
 
 # Application definition
@@ -90,26 +95,12 @@ database_switch = 1
 if database_switch == 1:
     # locahost database
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'spadb',
-            'USER': 'root',
-            'PASSWORD': 'root',
-            'HOST': 'db',
-            'PORT': 3306,
-        }
+        'default': configs['database']['local_db']
     }
 else:
     # Production database
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'smartp85_spa_db',
-            'USER': 'smartp85_daniel',
-            'PASSWORD': '@5d76o=XG8(&',
-            'HOST': '103.6.244.18',
-            'PORT': 3306,
-        }
+        'default': configs['database']['production_db']
     }
 
 # Password validation
@@ -151,10 +142,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = configs['static']['static_root']
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = configs['media']['media_url']
+MEDIA_ROOT = configs['media']['media_root']
 
 # DEFAULT_FILE_STORAGE = 'core.custom_azure.AzureMediaStorage'
 # STATICFILES_STORAGE = 'core.custom_azure.AzureStaticStorage'
@@ -172,13 +163,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = configs['cors_origin_allow_all']
+CORS_ALLOW_CREDENTIALS = configs['cors_allow_credentials']
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000"
-]
+CORS_ORIGIN_WHITELIST = configs['cors_origin_whitelist']
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
