@@ -1,3 +1,5 @@
 backend/env/**
 /data
 /env
+.vscode
+.vscode/*
