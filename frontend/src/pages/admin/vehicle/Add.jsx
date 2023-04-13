@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Alert } from "reactstrap";
 import accessoriesData from "../../../assets/data/accessoriesData.js";
 import "../../../styles/common-section.css";
 import { getBrands, addVehicle } from "../../../services/api/Provider";
-import { Alert } from "reactstrap"
 
 const accessoriesList = []
 
@@ -24,7 +23,7 @@ const AddVehicles = () => {
   const [accessories, setAccessories] = useState([]);
   const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
   const [errorMessage, setErrorMessage] = useState({});
-  const [alertStatus, setAlertStatus] = useState();
+  const [alertStatus, setAlertStatus] = useState(false);
 
   useEffect(() => {
     _getBrands();
@@ -76,6 +75,9 @@ const AddVehicles = () => {
     setModelYear('');
     setSeatingCapacity('');
     setMileage('');
+    if (accessories.length != 0) {
+      setAccessories([])
+    }
     document.getElementById("vehicleForm").reset()
   }
 
@@ -102,9 +104,9 @@ const AddVehicles = () => {
     fileData.append('mileage', mileage)
 
     setErrorMessage(validator(fileData));
-    addVehicle(fileData).then((response) => {
-      if (response?.request?.statusCode === 200 || 201) {
-        setAlertStatus({ type: 'success' })
+    addVehicle(fileData).then(response => {
+      if (response?.request?.statusText != 'Bad Request') {
+        setAlertStatus(true)
       }
     })
   };
@@ -113,8 +115,7 @@ const AddVehicles = () => {
     let err = {};
     const brandName = data.get('vehicle_brand');
     const fuelType = data.get('fuel_type');
-    var regexp = /^\d{1,}$|\d+\.\d{0,2}$/
-    // |(?=^.{0,9}$)
+    var price_regex = /^\d{1,}$|\d+\.\d{0,2}$/;
 
     if (vehicleName == '') {
       err.vehicleName = 'Vehicle Title is required.';
@@ -139,7 +140,7 @@ const AddVehicles = () => {
       err.priceOfCost = 'Price of Cost is required.'
     } else if (priceOfCost < 0) {
       err.priceOfCost = 'Price of Cost cannot be lesser than 0.'
-    } else if (!regexp.test(priceOfCost)) {
+    } else if (!price_regex.test(priceOfCost)) {
       err.priceOfCost = 'Price cannot more than 2 decimal places.'
     }
 
@@ -147,7 +148,7 @@ const AddVehicles = () => {
       err.priceOfSale = 'Price of Sale is required.'
     } else if (priceOfSale < 0) {
       err.priceOfSale = 'Price of Sale cannot be lesser than 0.'
-    } else if (!regexp.test(priceOfSale)) {
+    } else if (!price_regex.test(priceOfSale)) {
       err.priceOfSale = 'Price cannot more than 2 decimal places.'
     }
 
@@ -157,7 +158,7 @@ const AddVehicles = () => {
     if (mileage == '') {
       err.mileage = 'Mileage is required.'
     }
-    if (accessories == '') {
+    if (!accessories.length) {
       err.accessories = 'Accessories are required.'
     }
 
@@ -168,11 +169,12 @@ const AddVehicles = () => {
     if (Object.keys(errorMessage).length === 0) {
       console.log('No error found');
       setTimeout(() => {
-        setAlertStatus("");
+        setAlertStatus(false)
       }, 3000);
       clearForm();
     }
     else {
+      setAlertStatus(false)
       console.log(errorMessage);
     }
   }, [errorMessage])
@@ -186,10 +188,10 @@ const AddVehicles = () => {
         <hr className="style1 text-secondary"></hr>
 
         {
-          alertStatus?.type === 'success' &&
+          alertStatus ? (
           <Alert color="success">
             <strong>Success!</strong> Your information have been successfully created.
-          </Alert>
+          </Alert>) : false
         }
 
         <form id="vehicleForm" onSubmit={saveVehicle}>

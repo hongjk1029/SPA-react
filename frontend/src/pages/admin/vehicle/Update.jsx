@@ -1,5 +1,5 @@
 import React ,{useState, useRef, useEffect}from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Alert } from "reactstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import accessoriesData from "../../../assets/data/accessoriesData.js";
 import { getBrands, getVehiclesById, getBrandById, updateVehicleById } from "../../../services/api/Provider";
@@ -33,6 +33,7 @@ function UpdateVehicles(){
     const [vehicleImageList, setVehicleImageList] = useState(location.state.VehicleImages);
     const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
     const [accessories, setAccessories] = useState([]);
+    const [alertStatus, setAlertStatus] = useState(false);
 
     useEffect(() => {
       _getBrands();
@@ -122,6 +123,9 @@ function UpdateVehicles(){
       setModelYear('');
       setSeatingCapacity('');
       setMileage('');
+      if (accessories.length != 0) {
+        setAccessories([])
+      }
       document.getElementById("vehicleForm").reset()
     }
       
@@ -150,13 +154,17 @@ function UpdateVehicles(){
         updateVehicleById(vehicleId, fileData).then(response => 
         { 
           if (response?.request?.statusText != "Bad Request"){
-            navigate("/admin/vehicles",{
-              replace: true
-            });
+            setAlertStatus(true)
+            setTimeout(() => {
+                navigate("/admin/vehicles",{
+                replace: true
+              })}, 3000)
           } 
         });
       }
     };
+
+    
 
     return (
         <section>
@@ -164,6 +172,13 @@ function UpdateVehicles(){
             
               <h2>Update Vehicle</h2>
               <hr className="style1 text-secondary"></hr>
+
+              {
+                alertStatus ? (
+                <Alert color="success">
+                  <strong>Success!</strong> Your information have been successfully updated.
+                </Alert>) : false
+              }
     
               <form id="vehicleForm" onSubmit={saveVehicle}>
     
