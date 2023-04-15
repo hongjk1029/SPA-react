@@ -22,6 +22,7 @@ const AddVehicles = () => {
     const [vehicleImages, setVehicleImages] = useState([]);
     const [accessories, setAccessories] = useState([]);
     const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
+    const [errorMessage, setErrorMessage] = useState({});
 
     useEffect(() => {
       _getBrands();
@@ -97,10 +98,74 @@ const AddVehicles = () => {
     fileData.append('model_year', modelYear)
     fileData.append('seating_capacity', seatingCapacity)
     fileData.append('mileage', mileage)
-
+    
+    setErrorMessage(validator(fileData));
     addVehicle(fileData);
-    clearForm();
   };
+
+  const validator = (data) => {
+    let err = {};
+    const brandName = data.get('vehicle_brand');
+    const fuelType = data.get('fuel_type');
+    var regexp = /^[0-9]*\.[0-9]{2}$/;
+
+    if (vehicleName == '') {
+      err.vehicleName = 'Vehicle Title is required.';
+    }
+    if (vehicleOverview == '') {
+      err.vehicleOverview = 'Vehicle Overview is required.';
+    }
+    if (vehiclePlate == '') {
+      err.vehiclePlate = 'Vehicle Plate is required.';
+    }
+    if (modelYear == '') {
+      err.modelYear = 'Model Year is required.';
+    }
+    if (fuelType == '') {
+      err.fuelType = 'Fuel Type is required.'
+    }
+    if (brandName == '') {
+      err.brandName = 'Brand Name is required.'
+    }
+
+    if (priceOfCost == '') {
+      err.priceOfCost = 'Price of Cost is required.'
+    } else if (priceOfCost < 0) {
+      err.priceOfCost = 'Price of Cost cannot be lesser than 0.'
+    } else if (!regexp.test(priceOfCost)) {
+      err.priceOfCost = 'Price cannot more than 2 decimal places.'
+    }
+
+    if (priceOfSale == '') {
+      err.priceOfSale = 'Price of Sale is required.'
+    }  else if (priceOfSale < 0) {
+      err.priceOfSale = 'Price of Sale cannot be lesser than 0.'
+    } else if (!regexp.test(priceOfSale)) {
+      err.priceOfSale = 'Price cannot more than 2 decimal places.'
+    }
+
+    if (seatingCapacity == '') {
+      err.seatingCapacity = 'Seating Capacity is required.'
+    }
+    if (mileage == '') {
+      err.mileage = 'Mileage is required.'
+    }
+    if (accessories == '') {
+      err.accessories = 'Accessories are required.'
+    }
+
+    return err;
+  };
+
+  useEffect(() => {
+    if (Object.keys(errorMessage).length === 0) {
+      console.log('No error found');
+      clearForm();
+    }
+    else {
+      console.log(errorMessage);
+    }
+  }, [errorMessage])
   
 
   return (
@@ -116,18 +181,20 @@ const AddVehicles = () => {
           <Row>
             <Col lg="5">
               <label htmlFor="title">Vehicle Title</label>
-              <input type="text" className="form-control" id="vehicle_name"
-              onChange={event => setVehicleName(event.target.value)} value={vehicleName} required />
+                <input type="text" className="form-control" id="vehicle_name"
+                onChange={event => setVehicleName(event.target.value)} value={vehicleName}/>
+                <span className="text-danger">{ errorMessage.vehicleName }</span>
             </Col>
 
             <Col lg="5">
               <label htmlFor="brand">Select Brand</label>
-              <select id="brand" className="form-control" required>
+              <select id="brand" className="form-control">
               <option key='' value=''>--Select One--</option>
                 {brands.map((option, index) => (
                   <option key={index} value={option.id}>{option.brand_name}</option>
                 ))}
               </select>
+              <span className="text-danger">{ errorMessage.brandName }</span>
             </Col>
           </Row>
 
@@ -138,7 +205,8 @@ const AddVehicles = () => {
             <Col lg="10">
               <label htmlFor="overview">Vehicle Overview</label>
               <textarea rows="3" className="form-control" id="overview"
-              onChange={event => setVehicleOverview(event.target.value)} value={vehicleOverview} required></textarea>
+              onChange={event => setVehicleOverview(event.target.value)} value={vehicleOverview} ></textarea>
+              <span className="text-danger">{ errorMessage.vehicleOverview }</span>
             </Col>
           </Row>
 
@@ -146,14 +214,16 @@ const AddVehicles = () => {
           <Row className="mt-3">
             <Col lg="5">
               <label htmlFor="modelYear">Model Year</label>
-              <input type="text" className="form-control" id="modelYear"
-              onChange={event => setModelYear(event.target.value)} value={modelYear} required/>
+              <input type="number" className="form-control" id="modelYear"
+              onChange={event => setModelYear(event.target.value)} value={modelYear} />
+              <span className="text-danger">{ errorMessage.modelYear }</span>
             </Col>
             
             <Col lg="5">
               <label htmlFor="capacity">Seating Capacity</label>
-              <input type="text" className="form-control" id="capacity"
-              onChange={event => setSeatingCapacity(event.target.value)} value={seatingCapacity} required/>
+              <input type="number" className="form-control" id="capacity"
+              onChange={event => setSeatingCapacity(event.target.value)} value={seatingCapacity} />
+              <span className="text-danger">{ errorMessage.seatingCapacity }</span>
             </Col>
           </Row>
 
@@ -162,13 +232,15 @@ const AddVehicles = () => {
             <Col lg="5">
               <label htmlFor="plate">Vehicle Plate</label>
               <input type="text" className="form-control" id="plate"
-              onChange={event => setVehiclePlate(event.target.value)} value={vehiclePlate} required />
+              onChange={event => setVehiclePlate(event.target.value)} value={vehiclePlate}  />
+              <span className="text-danger">{ errorMessage.vehiclePlate }</span>
             </Col>
             
             <Col lg="5">
               <label htmlFor="mileage">Vehicle Mileage (Per KM)</label>
-              <input type="text" className="form-control" id="mileage" 
-              onChange={event => setMileage(event.target.value)} value={mileage} required/>
+              <input type="number" className="form-control" id="mileage" 
+              onChange={event => setMileage(event.target.value)} value={mileage} />
+              <span className="text-danger">{ errorMessage.mileage}</span>
             </Col>
           </Row>
 
@@ -176,12 +248,13 @@ const AddVehicles = () => {
           <Row className="mt-3">
             <Col lg="5">
               <label htmlFor="fuelType">Select Fuel Type</label>
-              <select id="fuelType" className="form-control" required>
+              <select id="fuelType" className="form-control" >
                 <option value="">--Select One--</option>
                 <option key="fueltype1" value="Petrol">Petrol</option>
                 <option key="fueltype2" value="Electric">Electric</option>
                 <option key="fueltype3" value="Hybrid">Hybrid</option>
               </select>
+              <span className="text-danger">{ errorMessage.fuelType}</span>
             </Col>
             
             <Col lg="5">
@@ -192,7 +265,7 @@ const AddVehicles = () => {
                 ref={select}
                 defaultValue=""
                 onChange={(e) => setChosenSalesType(e.target.value, changeSalesType(e))}
-                required
+                
               >
                 {salesTypeData.map((option, index) => (
                   <option key={index} value={option.name}>{option.name}</option>
@@ -207,12 +280,12 @@ const AddVehicles = () => {
               <Row className="mt-3">
                 <Col lg="5">
                   <label htmlFor="plate">Price Per Week (RM)</label>
-                  <input type="text" className="form-control" id="pricePerWeek" required />
+                  <input type="text" className="form-control" id="pricePerWeek"  />
                 </Col>
                   
                 <Col lg="5">
                   <label htmlFor="mileage">Price Per Month (RM)</label>
-                  <input type="text" className="form-control" id="pricePerMonth" required />
+                  <input type="text" className="form-control" id="pricePerMonth"  />
                 </Col>
               </Row>
             </>
@@ -222,14 +295,16 @@ const AddVehicles = () => {
               <Row className="mt-3">
                 <Col lg="5">
                   <label htmlFor="plate">Price of Cost (RM)</label>
-                    <input type="text" className="form-control" id="priceOfCost"
-                    onChange={event => setPriceOfCost(event.target.value)} value={priceOfCost} required />
+                    <input type="number" step=".01" className="form-control" id="priceOfCost"
+                    onChange={event => setPriceOfCost(event.target.value)} value={priceOfCost}  />
+                    <span className="text-danger">{ errorMessage.priceOfCost }</span>
                 </Col>
                 
                 <Col lg="5">
                   <label htmlFor="mileage">Price of Sale (RM)</label>
                     <input type="text" className="form-control" id="priceOfSale" 
-                    onChange={event => setPriceOfSale(event.target.value)} value={priceOfSale} required />
+                    onChange={event => setPriceOfSale(event.target.value)} value={priceOfSale}  />
+                    <span className="text-danger">{ errorMessage.priceOfSale }</span>
                 </Col>
               </Row>
             </>
@@ -238,7 +313,7 @@ const AddVehicles = () => {
           {/* 7th row 
           <div className="form-group col-md-5 mt-3">
             <label htmlFor="status">Status</label>
-            <select id="status" className="form-control" required>
+            <select id="status" className="form-control" >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
@@ -251,7 +326,7 @@ const AddVehicles = () => {
           <h5>Upload Images</h5>
             <Col lg="10">
               <input className="form-control mt-2" type="file" id="formFileMultipleImages" multiple 
-              accept="image/*" onChange={onImageChange} required/>
+              accept="image/*" onChange={onImageChange} />
             </Col>
           </Row>
           {vehicleImageURLs?.length > 0 && <Row className="d-flex flex-wrap mt-4">
@@ -281,6 +356,7 @@ const AddVehicles = () => {
           {/* 10th row */}
           <Row className="mt-3">
           <h5>Accessories</h5>
+            <span className="text-danger">{ errorMessage.accessories }</span>
             {accessoriesData.map((option, index) => (
               <div className="form-check form-check-inline col-md-3 mt-3" key={index} >
                 <input className="form-check-input" type="checkbox" id={option.value} value={option.value} onChange={onAccessoriesChange}/>
