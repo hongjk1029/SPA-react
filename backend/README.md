@@ -21,7 +21,8 @@ Docker
 https://docs.docker.com/desktop/install/windows-install/
 
 ## Start the project
-git clone
+### Running Full Stack with Docker on local host
+docker-compose -f docker-compose-local.yaml
 
 cd to frontend directory
 npm install
