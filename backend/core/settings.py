@@ -86,27 +86,25 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-database_switch = 2
+database_switch = 1
 
 if database_switch == 1:
     # locahost database
     DATABASES = {
-        'default': db_url(config(
-        'LOCAL_DB_URL'
-        ))
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': int(config('DB_PORT')),
+        }
     }
 elif database_switch == 2:
     DATABASES = {
         'default': db_url(
         'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
         )
-    }
-else:
-    # Production database
-    DATABASES = {
-        'default': db_url(config(
-        'PRODUCTION_DB_URL'
-        ))
     }
 
 # Password validation
