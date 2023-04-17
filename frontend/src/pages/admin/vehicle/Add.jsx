@@ -78,6 +78,9 @@ const AddVehicles = () => {
     if (accessories.length != 0) {
       setAccessories([])
     }
+    if (vehicleImages.length != 0) {
+      setVehicleImages([])
+    }
     document.getElementById("vehicleForm").reset()
   }
 
