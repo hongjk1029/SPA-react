@@ -1,7 +1,7 @@
 provider "aws" {
   region     = "ap-southeast-1"
-  access_key = "AKIAVO2SUG4CXW5AFNMC"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
 }
 
 variable "bucket_name" {
