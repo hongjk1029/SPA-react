@@ -1,4 +1,4 @@
-FROM python:3-slim
+FROM python:slim
 ENV PYTHONUNBUFFERED 1
 WORKDIR /app/api
 COPY requirements.txt /app/api
