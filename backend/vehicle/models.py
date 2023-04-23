@@ -1,5 +1,4 @@
 from django.db import models
-from django_mysql.models import ListCharField
 
 # Create your models here.
 class VehicleBrand(models.Model):
@@ -42,7 +41,7 @@ class Vehicle(models.Model):
     model_year = models.IntegerField(default=None)
     seating_capacity = models.IntegerField(default=None)
     mileage = models.IntegerField(default=None)
-    accessories = ListCharField(base_field=models.CharField(max_length=20), size=10, max_length=255)
+    # accessories = ListCharField(base_field=models.CharField(max_length=20), size=10, max_length=255)
     # vehicle_details = ListCharField(
     #     base_field=models.CharField(max_length=10),
     #     size=6,
