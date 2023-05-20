@@ -9,7 +9,6 @@ variable "db_port" {
 variable "db_host" {}
 variable "static_s3_bucket" {}
 variable "static_cloudfront_url" {}
-variable "data_stream_bucket" {}
 variable "set_manually" {
   description = "Values that need to be set manually in AWS SSM Parameters"
   type        = list(string)

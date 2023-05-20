@@ -54,13 +54,6 @@ resource "aws_ssm_parameter" "static_cloudfront_url" {
   value       = var.static_cloudfront_url
 }
 
-resource "aws_ssm_parameter" "data_stream_bucket" {
-  name        = "DATA_STREAM_BUCKET"
-  description = "(Deprecated) Data Stream Bucket"
-  type        = "String"
-  value       = var.data_stream_bucket
-}
-
 
 locals {
   ssm_params = concat(
@@ -96,10 +89,6 @@ locals {
       {
         name      = aws_ssm_parameter.static_cloudfront_url.name
         valueFrom = aws_ssm_parameter.static_cloudfront_url.name
-      },
-      {
-        name      = aws_ssm_parameter.data_stream_bucket.name
-        valueFrom = aws_ssm_parameter.data_stream_bucket.name
       },
   ])
   environment = [

@@ -221,7 +221,7 @@ module "server" {
   ecr_name           = module.server_ecr_repo.repository_url
   listener_arn       = module.ALB.listener.arn
   healthcheck        = "/health-check/"
-  command            = ["gunicorn", "--config=gunicorn.py", "pacer.wsgi:application", "--capture-output"]
+  command            = ["gunicorn", "--config=gunicorn.py", "core.wsgi:application"]
   entry_point        = ["/app/entrypoint.sh"]
 }
 

@@ -66,3 +66,5 @@ resource "aws_db_instance" "rds_cluster" {
   performance_insights_enabled = var.performance_insights_enabled
   parameter_group_name         = aws_db_parameter_group.custom_parameter_group_psql14.name
 }
+
+# TODO: Need a Bastion Server
