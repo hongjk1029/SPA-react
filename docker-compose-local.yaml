@@ -23,8 +23,7 @@ services:
 
   backend:
     container_name: spa_backend
-    entrypoint: [ "/app/api/entrypoint.sh" ]
-    command: "gunicorn core.wsgi:application --config=gunicorn.py"
+    command: "python manage.py runserver 0.0.0.0:8000"
     build:
       context: ./backend/
       dockerfile: Dockerfile
@@ -40,6 +39,20 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  frontend:
+    container_name: spa_frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app/frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - db-net
 
 volumes:
   todo-mysql-data:

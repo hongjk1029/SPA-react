@@ -86,27 +86,25 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-database_switch = 2
+database_switch = 1
 
 if database_switch == 1:
     # locahost database
     DATABASES = {
-        'default': db_url(config(
-        'LOCAL_DB_URL'
-        ))
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': int(config('DB_PORT')),
+        }
     }
 elif database_switch == 2:
     DATABASES = {
         'default': db_url(
         'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
         )
-    }
-else:
-    # Production database
-    DATABASES = {
-        'default': db_url(config(
-        'PRODUCTION_DB_URL'
-        ))
     }
 
 # Password validation
@@ -143,26 +141,37 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+USE_S3 = config('USE_S3') == 'True'
+
+if USE_S3:
+    # aws settings
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+    AWS_DEFAULT_ACL = 'public-read'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    # s3 static settings
+    AWS_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+    STATICFILES_STORAGE = 'core.storage_backends.StaticStorage'
+    # s3 public media settings
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'core.storage_backends.PublicMediaStorage'
+
+else: 
+    # For localhost
+    STATIC_URL = 'static/'
+    STATIC_ROOT = config('STATIC_ROOT')
+    MEDIA_URL = config('MEDIA_URL')
+    MEDIA_ROOT = config('MEDIA_ROOT')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = config('STATIC_ROOT')
 
-MEDIA_URL = config('MEDIA_URL')
-MEDIA_ROOT = config('MEDIA_ROOT')
 
-# DEFAULT_FILE_STORAGE = 'core.custom_azure.AzureMediaStorage'
-# STATICFILES_STORAGE = 'core.custom_azure.AzureStaticStorage'
-
-# STATIC_LOCATION = "staticfile"
-# MEDIA_LOCATION = "media"
-
-# AZURE_ACCOUNT_NAME = "spadevstorage"
-# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-# STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-# MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
