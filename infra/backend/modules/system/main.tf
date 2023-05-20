@@ -58,28 +58,6 @@ resource "aws_security_group" "rds_secrurity_group" {
   }
 }
 
-resource "aws_security_group" "redis_security_group" {
-  name        = "${var.project}-${var.env}-redis-sg"
-  description = "SG for RDS"
-  vpc_id      = module.vpc.vpc_id
-  ingress {
-    from_port       = 6379
-    protocol        = "TCP"
-    to_port         = 6379
-    security_groups = ["${aws_security_group.ecs_task_security_group_default.id}"]
-  }
-  egress {
-    from_port   = 0
-    protocol    = "-1"
-    to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "Redis SG"
-  }
-}
-
 resource "aws_security_group" "load_balance_secrurity_group" {
   name   = "${var.project}-${var.env}-alb-sg"
   vpc_id = module.vpc.vpc_id
@@ -160,8 +138,6 @@ module "env_vars" {
   db_user_name          = var.db_user_name
   db_password           = random_password.database_password.result
   db_host               = module.Postgres.rds_endpoint
-  redis_host            = module.Redis.redis
-  redis_port            = var.redis_port
   static_s3_bucket      = module.static_file.s3_bucket
   static_cloudfront_url = module.static_file.cloudfront_endpoint
 }
@@ -183,17 +159,6 @@ module "Postgres" {
   performance_insights_enabled = "true"
 }
 
-###Redis
-module "Redis" {
-  source             = "../redis"
-  env                = var.env
-  redis_instance     = var.redis_instance
-  redis_port         = var.redis_port
-  num_cache_clusters = var.redis_clusters
-  project            = var.project
-  security_group_ids = ["${aws_security_group.redis_security_group.id}"]
-  subnet_ids         = module.vpc.private_subnets
-}
 
 # ##ECS-Cluster
 resource "aws_ecs_cluster" "ecs_cluster" {

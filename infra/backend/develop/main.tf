@@ -7,6 +7,4 @@ module "infra_system" {
   server_cpu     = 512
   server_ram     = 1024
   rds_multi_az   = "false"
-  redis_instance = "cache.t4g.micro"
-  redis_clusters = 1
 }

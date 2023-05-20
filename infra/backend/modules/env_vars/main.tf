@@ -36,20 +36,8 @@ resource "aws_ssm_parameter" "db_port" {
   value       = var.db_port
 }
 
-resource "aws_ssm_parameter" "redis_host" {
-  name        = "REDIS_HOST"
-  description = "Postgres Redis Host"
-  type        = "String"
-  value       = var.redis_host
-}
 
 
-resource "aws_ssm_parameter" "redis_port" {
-  name        = "REDIS_PORT"
-  description = "Postgres Redis Port"
-  type        = "String"
-  value       = var.redis_port
-}
 
 
 resource "aws_ssm_parameter" "static_s3_bucket" {
@@ -100,14 +88,6 @@ locals {
       {
         name      = aws_ssm_parameter.db_port.name
         valueFrom = aws_ssm_parameter.db_port.name
-      },
-      {
-        name      = aws_ssm_parameter.redis_host.name
-        valueFrom = aws_ssm_parameter.redis_host.name
-      },
-      {
-        name      = aws_ssm_parameter.redis_port.name
-        valueFrom = aws_ssm_parameter.redis_port.name
       },
       {
         name      = aws_ssm_parameter.static_s3_bucket.name

@@ -7,8 +7,6 @@ variable "db_port" {
   default = "5432"
 }
 variable "db_host" {}
-variable "redis_host" {}
-variable "redis_port" {}
 variable "static_s3_bucket" {}
 variable "static_cloudfront_url" {}
 variable "data_stream_bucket" {}
