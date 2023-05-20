@@ -19,11 +19,5 @@ variable "db_storage" {}
 variable "region" {}
 variable "server_cpu" {}
 variable "server_ram" {}
-variable "sleepscore_cpu" {}
-variable "sleepscore_ram" {}
-variable "celery_cpu" {}
-variable "celery_ram" {}
-variable "beat_cpu" {}
-variable "beat_ram" {}
 variable "redis_instance" {}
 variable "redis_clusters" {}
