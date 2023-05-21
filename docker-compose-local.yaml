@@ -3,7 +3,7 @@ services:
   db:
     image: postgres
     volumes:
-      - todo-mysql-data:/var/lib/postgresql/data
+      - spa-db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -23,6 +23,7 @@ services:
 
   backend:
     container_name: spa_backend
+    entrypoint: [ "/app/api/entrypoint.sh" ]
     command: "python manage.py runserver 0.0.0.0:8000"
     build:
       context: ./backend/
@@ -55,7 +56,7 @@ services:
       - db-net
 
 volumes:
-  todo-mysql-data:
+  spa-db-data:
 
 
 networks:
