@@ -1,4 +1,4 @@
-import { BASE_URL } from './Provider'; 
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export function handleResponse(response) {
     if (response.results) {
