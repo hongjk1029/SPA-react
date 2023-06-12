@@ -8,9 +8,9 @@ module "vpc" {
   public_subnets  = var.public_subnet_cidr_blocks
   private_subnets = var.private_subnet_cidr_blocks
 
-  enable_nat_gateway     = true
-  enable_vpn_gateway     = true
-  one_nat_gateway_per_az = true
+  enable_nat_gateway     = false
+  enable_vpn_gateway     = false
+  one_nat_gateway_per_az = false
 
   tags = {
     Terraform   = "true"
