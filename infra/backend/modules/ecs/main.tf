@@ -88,16 +88,16 @@ resource "aws_alb_target_group" "target_group" {
   port                 = var.containerport
   vpc_id               = var.vpc_id
   target_type          = "ip"
-  deregistration_delay = 15
+  deregistration_delay = 3600
   health_check {
     enabled             = true
-    healthy_threshold   = 2
-    unhealthy_threshold = 3
-    interval            = 20
+    healthy_threshold   = 10
+    unhealthy_threshold = 10
+    interval            = 300
     path                = var.healthcheck
     port                = var.containerport
     protocol            = "HTTP"
-    timeout             = 15
+    timeout             = 120
     matcher             = "200"
   }
 }
