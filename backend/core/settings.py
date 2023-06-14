@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = eval(config('DEBUG'))
+DEBUG = DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = [config('ALLOWED_HOST')]
+ALLOWED_HOSTS = config('ALLOWED_HOST', cast=lambda v: [s.strip() for s in v.split(',')])
 
 
 # Application definition
@@ -97,7 +97,7 @@ if database_switch == 1:
             'USER': config('DB_USER'),
             'PASSWORD': config('DB_PASSWORD'),
             'HOST': config('DB_HOST'),
-            'PORT': int(config('DB_PORT')),
+            'PORT': config('DB_PORT', cast=int),
         }
     }
 elif database_switch == 2:
@@ -141,7 +141,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-USE_S3 = config('USE_S3') == 'True'
+USE_S3 = config('USE_S3', cast=bool) == True
 
 if USE_S3:
     # aws settings
@@ -177,10 +177,10 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_ALLOW_ALL = eval(config('CORS_ORIGIN_ALLOW_ALL'))
-CORS_ALLOW_CREDENTIALS = eval(config('CORS_ALLOW_CREDENTIALS'))
+CORS_ORIGIN_ALLOW_ALL = config('CORS_ORIGIN_ALLOW_ALL', cast=bool)
+CORS_ALLOW_CREDENTIALS = config('CORS_ALLOW_CREDENTIALS', cast=bool)
 
-CORS_ORIGIN_WHITELIST = [config('CORS_ORIGIN_WHITELIST')]
+CORS_ORIGIN_WHITELIST = config('CORS_ORIGIN_WHITELIST', cast=lambda v: [s.strip() for s in v.split(',')])
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
