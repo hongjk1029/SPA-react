@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export function handleResponse(response) {
     if (response.results) {
@@ -27,7 +27,7 @@ export function handleVehiclesResponse(response) {
     if (response.data) {
         response.data.forEach(vehicles => {
             vehicles.vehicle_images.forEach(vehicle_images => {
-                vehicle_images.vehicle_image = BASE_URL + vehicle_images.vehicle_image;
+                vehicle_images.vehicle_image = vehicle_images.vehicle_image;
             });
         });
         return response.data; 
@@ -43,7 +43,7 @@ export function handleVehicleByIdResponse(response) {
 
     if (response.data) {
         response.data.vehicle_images.forEach(vehicle_images => {
-            vehicle_images.vehicle_image = BASE_URL + vehicle_images.vehicle_image;
+            vehicle_images.vehicle_image = vehicle_images.vehicle_image;
         });
         return response.data; 
     }
