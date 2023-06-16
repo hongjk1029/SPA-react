@@ -1,29 +1,10 @@
-version: "3.9"
+version: '3.9'
 services:
-  # redis:
-  #   restart: always
-  #   image: redis:5
-  #   ports:
-  #     - "6379:6379"
-  #   networks:
-  #     - db-net
-  
-  frontend:
-    container_name: spa_frontend
-    build:
-      context: ./frontend/
-      dockerfile: Dockerfile
-    volumes:
-      - ./frontend:/app/frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-    networks:
-      - db-net
   backend:
-    container_name: spa_backend
-    command: "python manage.py runserver 0.0.0.0:8000"
+    container_name: spa-backend
+    image: 375446058757.dkr.ecr.ap-southeast-1.amazonaws.com/spa-develop-server-ecr
+    entrypoint: [ "/app/api/entrypoint.sh" ]
+    command: "gunicorn core.wsgi:application --config=gunicorn.py"
     build:
       context: ./backend/
       dockerfile: Dockerfile
@@ -32,32 +13,38 @@ services:
     ports:
       - "8000:8000"
     environment:
-      MYSQL_HOST: db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DB: spadb
-
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     restart: on-failure
     depends_on:
       db:
         condition: service_healthy
 
   db:
-    image: mysql:8.0.32
+    image: postgres
     volumes:
-      - todo-mysql-data:/var/lib/mysql
-    ports:
-      - "3306:3306"
+      - spa-db-data:/var/lib/postgresql/data
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: spadb
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    container_name: db
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      timeout: 20s
-      retries: 10
+      test:
+        [
+          "CMD-SHELL",
+          "sh -c 'pg_isready -U postgres -d postgres'"
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
 volumes:
-  todo-mysql-data:
+  spa-db-data:
+
 
 networks:
   db-net:

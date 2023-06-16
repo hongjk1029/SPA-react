@@ -1,8 +1,8 @@
 import axios from 'axios'; 
 import { handleResponse, handleError, handleVehiclesResponse, handleVehicleByIdResponse } from './Response'; 
 
-export const BASE_URL = 'http://localhost:8000';
-const AUTH_URL = 'api/token/';
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const AUTH_URL = "api/token/"
 const BRANDS_URL = 'vehicle/brand/'; 
 const VEHICLE_URL = 'vehicle/vehicle/';
 
