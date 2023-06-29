@@ -122,9 +122,13 @@ const Header = ({ isLogin, setLogin}) => {
       return (
         <header className="header">
           {NotAdminPage() && (
-            <Helmet>
-              <script defer src="https://widget.tochat.be/bundle.js?key=76872d3b-f925-4359-b7c1-5f94ef9dbe95" />
-            </Helmet>
+            // <Helmet>
+            //   <script defer src="https://widget.tochat.be/bundle.js?key=76872d3b-f925-4359-b7c1-5f94ef9dbe95" />
+            // </Helmet>
+                    <Helmet>
+                      <script defer src="https://widget.tochat.be/bundle.js?key=d6bff245-9f32-4ecf-aa8a-12c0418bee9d"/>
+                    </Helmet>
+
           )}
         {/* ============ header top ============ */}
         <div className="header__top">
