@@ -6,6 +6,9 @@ import Helmet from "../../components/Helmet/Helmet";
 import { useParams } from "react-router-dom";
 import ImageGallery from 'react-image-gallery';
 import { getVehiclesById } from "../../services/api/Provider";
+import { BsSpeedometer, BsFillPersonFill } from "react-icons/bs";
+import { AiTwotoneCalendar } from "react-icons/ai";
+import { FaGasPump } from "react-icons/fa";
 
 import "/node_modules/react-image-gallery/styles/css/image-gallery.css";
 import "../../styles/car-details.css";
@@ -17,6 +20,7 @@ const CarDetails = () => {
   const [images, setImages] = useState([]);
   const [brand, setBrand] = useState([]);
   const [priceOfSale, setPriceOfSale] = useState(0);
+  const [mileage, setMileage] = useState(0);
 
   const addCommas = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -28,6 +32,7 @@ const CarDetails = () => {
   async function _getVehiclesById(vehicleId) {
     getVehiclesById(vehicleId).then((res) => {
       setPriceOfSale(addCommas(res.price_of_sale));
+      setMileage(addCommas(res.mileage));
       let vehicle_brand = res.vehicle_brand;
       let brand_name = vehicle_brand.brand_name;
       let temp_images = [...images];
@@ -88,24 +93,25 @@ const CarDetails = () => {
                     <i
                       className="ri-roadster-line"
                       style={{ color: "#f9a826" }}
+                      title="Car Model"
                     ></i>{" "}
                     {vehicles.vehicle}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i
-                      className="ri-settings-2-line"
                       style={{ color: "#f9a826" }}
-                    ></i>{" "}
-                    {vehicles.automatic}
+                      title="Fuel Type" 
+                    ><FaGasPump className="iconPadding"/></i>{" "}
+                    {vehicles.fuel_type}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i
-                      className="ri-timer-flash-line"
                       style={{ color: "#f9a826" }}
-                    ></i>{" "}
-                    {vehicles.speed}
+                      title="Mileage" 
+                    ><BsSpeedometer className="iconPadding"/></i>{" "}
+                    {addCommas(mileage) + " km"}
                   </span>
                 </div>
 
@@ -114,21 +120,26 @@ const CarDetails = () => {
                   style={{ columnGap: "2.8rem" }}
                 >
                   <span className=" d-flex align-items-center gap-1 section__description">
-                    <i className="ri-map-pin-line" style={{ color: "#f9a826" }}></i>{" "}
-                    {vehicles.gps}
+                    <i style={{ color: "#f9a826" }} title="Model Year" >
+                      <AiTwotoneCalendar className="iconPadding"/>
+                    </i>{" "}
+                    {vehicles.model_year}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i
-                      className="ri-wheelchair-line"
                       style={{ color: "#f9a826" }}
-                    ></i>{" "}
+                      title="Seating Capacity" 
+                    >
+                      <BsFillPersonFill className="iconPadding"/>
+                    </i>{" "}
                     {vehicles.seating_capacity}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i
                       className="ri-building-2-line"
+                      title="Brand" 
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
                     {brand}
