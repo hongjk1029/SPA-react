@@ -63,7 +63,7 @@ const Layout = () => {
                   }
                 })}
                 <hr />
-                <MenuItem routerLink={<Link to="/admin/password/edit" />}>Change Admin Password</MenuItem>
+                {/* <MenuItem routerLink={<Link to="/admin/password/edit" />}>Change Admin Password</MenuItem> */}
               </Menu>
             </Sidebar>
           </Col>
