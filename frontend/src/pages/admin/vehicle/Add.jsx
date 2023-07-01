@@ -20,8 +20,10 @@ const AddVehicles = () => {
   const [seatingCapacity, setSeatingCapacity] = useState('');
   const [mileage, setMileage] = useState('');
   const [vehicleImages, setVehicleImages] = useState([]);
+  const [vehicleDocuments, setVehicleDocuments] = useState([]);
   const [accessories, setAccessories] = useState([]);
   const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
+  const [vehicleDocumentURLs, setVehicleDocumentURLs] = useState([]);
   const [errorMessage, setErrorMessage] = useState({});
   const [alertStatus, setAlertStatus] = useState(false);
 
@@ -31,6 +33,12 @@ const AddVehicles = () => {
     vehicleImages.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
     setVehicleImageURLs(newImageUrls)
   }, [vehicleImages]);
+
+  useEffect(() => {
+    const newDocUrls = [];
+    vehicleDocuments.forEach(doc => newDocUrls.push(doc))
+    setVehicleDocumentURLs(newDocUrls)
+  }, [vehicleDocuments]);
 
   function _getBrands() {
     getBrands().then((res) => {
@@ -51,6 +59,10 @@ const AddVehicles = () => {
 
   function onImageChange(e) {
     setVehicleImages([...e.target.files])
+  }
+
+  function onDocumentChange(e) {
+    setVehicleDocuments([...e.target.files])
   }
 
   function onAccessoriesChange(e) {
@@ -81,6 +93,9 @@ const AddVehicles = () => {
     if (vehicleImages.length != 0) {
       setVehicleImages([])
     }
+    if (vehicleDocuments.length != 0) {
+      setVehicleDocuments([])
+    }
     document.getElementById("vehicleForm").reset()
   }
 
@@ -93,6 +108,7 @@ const AddVehicles = () => {
 
     const fileData = new FormData();
     vehicleImages.forEach((file) => fileData.append('vehicle_images', file, file.name));
+    vehicleDocuments.forEach((file) => fileData.append('vehicle_documents', file, file.name));
     accessories.forEach((data) => fileData.append('accessories', data));
 
     fileData.append('vehicle', vehicleName)
@@ -170,7 +186,7 @@ const AddVehicles = () => {
 
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
-      console.log('No error found');
+      //console.log('No error found');
       setTimeout(() => {
         setAlertStatus(false)
       }, 3000);
@@ -178,7 +194,7 @@ const AddVehicles = () => {
     }
     else {
       setAlertStatus(false)
-      console.log(errorMessage);
+      //console.log(errorMessage);
     }
   }, [errorMessage])
 
@@ -367,11 +383,24 @@ const AddVehicles = () => {
 
           {/* 9th row */}
           <Row className="mt-2">
-            <h5>Upload Document Images</h5>
+            <h5>Upload Document</h5>
             <Col lg="10">
-              <input className="form-control mt-2" type="file" id="formFileMultipleDocuments" multiple />
+              <input className="form-control mt-2" type="file" id="formFileMultipleDocuments" multiple onChange={onDocumentChange} />
             </Col>
           </Row>
+          {vehicleDocumentURLs?.length > 0 && <Row className="d-flex flex-wrap mt-4">
+            {vehicleDocumentURLs.map((item, index) => (
+              <div key={index}> 
+                  <a href={item.name} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="disable-click">
+                    {item.name}
+                  </a>
+                  <br></br>
+                </div>
+            ))}
+          </Row>}
 
           <hr className="style1 mt-4 section-line"></hr>
 

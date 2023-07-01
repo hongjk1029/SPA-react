@@ -4,9 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import accessoriesData from "../../../assets/data/accessoriesData.js";
 import { getBrands, getVehiclesById, getBrandById, updateVehicleById } from "../../../services/api/Provider";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { IoMdClose } from "react-icons/io";
 import "../../../styles/common-section.css";
 
 let deletedImageList = [];
+let deletedDocumentList = [];
 
 function UpdateVehicles(){ 
     const location = useLocation();
@@ -32,11 +34,17 @@ function UpdateVehicles(){
     const [deletedVehicleImages, setDeletedVehicleImages] = useState([]);
     const [vehicleImageList, setVehicleImageList] = useState(location.state.VehicleImages);
     const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
+
+    const [newVehicleDocuments, setNewVehicleDocuments] = useState([]);
+    const [deletedVehicleDocuments, setDeletedVehicleDocuments] = useState([]);
+    const [vehicleDocumentList, setVehicleDocumentList] = useState(location.state.VehicleDocuments);
+    const [vehicleDocumentURLs, setVehicleDocumentURLs] = useState([]);
+
     const [accessories, setAccessories] = useState([]);
     const [alertStatus, setAlertStatus] = useState(false);
 
     useEffect(() => {
-      _getBrands();
+      _getBrands(); 
       _getVehiclesById(vehicleId);
       window.scrollTo(0, 0);
       deletedImageList = []
@@ -47,6 +55,12 @@ function UpdateVehicles(){
       newVehicleImages.forEach(image => newImageUrls.push(URL.createObjectURL(image)));
       setVehicleImageURLs(newImageUrls);
     }, [newVehicleImages]);
+
+    useEffect(() => {
+      const newDocUrls = [];
+      newVehicleDocuments.forEach(doc => newDocUrls.push(doc));
+      setVehicleDocumentURLs(newDocUrls);
+    }, [newVehicleDocuments]);
 
     function _getVehiclesById(vehicleId) {
       getVehiclesById(vehicleId).then((res) => {
@@ -61,6 +75,7 @@ function UpdateVehicles(){
         setMileage(res.mileage)
         setFuelType(res.fuel_type)
         setVehicleImageList(res.vehicle_images)
+        setVehicleDocumentList(res.vehicle_documents)
         setAccessories(res.accessories)
       });
     }
@@ -92,11 +107,23 @@ function UpdateVehicles(){
       setNewVehicleImages([...e.target.files])
     }
 
+    function onDocumentChange(e){
+      setNewVehicleDocuments([...e.target.files])
+    }
+
     function onImagePreviewClick(imageId){
       if(window.confirm('Confirm to delete this image?')){
         setVehicleImageList(vehicleImageList.filter(item => item.id != imageId));
         setDeletedVehicleImages(deletedImageList);
         deletedImageList.push(imageId);
+      }
+    }
+
+    function onDocumentPreviewClick(docId){
+      if(window.confirm('Confirm to delete this document?')){
+        setVehicleDocumentList(vehicleDocumentList.filter(item => item.id != docId));
+        setDeletedVehicleDocuments(deletedDocumentList);
+        deletedDocumentList.push(docId);
       }
     }
       
@@ -138,7 +165,9 @@ function UpdateVehicles(){
     
         const fileData = new FormData();  
         newVehicleImages.forEach((file) => fileData.append('vehicle_images', file, file.name));
+        newVehicleDocuments.forEach((file) => fileData.append('vehicle_documents', file, file.name));
         deletedVehicleImages.forEach((data) => fileData.append('delete_images', data));
+        deletedVehicleDocuments.forEach((data) => fileData.append('delete_documents', data));
         accessories.forEach((data) => fileData.append('accessories', data));
         fileData.append('vehicle', vehicleName)
         fileData.append('vehicle_brand', brandName)
@@ -359,10 +388,37 @@ function UpdateVehicles(){
     
               {/* 9th row */}
               <Row className="mt-2">
-              <h5>Upload Document Images</h5>
+              <h5>Upload Document</h5>
                 <Col lg="10">
-                  <input className="form-control mt-2" type="file" id="formFileMultipleDocuments" multiple />
+                  <input className="form-control mt-2" type="file" id="formFileMultipleDocuments" multiple onChange={onDocumentChange}/>
                 </Col>
+              </Row>
+              <Row className="d-flex flex-wrap mt-4">
+                {vehicleDocumentList.map((item, index) => (
+                  <div key={index}> 
+                    <a href={item.document} 
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      {item.document.substring(item.document.lastIndexOf("/") + 1)}
+                    </a>
+                    <IoMdClose
+                      onClick={event => onDocumentPreviewClick(item.id)} 
+                      className="delete-icon-document"
+                    />
+                    <br></br>
+                  </div>
+                ))}
+                {vehicleDocumentURLs.map((item, index) => (
+                  <div key={index}> 
+                  <a href={item.name} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="disable-click">
+                    {item.name}
+                  </a>
+                  <br></br>
+                </div>
+                ))}
               </Row>
     
               <hr className="style1 mt-4 section-line"></hr>

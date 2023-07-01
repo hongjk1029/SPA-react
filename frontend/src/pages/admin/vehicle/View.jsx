@@ -15,12 +15,13 @@ function ViewVehicles(){
   const [vehicles, setVehicles] = useState([]);
 
   const navigate = useNavigate();
-  const updateVehicle = (id, accessories, images) =>{
+  const updateVehicle = (id, accessories, images, documents) =>{
     navigate("/admin/vehicles/edit",{
       state: {
         Id: id,
         Accessories: accessories,
-        VehicleImages: images
+        VehicleImages: images,
+        VehicleDocuments: documents
       }
     });
   }
@@ -131,7 +132,7 @@ function ViewVehicles(){
       formatter: (cellContent, row) => {
         return (
           <div>
-            <FiEdit className="text-primary btnEdit" role="button" onClick={() => updateVehicle(row.id, row.accessories, row.vehicle_images)}/>
+            <FiEdit className="text-primary btnEdit" role="button" onClick={() => updateVehicle(row.id, row.accessories, row.vehicle_images, row.vehicle_documents)}/>
             <IoMdClose className="text-danger" role="button"  onClick={() => _deleteVehicle(row.id)}/>
           </div>
         );
