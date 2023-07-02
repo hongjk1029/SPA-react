@@ -2,6 +2,16 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
+def vehicle_image_upload_path(instance, filename):
+    return '{}/{}/image/{}'.format(instance.vehicle.vehicle_brand.brand_name,
+                                   instance.vehicle.vehicle,
+                                   filename)
+
+def vehicle_document_upload_path(instance, filename):
+    return '{}/{}/document/{}'.format(instance.vehicle.vehicle_brand.brand_name,
+                                      instance.vehicle.vehicle,
+                                      filename)
+
 class VehicleBrand(models.Model):
     brand_name = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
@@ -52,14 +62,14 @@ class Vehicle(models.Model):
         return self.vehicle
 
 class VehicleDocument(models.Model):
-    document = models.FileField(null=True)
+    document = models.FileField(null=True, upload_to=vehicle_document_upload_path)
     vehicle = models.ForeignKey(Vehicle, related_name='documents', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     removed = models.DateTimeField(null=True, blank=True)
 
 class VehicleImage(models.Model):   
-    vehicle_image = models.ImageField()
+    vehicle_image = models.ImageField(upload_to=vehicle_image_upload_path)
     vehicle = models.ForeignKey(Vehicle, related_name='vehicle_image', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
