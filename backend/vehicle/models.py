@@ -21,12 +21,12 @@ sales_type = [
     # ('Hybrid','Hybrid'),
     # ('EV','EV'),
 # ]
-class VehicleRent(models.Model):
-    rent_active = models.BooleanField(default=False)
-    price_per_week = models.DecimalField(default=0, max_digits=65,decimal_places=2)
-    price_per_month = models.DecimalField(default=0, max_digits=65,decimal_places=2)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+# class VehicleRent(models.Model):
+#     price_per_day = models.DecimalField(default=0, max_digits=65, decimal_places=2)
+#     price_per_month = models.DecimalField(default=0, max_digits=65, decimal_places=2)
+#     is_active = models.BooleanField(default=True)
+#     created = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)
 
 class Vehicle(models.Model):
     vehicle = models.CharField(max_length=255)
@@ -34,21 +34,16 @@ class Vehicle(models.Model):
     vehicle_overview = models.CharField(max_length=255)  
     number_plate = models.CharField(max_length=10)
     is_active = models.BooleanField(default=True)
-    # vehicle_rent_active = models.OneToOneField(VehicleRent,on_delete=models.CASCADE)
-    price_of_cost = models.DecimalField(default=0, max_digits=65,decimal_places=2)
-    price_of_sale = models.DecimalField(default=0, max_digits=65,decimal_places=2)
-    # vehicle_details = ArrayField(models.CharField(max_length=200), blank=True)
+    # vehicle_rent = models.OneToOneField(VehicleRent, on_delete=models.CASCADE, null=True)
+    price_per_day = models.DecimalField(default=0, max_digits=65, decimal_places=2, null=True, blank=True)
+    price_per_month = models.DecimalField(default=0, max_digits=65, decimal_places=2, null=True, blank=True)
+    price_of_cost = models.DecimalField(default=0, max_digits=65,decimal_places=2, null=True, blank=True)
+    price_of_sale = models.DecimalField(default=0, max_digits=65,decimal_places=2, null=True, blank=True)
     fuel_type = models.CharField(max_length=50)
     model_year = models.IntegerField(default=None)
     seating_capacity = models.IntegerField(default=None)
     mileage = models.IntegerField(default=None)
     accessories = ArrayField(models.CharField(max_length=100), size=10, max_length=255, default=None)
-    # accessories = ListCharField(base_field=models.CharField(max_length=20), size=10, max_length=255)
-    # vehicle_details = ListCharField(
-    #     base_field=models.CharField(max_length=10),
-    #     size=6,
-    #     max_length=100,  # 6 * 10 character nominals, plus commas
-    # )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     removed = models.DateTimeField(null=True, blank=True)
