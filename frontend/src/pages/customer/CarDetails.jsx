@@ -77,12 +77,15 @@ const CarDetails = () => {
 
                 <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
+                    RM {priceOfSale}
+                  </h6>
+                  {/* <h6 className="rent__price fw-bold fs-4">
                     ${priceOfSale} / Day
                   </h6>
 
                   <h6 className="rent__price fw-bold fs-4">
                     ${priceOfSale} / Month
-                  </h6>
+                  </h6> */}
                 </div>
 
                 <p className="section__description">

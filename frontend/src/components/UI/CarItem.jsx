@@ -26,7 +26,8 @@ const CarItem = (props) => {
         <div className="car__item-content mt-4">
           <h4 className="section__title text-center">{vehicle_brand.brand_name} {vehicle}</h4>
           <h6 className="rent__price text-center mt-">
-            ${priceOfSale} <span>/ Day</span>
+            {/* ${priceOfSale} <span>/ Day</span> */}
+            RM {priceOfSale}
           </h6>
 
           <div className="car__item-info d-flex align-items-center justify-content-between mt-3 mb-4">
