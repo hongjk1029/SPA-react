@@ -16,8 +16,8 @@ const quickLinksAdmin = [
     display: "Privacy Policy",
   },
   {
-    path: "#",
-    display: "Contact",
+    // path: "#",
+    // display: "Contact",
   },
 ];
 
@@ -43,8 +43,8 @@ const quickLinksCustomer = [
   },
 
   {
-    path: "/contact",
-    display: "Contact",
+    // path: "/contact",
+    // display: "Contact",
   },
 ];
 
