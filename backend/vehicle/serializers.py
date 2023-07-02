@@ -35,7 +35,7 @@ class VehicleSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Vehicle
-        fields = ['id', 'vehicle', 'vehicle_brand', 'vehicle_overview', 'number_plate', 'price_of_cost', 'price_of_sale', 'fuel_type', 'model_year', 'seating_capacity', 'mileage', 'accessories', 'vehicle_documents', 'vehicle_images', 'delete_documents', 'delete_images']
+        fields = ['id', 'vehicle', 'vehicle_brand', 'vehicle_overview', 'number_plate', 'price_per_day', 'price_per_month', 'price_of_cost', 'price_of_sale', 'fuel_type', 'model_year', 'seating_capacity', 'mileage', 'accessories', 'vehicle_documents', 'vehicle_images', 'delete_documents', 'delete_images']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
