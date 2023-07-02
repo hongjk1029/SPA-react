@@ -15,6 +15,11 @@ class VehicleDocumentSerializer(serializers.ModelSerializer):
         model = VehicleDocument
         fields = ['id','document']
 
+class DownloadVehicleDocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehicleDocument
+        fields = ['id','document', 'vehicle']
+
 class VehicleImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehicleImage
