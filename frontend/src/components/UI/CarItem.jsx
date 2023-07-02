@@ -13,7 +13,7 @@ const CarItem = (props) => {
   const [priceOfSale, setPriceOfSale] = useState(0);
 
   useEffect(() => {
-    setPriceOfSale(addCommas(price_of_sale));
+    setPriceOfSale(price_of_sale);
   }, []);
 
   return (

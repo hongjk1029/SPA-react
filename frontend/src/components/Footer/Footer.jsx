@@ -177,7 +177,7 @@ const Footer = ({isLogin}) => {
           </Row>
         </Container>
         {/* <Helmet> <script defer src="https://widget.tochat.be/bundle.js?key=76872d3b-f925-4359-b7c1-5f94ef9dbe95"></script></Helmet> */}
-        <Helmet><script defer src="https://widget.tochat.be/bundle.js?key=d6bff245-9f32-4ecf-aa8a-12c0418bee9d"></script></Helmet>
+        <Helmet><script defer src={process.env.REACT_APP_TOCHAT_KEY}></script></Helmet>
         
       </footer>
     );

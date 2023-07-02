@@ -14,6 +14,7 @@ import "/node_modules/react-image-gallery/styles/css/image-gallery.css";
 import "../../styles/car-details.css";
 
 const CarDetails = () => {
+  const WHATSAPP_PHONE_NUMBER = process.env.REACT_APP_WHATSAPP_PHONE_NUMBER;
   const { id } = useParams();
 
   const [vehicles, setVehicles] = useState([]);
@@ -51,7 +52,7 @@ const CarDetails = () => {
   } 
   function navigateToWhatsApp() {
     // window.location.href = 'https://api.whatsapp.com/send?phone=60123160808';
-    window.open('https://api.whatsapp.com/send?phone=60123160808', '_blank');
+    window.open('https://api.whatsapp.com/send?phone=' + WHATSAPP_PHONE_NUMBER, '_blank');
   }
 
   return (
