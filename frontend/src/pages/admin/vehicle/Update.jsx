@@ -15,8 +15,17 @@ function UpdateVehicles(){
     const navigate = useNavigate();
     let accessoriesList = location.state.Accessories;
     let vehicleId = location.state.Id;
-    const salesTypeData = [ /*{ id: 1, name: "Rental", },*/ { id: 2, name: "Sale", }, ];
-    const [chosenSalesType, setChosenSalesType] = useState("Sale");
+    let saleRental = "";
+
+    if (location.state.PriceOfSale != null && location.state.PriceOfSale != '' && location.state.PriceOfSale != '0' && location.state.PriceOfSale != '0.00'){
+      saleRental = "Sale"
+    }
+    else{
+      saleRental = "Rental"
+    }
+
+    const salesTypeData = [ { id: 1, name: "Rental", }, { id: 2, name: "Sale", } ];
+    const [chosenSalesType, setChosenSalesType] = useState(saleRental);
     const select = useRef();
     const [brandId, setBrandId] = useState(0);
     const [brands, setBrands] = useState([]);
@@ -25,6 +34,8 @@ function UpdateVehicles(){
     const [vehiclePlate, setVehiclePlate] = useState('');
     const [priceOfCost, setPriceOfCost] = useState('');
     const [priceOfSale, setPriceOfSale] = useState('');
+    const [pricePerDay, setPricePerDay] = useState('');
+    const [pricePerMonth, setPricePerMonth] = useState('');
     const [modelYear, setModelYear] = useState('');
     const [seatingCapacity, setSeatingCapacity] = useState('');
     const [mileage, setMileage] = useState('');
@@ -70,6 +81,8 @@ function UpdateVehicles(){
         setVehiclePlate(res.number_plate)
         setPriceOfCost(res.price_of_cost)
         setPriceOfSale(res.price_of_sale)
+        setPricePerDay(res.price_per_day)
+        setPricePerMonth(res.price_per_month)
         setModelYear(res.model_year)
         setSeatingCapacity(res.seating_capacity)
         setMileage(res.mileage)
@@ -95,11 +108,11 @@ function UpdateVehicles(){
       
     function changeSalesType(e){
       if (e.target.value == "Rental"){
-      setPriceOfCost('');
-      setPriceOfSale('');
+        setPriceOfSale('');
       }
       else{
-      //set Price Per Week (RM) and Price Per Month (RM) to empty
+        setPricePerDay('');
+        setPricePerMonth('');
       }
     }
     
@@ -147,6 +160,8 @@ function UpdateVehicles(){
       setVehiclePlate('');
       setPriceOfCost('');
       setPriceOfSale('');
+      setPricePerDay('');
+      setPricePerMonth('');
       setModelYear('');
       setSeatingCapacity('');
       setMileage('');
@@ -173,8 +188,10 @@ function UpdateVehicles(){
         fileData.append('vehicle_brand', brandName)
         fileData.append('vehicle_overview', vehicleOverview)
         fileData.append('number_plate', vehiclePlate)
-        fileData.append('price_of_cost', priceOfCost)
-        fileData.append('price_of_sale', priceOfSale)
+        fileData.append('price_of_cost', priceOfCost == '' || priceOfCost == null ? '0' : priceOfCost)
+        fileData.append('price_of_sale', priceOfSale == '' || priceOfSale == null  ? '0' : priceOfSale)
+        fileData.append('price_per_day', pricePerDay == '' || pricePerDay == null ? '0' : pricePerDay)
+        fileData.append('price_per_month', pricePerMonth == '' || pricePerMonth == null ? '0' : pricePerMonth)
         fileData.append('fuel_type', fuelType)
         fileData.append('model_year', modelYear)
         fileData.append('seating_capacity', seatingCapacity)
@@ -182,6 +199,7 @@ function UpdateVehicles(){
 
         updateVehicleById(vehicleId, fileData).then(response => 
         { 
+          console.log(response);
           if (response?.request?.statusText != "Bad Request"){
             setAlertStatus(true)
             setTimeout(() => {
@@ -291,6 +309,7 @@ function UpdateVehicles(){
                     ref={select}
                     defaultValue=""
                     onChange={(e) => setChosenSalesType(e.target.value, changeSalesType(e))}
+                    value={saleRental}
                     required
                   >
                     {salesTypeData.map((option, index) => (
@@ -305,13 +324,24 @@ function UpdateVehicles(){
                 <>
                   <Row className="mt-3">
                     <Col lg="5">
-                      <label htmlFor="plate">Price Per Week (RM)</label>
-                      <input type="text" className="form-control" id="pricePerWeek" required />
+                      <label htmlFor="plate">Price of Cost (RM)</label>
+                        <input type="text" className="form-control" id="priceOfCost"
+                        onChange={event => setPriceOfCost(event.target.value)} value={priceOfCost} required />
+                    </Col>
+                    
+                    <Col lg="5"></Col>
+                  </Row>
+                  <Row className="mt-3">
+                    <Col lg="5">
+                      <label htmlFor="plate">Price Per Day (RM)</label>
+                      <input type="text" className="form-control" id="pricePerDay" 
+                      onChange={event => setPricePerDay(event.target.value)} value={pricePerDay} required />
                     </Col>
                       
                     <Col lg="5">
                       <label htmlFor="mileage">Price Per Month (RM)</label>
-                      <input type="text" className="form-control" id="pricePerMonth" required />
+                      <input type="text" className="form-control" id="pricePerMonth" 
+                      onChange={event => setPricePerMonth(event.target.value)} value={pricePerMonth}required />
                     </Col>
                   </Row>
                 </>

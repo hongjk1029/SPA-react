@@ -7,8 +7,8 @@ import { getBrands, addVehicle } from "../../../services/api/Provider";
 const accessoriesList = []
 
 const AddVehicles = () => {
-  const salesTypeData = [ /*{ id: 1, name: "Rental", },*/ { id: 2, name: "Sale", },];
-  const [chosenSalesType, setChosenSalesType] = useState("Sale");
+  const salesTypeData = [ { id: 1, name: "Rental", }, { id: 2, name: "Sale", },];
+  const [chosenSalesType, setChosenSalesType] = useState("Rental");
   const select = useRef();
   const [brands, setBrands] = useState([]);
   const [vehicleName, setVehicleName] = useState('');
@@ -16,6 +16,8 @@ const AddVehicles = () => {
   const [vehiclePlate, setVehiclePlate] = useState('');
   const [priceOfCost, setPriceOfCost] = useState('');
   const [priceOfSale, setPriceOfSale] = useState('');
+  const [pricePerDay, setPricePerDay] = useState('');
+  const [pricePerMonth, setPricePerMonth] = useState('');
   const [modelYear, setModelYear] = useState('');
   const [seatingCapacity, setSeatingCapacity] = useState('');
   const [mileage, setMileage] = useState('');
@@ -49,11 +51,11 @@ const AddVehicles = () => {
 
   function changeSalesType(e) {
     if (e.target.value == "Rental") {
-      setPriceOfCost('');
       setPriceOfSale('');
     }
     else {
-      //set Price Per Week (RM) and Price Per Month (RM) to empty
+      setPricePerDay('');
+      setPricePerMonth('');
     }
   }
 
@@ -83,6 +85,8 @@ const AddVehicles = () => {
     setVehicleOverview('');
     setVehiclePlate('');
     setPriceOfCost('');
+    setPricePerDay('');
+    setPricePerMonth('');
     setPriceOfSale('');
     setModelYear('');
     setSeatingCapacity('');
@@ -117,6 +121,8 @@ const AddVehicles = () => {
     fileData.append('number_plate', vehiclePlate)
     fileData.append('price_of_cost', priceOfCost)
     fileData.append('price_of_sale', priceOfSale)
+    fileData.append('price_per_day', pricePerDay)
+    fileData.append('price_per_month', pricePerMonth)
     fileData.append('fuel_type', fuelType)
     fileData.append('model_year', modelYear)
     fileData.append('seating_capacity', seatingCapacity)
@@ -155,20 +161,47 @@ const AddVehicles = () => {
       err.brandName = 'Brand Name is required.'
     }
 
-    if (priceOfCost == '') {
-      err.priceOfCost = 'Price of Cost is required.'
-    } else if (priceOfCost < 0) {
-      err.priceOfCost = 'Price of Cost cannot be lesser than 0.'
-    } else if (!price_regex.test(priceOfCost)) {
-      err.priceOfCost = 'Price cannot more than 2 decimal places.'
+    if (chosenSalesType === "Rental") {
+	  if (priceOfCost == '') {
+        err.priceOfCost = 'Price of Cost is required.'
+      } else if (priceOfCost < 0) {
+        err.priceOfCost = 'Price of Cost cannot be lesser than 0.'
+      } else if (!price_regex.test(priceOfCost)) {
+        err.priceOfCost = 'Price cannot more than 2 decimal places.'
+      }
+	  
+      if (pricePerDay == '') {
+        err.pricePerDay = 'Price per day is required.'
+      } else if (pricePerDay < 0) {
+        err.pricePerDay = 'Price per day cannot be lesser than 0.'
+      } else if (!price_regex.test(pricePerDay)) {
+        err.pricePerDay = 'Price cannot more than 2 decimal places.'
+      }
+  
+      if (pricePerMonth == '') {
+        err.pricePerMonth = 'Price per month is required.'
+      } else if (pricePerMonth < 0) {
+        err.pricePerMonth = 'Price per month cannot be lesser than 0.'
+      } else if (!price_regex.test(pricePerMonth)) {
+        err.pricePerMonth = 'Price cannot more than 2 decimal places.'
+      }
     }
-
-    if (priceOfSale == '') {
-      err.priceOfSale = 'Price of Sale is required.'
-    } else if (priceOfSale < 0) {
-      err.priceOfSale = 'Price of Sale cannot be lesser than 0.'
-    } else if (!price_regex.test(priceOfSale)) {
-      err.priceOfSale = 'Price cannot more than 2 decimal places.'
+    else {
+      if (priceOfCost == '') {
+        err.priceOfCost = 'Price of Cost is required.'
+      } else if (priceOfCost < 0) {
+        err.priceOfCost = 'Price of Cost cannot be lesser than 0.'
+      } else if (!price_regex.test(priceOfCost)) {
+        err.priceOfCost = 'Price cannot more than 2 decimal places.'
+      }
+  
+      if (priceOfSale == '') {
+        err.priceOfSale = 'Price of Sale is required.'
+      } else if (priceOfSale < 0) {
+        err.priceOfSale = 'Price of Sale cannot be lesser than 0.'
+      } else if (!price_regex.test(priceOfSale)) {
+        err.priceOfSale = 'Price cannot more than 2 decimal places.'
+      }
     }
 
     if (seatingCapacity == '') {
@@ -315,15 +348,30 @@ const AddVehicles = () => {
           {/* 6th row */}
           {chosenSalesType === "Rental" ? (
             <>
+			  <Row className="mt-3">
+                <Col lg="5">
+                  <label htmlFor="plate">Price of Cost (RM)</label>
+                  <input type="number" step=".01" className="form-control" id="priceOfCost"
+                    onChange={event => setPriceOfCost(event.target.value)} value={priceOfCost} />
+                  <span className="text-danger">{errorMessage.priceOfCost}</span>
+                </Col>
+
+                <Col lg="5">
+                </Col>
+              </Row>
               <Row className="mt-3">
                 <Col lg="5">
-                  <label htmlFor="plate">Price Per Week (RM)</label>
-                  <input type="text" className="form-control" id="pricePerWeek" />
+                  <label htmlFor="plate">Price Per Day (RM)</label>
+                  <input type="text" step=".01" className="form-control" id="pricePerDay" 
+                    onChange={event => setPricePerDay(event.target.value)} value={pricePerDay} />
+                  <span className="text-danger">{errorMessage.pricePerDay}</span>
                 </Col>
 
                 <Col lg="5">
                   <label htmlFor="mileage">Price Per Month (RM)</label>
-                  <input type="text" className="form-control" id="pricePerMonth" />
+                  <input type="text" className="form-control" id="pricePerMonth" 
+                    onChange={event => setPricePerMonth(event.target.value)} value={pricePerMonth} />
+                  <span className="text-danger">{errorMessage.pricePerMonth}</span>
                 </Col>
               </Row>
             </>

@@ -15,13 +15,14 @@ function ViewVehicles() {
   const [vehicles, setVehicles] = useState([]);
 
   const navigate = useNavigate();
-  const updateVehicle = (id, accessories, images, documents) =>{
+  const updateVehicle = (id, accessories, images, documents, priceOfSale) =>{
     navigate("/admin/vehicles/edit",{
       state: {
         Id: id,
         Accessories: accessories,
         VehicleImages: images,
-        VehicleDocuments: documents
+        VehicleDocuments: documents,
+        PriceOfSale: priceOfSale
       }
     });
   }
@@ -84,7 +85,7 @@ function ViewVehicles() {
       sort: true,
       headerClasses: 'pointer',
       formatter: (cellContent, row) => {
-        if (row.price_of_cost != null) {
+        if (row.price_of_sale != null && row.price_of_sale != '' && row.price_of_sale != '0' && row.price_of_sale != '0.00') {
           return (
             "Sale"
           );
@@ -95,14 +96,14 @@ function ViewVehicles() {
       }
     },
     {
-      dataField: 'rentalPrice',
+      dataField: 'price_per_month',
       text: 'Rental Price(RM)',
       sort: true,
       headerClasses: 'pointer',
       formatter: (cellContent, row) => {
-        if (row.rentalPrice != null) {
+        if (row.price_per_month != null && row.price_per_month != '' && row.price_per_month != '0' && row.price_per_month != '0.00') {
           return (
-            row.rentalPrice
+            row.price_per_month
           );
         }
         return (
@@ -116,7 +117,7 @@ function ViewVehicles() {
       sort: true,
       headerClasses: 'pointer',
       formatter: (cellContent, row) => {
-        if (row.price_of_sale != null) {
+        if (row.price_of_sale != null && row.price_of_sale != '' && row.price_of_sale != '0' && row.price_of_sale != '0.00') {
           return (
             row.price_of_sale
           );
@@ -160,7 +161,7 @@ function ViewVehicles() {
       formatter: (cellContent, row) => {
         return (
           <div>
-            <FiEdit className="text-primary btnEdit" role="button" onClick={() => updateVehicle(row.id, row.accessories, row.vehicle_images, row.vehicle_documents)}/>
+            <FiEdit className="text-primary btnEdit" role="button" onClick={() => updateVehicle(row.id, row.accessories, row.vehicle_images, row.vehicle_documents, row.price_of_sale)}/>
             <FiDownload className="text-primary btnEdit" role="button" onClick={() => _downloadVehicleDocument(row.id)} />
             <IoMdClose className="text-danger" role="button"  onClick={() => _deleteVehicle(row.id)}/>
           </div>
