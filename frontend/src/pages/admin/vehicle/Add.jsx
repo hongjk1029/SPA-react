@@ -7,8 +7,8 @@ import { getBrands, addVehicle } from "../../../services/api/Provider";
 const accessoriesList = []
 
 const AddVehicles = () => {
-  const salesTypeData = [ /*{ id: 1, name: "Rental", },*/ { id: 2, name: "Sale", },];
-  const [chosenSalesType, setChosenSalesType] = useState("Sale");
+  const salesTypeData = [ { id: 1, name: "Rental", }, { id: 2, name: "Sale", },];
+  const [chosenSalesType, setChosenSalesType] = useState("Rental");
   const select = useRef();
   const [brands, setBrands] = useState([]);
   const [vehicleName, setVehicleName] = useState('');
@@ -16,12 +16,16 @@ const AddVehicles = () => {
   const [vehiclePlate, setVehiclePlate] = useState('');
   const [priceOfCost, setPriceOfCost] = useState('');
   const [priceOfSale, setPriceOfSale] = useState('');
+  const [pricePerDay, setPricePerDay] = useState('');
+  const [pricePerMonth, setPricePerMonth] = useState('');
   const [modelYear, setModelYear] = useState('');
   const [seatingCapacity, setSeatingCapacity] = useState('');
   const [mileage, setMileage] = useState('');
   const [vehicleImages, setVehicleImages] = useState([]);
+  const [vehicleDocuments, setVehicleDocuments] = useState([]);
   const [accessories, setAccessories] = useState([]);
   const [vehicleImageURLs, setVehicleImageURLs] = useState([]);
+  const [vehicleDocumentURLs, setVehicleDocumentURLs] = useState([]);
   const [errorMessage, setErrorMessage] = useState({});
   const [alertStatus, setAlertStatus] = useState(false);
 
@@ -32,6 +36,12 @@ const AddVehicles = () => {
     setVehicleImageURLs(newImageUrls)
   }, [vehicleImages]);
 
+  useEffect(() => {
+    const newDocUrls = [];
+    vehicleDocuments.forEach(doc => newDocUrls.push(doc))
+    setVehicleDocumentURLs(newDocUrls)
+  }, [vehicleDocuments]);
+
   function _getBrands() {
     getBrands().then((res) => {
       let arr = res;
@@ -41,16 +51,20 @@ const AddVehicles = () => {
 
   function changeSalesType(e) {
     if (e.target.value == "Rental") {
-      setPriceOfCost('');
       setPriceOfSale('');
     }
     else {
-      //set Price Per Week (RM) and Price Per Month (RM) to empty
+      setPricePerDay('');
+      setPricePerMonth('');
     }
   }
 
   function onImageChange(e) {
     setVehicleImages([...e.target.files])
+  }
+
+  function onDocumentChange(e) {
+    setVehicleDocuments([...e.target.files])
   }
 
   function onAccessoriesChange(e) {
@@ -71,6 +85,8 @@ const AddVehicles = () => {
     setVehicleOverview('');
     setVehiclePlate('');
     setPriceOfCost('');
+    setPricePerDay('');
+    setPricePerMonth('');
     setPriceOfSale('');
     setModelYear('');
     setSeatingCapacity('');
@@ -80,6 +96,9 @@ const AddVehicles = () => {
     }
     if (vehicleImages.length != 0) {
       setVehicleImages([])
+    }
+    if (vehicleDocuments.length != 0) {
+      setVehicleDocuments([])
     }
     document.getElementById("vehicleForm").reset()
   }
@@ -93,6 +112,7 @@ const AddVehicles = () => {
 
     const fileData = new FormData();
     vehicleImages.forEach((file) => fileData.append('vehicle_images', file, file.name));
+    vehicleDocuments.forEach((file) => fileData.append('vehicle_documents', file, file.name));
     accessories.forEach((data) => fileData.append('accessories', data));
 
     fileData.append('vehicle', vehicleName)
@@ -101,6 +121,8 @@ const AddVehicles = () => {
     fileData.append('number_plate', vehiclePlate)
     fileData.append('price_of_cost', priceOfCost)
     fileData.append('price_of_sale', priceOfSale)
+    fileData.append('price_per_day', pricePerDay)
+    fileData.append('price_per_month', pricePerMonth)
     fileData.append('fuel_type', fuelType)
     fileData.append('model_year', modelYear)
     fileData.append('seating_capacity', seatingCapacity)
@@ -139,20 +161,47 @@ const AddVehicles = () => {
       err.brandName = 'Brand Name is required.'
     }
 
-    if (priceOfCost == '') {
-      err.priceOfCost = 'Price of Cost is required.'
-    } else if (priceOfCost < 0) {
-      err.priceOfCost = 'Price of Cost cannot be lesser than 0.'
-    } else if (!price_regex.test(priceOfCost)) {
-      err.priceOfCost = 'Price cannot more than 2 decimal places.'
+    if (chosenSalesType === "Rental") {
+	  if (priceOfCost == '') {
+        err.priceOfCost = 'Price of Cost is required.'
+      } else if (priceOfCost < 0) {
+        err.priceOfCost = 'Price of Cost cannot be lesser than 0.'
+      } else if (!price_regex.test(priceOfCost)) {
+        err.priceOfCost = 'Price cannot more than 2 decimal places.'
+      }
+	  
+      if (pricePerDay == '') {
+        err.pricePerDay = 'Price per day is required.'
+      } else if (pricePerDay < 0) {
+        err.pricePerDay = 'Price per day cannot be lesser than 0.'
+      } else if (!price_regex.test(pricePerDay)) {
+        err.pricePerDay = 'Price cannot more than 2 decimal places.'
+      }
+  
+      if (pricePerMonth == '') {
+        err.pricePerMonth = 'Price per month is required.'
+      } else if (pricePerMonth < 0) {
+        err.pricePerMonth = 'Price per month cannot be lesser than 0.'
+      } else if (!price_regex.test(pricePerMonth)) {
+        err.pricePerMonth = 'Price cannot more than 2 decimal places.'
+      }
     }
-
-    if (priceOfSale == '') {
-      err.priceOfSale = 'Price of Sale is required.'
-    } else if (priceOfSale < 0) {
-      err.priceOfSale = 'Price of Sale cannot be lesser than 0.'
-    } else if (!price_regex.test(priceOfSale)) {
-      err.priceOfSale = 'Price cannot more than 2 decimal places.'
+    else {
+      if (priceOfCost == '') {
+        err.priceOfCost = 'Price of Cost is required.'
+      } else if (priceOfCost < 0) {
+        err.priceOfCost = 'Price of Cost cannot be lesser than 0.'
+      } else if (!price_regex.test(priceOfCost)) {
+        err.priceOfCost = 'Price cannot more than 2 decimal places.'
+      }
+  
+      if (priceOfSale == '') {
+        err.priceOfSale = 'Price of Sale is required.'
+      } else if (priceOfSale < 0) {
+        err.priceOfSale = 'Price of Sale cannot be lesser than 0.'
+      } else if (!price_regex.test(priceOfSale)) {
+        err.priceOfSale = 'Price cannot more than 2 decimal places.'
+      }
     }
 
     if (seatingCapacity == '') {
@@ -170,7 +219,7 @@ const AddVehicles = () => {
 
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
-      console.log('No error found');
+      //console.log('No error found');
       setTimeout(() => {
         setAlertStatus(false)
       }, 3000);
@@ -178,7 +227,7 @@ const AddVehicles = () => {
     }
     else {
       setAlertStatus(false)
-      console.log(errorMessage);
+      //console.log(errorMessage);
     }
   }, [errorMessage])
 
@@ -299,15 +348,30 @@ const AddVehicles = () => {
           {/* 6th row */}
           {chosenSalesType === "Rental" ? (
             <>
+			  <Row className="mt-3">
+                <Col lg="5">
+                  <label htmlFor="plate">Price of Cost (RM)</label>
+                  <input type="number" step=".01" className="form-control" id="priceOfCost"
+                    onChange={event => setPriceOfCost(event.target.value)} value={priceOfCost} />
+                  <span className="text-danger">{errorMessage.priceOfCost}</span>
+                </Col>
+
+                <Col lg="5">
+                </Col>
+              </Row>
               <Row className="mt-3">
                 <Col lg="5">
-                  <label htmlFor="plate">Price Per Week (RM)</label>
-                  <input type="text" className="form-control" id="pricePerWeek" />
+                  <label htmlFor="plate">Price Per Day (RM)</label>
+                  <input type="text" step=".01" className="form-control" id="pricePerDay" 
+                    onChange={event => setPricePerDay(event.target.value)} value={pricePerDay} />
+                  <span className="text-danger">{errorMessage.pricePerDay}</span>
                 </Col>
 
                 <Col lg="5">
                   <label htmlFor="mileage">Price Per Month (RM)</label>
-                  <input type="text" className="form-control" id="pricePerMonth" />
+                  <input type="text" className="form-control" id="pricePerMonth" 
+                    onChange={event => setPricePerMonth(event.target.value)} value={pricePerMonth} />
+                  <span className="text-danger">{errorMessage.pricePerMonth}</span>
                 </Col>
               </Row>
             </>
@@ -367,11 +431,24 @@ const AddVehicles = () => {
 
           {/* 9th row */}
           <Row className="mt-2">
-            <h5>Upload Document Images</h5>
+            <h5>Upload Document</h5>
             <Col lg="10">
-              <input className="form-control mt-2" type="file" id="formFileMultipleDocuments" multiple />
+              <input className="form-control mt-2" type="file" id="formFileMultipleDocuments" multiple onChange={onDocumentChange} />
             </Col>
           </Row>
+          {vehicleDocumentURLs?.length > 0 && <Row className="d-flex flex-wrap mt-4">
+            {vehicleDocumentURLs.map((item, index) => (
+              <div key={index}> 
+                  <a href={item.name} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="disable-click">
+                    {item.name}
+                  </a>
+                  <br></br>
+                </div>
+            ))}
+          </Row>}
 
           <hr className="style1 mt-4 section-line"></hr>
 

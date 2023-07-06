@@ -37,3 +37,7 @@
     vertical-align: middle;
     line-height: 0;
 }
+
+.iconPadding{
+    padding-bottom: 0.15rem;
+}

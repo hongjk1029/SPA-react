@@ -39,24 +39,24 @@ const brandLinks = [
       hasChild: true,
       child: vehicleLinks,
     },
-    {
-      path: "/admin/manage-query",
-      display: "Manage Query",
-      hasChild: false,
-      child: [],
-    },
-    {
-      path: "/admin/manage-pages",
-      display: "Manage Pages",
-      hasChild: false,
-      child: [],
-    },
-    {
-      path: "/admin/contact-info",
-      display: "Update Contact Info",
-      hasChild: false,
-      child: [],
-    },
+    // {
+    //   path: "/admin/manage-query",
+    //   display: "Manage Query",
+    //   hasChild: false,
+    //   child: [],
+    // },
+    // {
+    //   path: "/admin/manage-pages",
+    //   display: "Manage Pages",
+    //   hasChild: false,
+    //   child: [],
+    // },
+    // {
+    //   path: "/admin/contact-info",
+    //   display: "Update Contact Info",
+    //   hasChild: false,
+    //   child: [],
+    // },
     // {
     //   path: "/admin/password/edit",
     //   display: "Change Admin Password",

@@ -16,8 +16,8 @@ const quickLinksAdmin = [
     display: "Privacy Policy",
   },
   {
-    path: "#",
-    display: "Contact",
+    // path: "#",
+    // display: "Contact",
   },
 ];
 
@@ -43,8 +43,8 @@ const quickLinksCustomer = [
   },
 
   {
-    path: "/contact",
-    display: "Contact",
+    // path: "/contact",
+    // display: "Contact",
   },
 ];
 
@@ -176,8 +176,9 @@ const Footer = ({isLogin}) => {
             </Col>
           </Row>
         </Container>
-        <Helmet> <script defer src="https://widget.tochat.be/bundle.js?key=76872d3b-f925-4359-b7c1-5f94ef9dbe95"></script></Helmet>
-       
+        {/* <Helmet> <script defer src="https://widget.tochat.be/bundle.js?key=76872d3b-f925-4359-b7c1-5f94ef9dbe95"></script></Helmet> */}
+        <Helmet><script defer src={process.env.REACT_APP_TOCHAT_KEY}></script></Helmet>
+        
       </footer>
     );
   }

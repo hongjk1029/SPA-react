@@ -1,17 +1,19 @@
 import React, { useState,useEffect } from "react";
 import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
+import { BsSpeedometer } from "react-icons/bs";
+import { FaGasPump } from "react-icons/fa";
 import "../../styles/car-item.css";
 
 const addCommas = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 const CarItem = (props) => {
   // Haven't Mapped for automatic, speed, price
-  const { id, vehicle_images, vehicle, vehicle_brand, automatic, speed, price_of_sale } = props.item;
+  const { id, vehicle_images, vehicle, vehicle_brand, fuel_type, mileage, price_of_sale } = props.item;
   const [priceOfSale, setPriceOfSale] = useState(0);
 
   useEffect(() => {
-    setPriceOfSale(addCommas(price_of_sale));
+    setPriceOfSale(price_of_sale);
   }, []);
 
   return (
@@ -24,7 +26,8 @@ const CarItem = (props) => {
         <div className="car__item-content mt-4">
           <h4 className="section__title text-center">{vehicle_brand.brand_name} {vehicle}</h4>
           <h6 className="rent__price text-center mt-">
-            ${priceOfSale} <span>/ Day</span>
+            {/* ${priceOfSale} <span>/ Day</span> */}
+            RM {priceOfSale}
           </h6>
 
           <div className="car__item-info d-flex align-items-center justify-content-between mt-3 mb-4">
@@ -32,10 +35,10 @@ const CarItem = (props) => {
               <i className="ri-car-line"></i> {vehicle}
             </span>
             <span className=" d-flex align-items-center gap-1">
-              <i className="ri-settings-2-line"></i> {automatic}
+              <i><FaGasPump/></i> {fuel_type}
             </span>
             <span className=" d-flex align-items-center gap-1">
-              <i className="ri-timer-flash-line"></i> {speed}
+              <i><BsSpeedometer/></i> {addCommas(mileage) + " km"} 
             </span>
           </div>
 

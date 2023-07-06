@@ -99,3 +99,13 @@
 .image-column:hover .delete-icon-middle {
   opacity: 1;
 }
+
+.delete-icon-document{
+  color: red;
+  padding-bottom: 0.1rem;
+  cursor: pointer;
+}
+
+.disable-click{
+  pointer-events: none;
+}

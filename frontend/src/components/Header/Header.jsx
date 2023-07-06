@@ -23,8 +23,8 @@ const navLinks = [
   },
 
   {
-    path: "/contact",
-    display: "Contact",
+    // path: "/contact",
+    // display: "Contact",
   },
 ];
 
@@ -49,6 +49,10 @@ const Header = ({ isLogin, setLogin}) => {
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
 
+  function navigateToWhatsApp() {
+    // window.location.href = 'https://api.whatsapp.com/send?phone=60123160808';
+    window.open('https://api.whatsapp.com/send?phone=60123160808', '_blank');
+  }
 
 
   const handleSignOut = () => { localStorage.clear();setLogin(false); navigate("/admin/sign-in")}
@@ -122,9 +126,13 @@ const Header = ({ isLogin, setLogin}) => {
       return (
         <header className="header">
           {NotAdminPage() && (
-            <Helmet>
-              <script defer src="https://widget.tochat.be/bundle.js?key=76872d3b-f925-4359-b7c1-5f94ef9dbe95" />
-            </Helmet>
+            // <Helmet>
+            //   <script defer src="https://widget.tochat.be/bundle.js?key=76872d3b-f925-4359-b7c1-5f94ef9dbe95" />
+            // </Helmet>
+                    <Helmet>
+                      <script defer src={process.env.REACT_APP_TOCHAT_KEY}/>
+                    </Helmet>
+
           )}
         {/* ============ header top ============ */}
         <div className="header__top">
@@ -153,9 +161,12 @@ const Header = ({ isLogin, setLogin}) => {
   
               <Col lg="2" md="3" sm="0" className=" d-flex align-items-center justify-content-end " >
                 <button className="header__btn btn ">
-                  <Link to="/contact">
+                  {/* <Link to="/contact">
                     <i className="ri-phone-line"></i> Request a call
-                  </Link>
+                  </Link> */}
+                    <Link onClick={navigateToWhatsApp}>
+                      <i className="ri-phone-line"></i> Request a quote
+                    </Link>
                 </button>
               </Col>
             </Row>

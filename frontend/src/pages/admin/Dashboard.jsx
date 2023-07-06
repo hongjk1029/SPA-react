@@ -43,13 +43,13 @@ const Dashboard = () => {
       redirectUrl: "/admin/brands",
       background: "card-header pt-4 bg-success"
     },
-    {
-      id: 1003,
-      amount: 1,
-      displayName: "QUERIES",
-      redirectUrl: "/admin/manage-query",
-      background: "card-header pt-4 bg-primary"
-    },
+    // {
+    //   id: 1003,
+    //   amount: 1,
+    //   displayName: "QUERIES",
+    //   redirectUrl: "/admin/manage-query",
+    //   background: "card-header pt-4 bg-primary"
+    // },
   ];
 
   return (
