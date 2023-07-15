@@ -9,6 +9,7 @@ from django.http import Http404, HttpResponse
 from core import settings
 import io
 from django.shortcuts import get_list_or_404
+from vehicle import filters
 
 # Vehicle Brand Here
 class BrandList(generics.ListCreateAPIView):
@@ -40,6 +41,7 @@ class VehicleList(generics.ListCreateAPIView):
     """
     queryset = Vehicle.objects.exclude(removed__isnull=False)
     serializer_class = vehicle_srlz.VehicleSerializer
+    filterset_class = filters.VehicleFilter
 
 class VehicleDetails(generics.RetrieveUpdateDestroyAPIView):
     """
