@@ -93,7 +93,42 @@ const CarDetails = () => {
                   {vehicles.vehicle_overview}
                 </p>
 
-                <div
+                <table class="table table-hover width-80">
+                  <thead>
+                    <tr>
+                      <th scope="col-4" className="px-0">Specifications</th>
+                      <th scope="col-4" className="px-0"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="px-0">Brand</td>
+                      <td className="px-0">{brand}</td>
+                    </tr>
+                    <tr>
+                      <td className="px-0">Model</td>
+                      <td className="px-0">{vehicles.vehicle}</td>
+                    </tr>
+                    <tr>
+                      <td className="px-0">Fuel Type</td>
+                      <td className="px-0">{vehicles.fuel_type}</td>
+                    </tr>
+                    <tr>
+                      <td className="px-0">Mileage</td>
+                      <td className="px-0">{addCommas(mileage) + " km"}</td>
+                    </tr>
+                    <tr>
+                      <td className="px-0">Seating Capacity</td>
+                      <td className="px-0">{vehicles.seating_capacity}</td>
+                    </tr>
+                    <tr>
+                      <td className="px-0">Model Year</td>
+                      <td className="px-0">{vehicles.model_year}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                {/* <div
                   className=" d-flex align-items-center mt-3"
                   style={{ columnGap: "4rem" }}
                 >
@@ -121,9 +156,9 @@ const CarDetails = () => {
                     ><BsSpeedometer className="iconPadding"/></i>{" "}
                     {addCommas(mileage) + " km"}
                   </span>
-                </div>
+                </div> */}
 
-                <div
+                {/* <div
                   className=" d-flex align-items-center mt-3"
                   style={{ columnGap: "2.8rem" }}
                 >
@@ -152,9 +187,8 @@ const CarDetails = () => {
                     ></i>{" "}
                     {brand}
                   </span>
-                </div>
+                </div> */}
               </div>
-              <br></br>
               
               <button className="btnWhatsapp" onClick={navigateToWhatsApp}>
                 
