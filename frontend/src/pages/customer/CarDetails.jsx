@@ -93,7 +93,7 @@ const CarDetails = () => {
                   {vehicles.vehicle_overview}
                 </p>
 
-                <table class="table table-hover width-80">
+                <table class="table table-hover width-60">
                   <thead>
                     <tr>
                       <th scope="col-4" className="px-0">Specifications</th>
