@@ -61,7 +61,7 @@ export function getModels(){
 export function getVehicles(){ 
   return axios 
     .get(`${BASE_URL}/${VEHICLE_URL}`) 
-    .then(handleVehiclesResponse) 
+    .then(handleVehiclesResponse)  
     .catch(handleError); 
 }; 
 
@@ -91,9 +91,9 @@ export function addVehicle(fileData){
 }; 
 
 export function updateVehicleById(id, fileData){ 
-  for (var pair of fileData.entries()) {
-    console.log(pair[0]+ ', ' + pair[1]); 
-  }
+  // for (var pair of fileData.entries()) {
+  //   console.log(pair[0]+ ', ' + pair[1]); 
+  // }
   return axios 
     .put(`${BASE_URL}/${VEHICLE_URL}${id}/`, fileData, {
       headers: {

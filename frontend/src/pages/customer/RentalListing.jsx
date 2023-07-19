@@ -7,11 +7,11 @@ import carData from "../../assets/data/carData";
 import FindCarForm from "../../components/UI/FindCarForm";
 import { getVehiclesBySaleType } from "../../services/api/Provider";
 
-const CarListing = () => {
+const RentalListing = () => {
   const [vehicles, setVehicles] = useState([]);
 
   useEffect(() => {
-    _getVehiclesBySaleType('sale');
+    _getVehiclesBySaleType('rental');
  }, []);
 
   function _getVehiclesBySaleType(saleType) {
@@ -64,4 +64,4 @@ const CarListing = () => {
   );
 };
 
-export default CarListing;
+export default RentalListing;
