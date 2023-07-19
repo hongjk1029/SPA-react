@@ -199,7 +199,6 @@ function UpdateVehicles(){
 
         updateVehicleById(vehicleId, fileData).then(response => 
         { 
-          console.log(response);
           if (response?.request?.statusText != "Bad Request"){
             setAlertStatus(true)
             setTimeout(() => {

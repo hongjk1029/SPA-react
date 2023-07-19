@@ -18,8 +18,12 @@ const navLinks = [
     display: "About",
   },
   {
-    path: "/cars",
-    display: "Cars",
+    path: "/cars/sale",
+    display: "Sale",
+  },
+  {
+    path: "/cars/rental",
+    display: "Rental",
   },
 
   {
