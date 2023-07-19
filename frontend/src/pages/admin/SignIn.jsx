@@ -49,7 +49,7 @@ const SignIn = ({setIsAdminLogin}) => {
                       <hr />
                       <form onSubmit={handleSubmit} id="signInForm">
                         <div className="form-group mb-3">
-                          <input onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Email address" required="" autoComplete="on" className="form-control rounded-pill border-0 shadow-sm px-4" ></input>
+                          <input onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" required="" autoComplete="on" className="form-control rounded-pill border-0 shadow-sm px-4" ></input>
                         </div>
                         <div className="form-group mb-3">
                           <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" required="" autoComplete="on" className="form-control rounded-pill border-0 shadow-sm px-4" ></input>

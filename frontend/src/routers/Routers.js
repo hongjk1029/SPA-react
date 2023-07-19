@@ -23,6 +23,7 @@ import UpdateVehicles from "../pages/admin/vehicle/Update";
 import Home from "../pages/customer/Home";
 import About from "../pages/customer/About";
 import CarListing from "../pages/customer/CarListing";
+import RentalListing from "../pages/customer/RentalListing";
 import CarDetails from "../pages/customer/CarDetails";
 import Contact from "../pages/customer/Contact";
 import PrivacyPolicy from "../pages/customer/PrivacyPolicy";
@@ -66,7 +67,8 @@ const Routers = ({isAdmin , setLogin}) => {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/cars" element={<CarListing />} />
+          <Route path="/cars/sale" element={<CarListing />} />
+          <Route path="/cars/rental" element={<RentalListing />} />
           <Route path="/policy" element={<PrivacyPolicy/>} />
           <Route path="/terms" element={<TermsCondition/>} />
           <Route path="/contact" element={<Contact />} />

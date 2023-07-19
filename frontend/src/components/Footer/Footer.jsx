@@ -28,8 +28,13 @@ const quickLinksCustomer = [
   },
 
   {
-    path: "/cars",
-    display: "Car Listing",
+    path: "/cars/sale",
+    display: "Sale",
+  },
+
+  {
+    path: "/cars/rental",
+    display: "Rental",
   },
 
   {
