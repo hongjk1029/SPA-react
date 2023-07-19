@@ -65,6 +65,13 @@ export function getVehicles(){
     .catch(handleError); 
 }; 
 
+export function getVehiclesBySaleType(saleType){ 
+  return axios 
+    .get(`${BASE_URL}/${VEHICLE_URL}?vehicle_type=${saleType}`) 
+    .then(handleVehiclesResponse) 
+    .catch(handleError); 
+}; 
+
 export function getVehiclesById(id){ 
   return axios 
     .get(`${BASE_URL}/${VEHICLE_URL}${id}/`) 
