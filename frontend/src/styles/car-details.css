@@ -41,3 +41,7 @@
 .iconPadding{
     padding-bottom: 0.15rem;
 }
+
+.width-60{
+    width: 60% !important;
+}
