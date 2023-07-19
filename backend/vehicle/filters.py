@@ -16,5 +16,5 @@ class VehicleFilter(filterset.FilterSet):
         if standardize_get_value == 'sale':
             filter_list = queryset.filter(Q(price_per_day__isnull=True, price_per_month__isnull=True) | Q(price_per_day=zero_decimal, price_per_month=zero_decimal))
         if standardize_get_value == 'rental':
-            filter_list = queryset.filter(Q(price_of_cost__isnull=True, price_of_sale__isnull=True) | Q(price_of_cost=zero_decimal, price_of_sale=zero_decimal))
+            filter_list = queryset.filter(Q(price_of_sale__isnull=True) | Q(price_of_sale=zero_decimal))
         return filter_list
