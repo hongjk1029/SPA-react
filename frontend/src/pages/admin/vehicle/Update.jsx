@@ -169,6 +169,7 @@ function UpdateVehicles(){
         setAccessories([])
       }
       document.getElementById("vehicleForm").reset()
+      window.scrollTo(0, 0);
     }
       
     const saveVehicle = event =>{
@@ -207,6 +208,7 @@ function UpdateVehicles(){
               })}, 3000)
           } 
         });
+        window.scrollTo(0, 0);
       }
     };
 
