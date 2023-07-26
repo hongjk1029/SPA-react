@@ -149,20 +149,20 @@ module "Postgres" {
   max_allocated_storage        = "1000"
   password                     = random_password.database_password.result
   project                      = var.project
-  subnetIds                    = module.vpc.private_subnets
+  subnetIds                    = module.vpc.public_subnets
   username                     = var.db_user_name
   vpc_security_group_ids       = ["${aws_security_group.rds_secrurity_group.id}"]
   allocated_storage            = var.db_storage
   db_name                      = var.db_name
   env                          = var.env
   multi_az                     = var.rds_multi_az
-  performance_insights_enabled = "true"
+  performance_insights_enabled = "false"
 }
 
 
 # ##ECS-Cluster
 resource "aws_ecs_cluster" "ecs_cluster" {
-  name = "${var.project}-cluster"
+  name = "${var.project}-cluster-${var.env}" # Need Testing cluster instead
 
   setting {
     name  = "containerInsights"
@@ -208,7 +208,7 @@ module "server" {
   cluster_arn        = aws_ecs_cluster.ecs_cluster.arn
   cluster_name       = aws_ecs_cluster.ecs_cluster.name
   security_groups_id = ["${aws_security_group.ecs_task_security_group_default.id}"]
-  subnets_id         = module.vpc.private_subnets
+  subnets_id         = module.vpc.public_subnets
   execution_role_arn = aws_iam_role.execution_role.arn
   vpc_id             = module.vpc.vpc_id
   alb_arn            = module.ALB.alb.arn
@@ -216,8 +216,8 @@ module "server" {
   cpu                = var.server_cpu
   memory             = var.server_ram
   containerport      = 8000
-  secrets            = module.env_vars.ssm_params
-  environment        = module.env_vars.environment
+  # secrets            = module.env_vars.ssm_params
+  # environment        = module.env_vars.environment
   ecr_name           = module.server_ecr_repo.repository_url
   listener_arn       = module.ALB.listener.arn
   healthcheck        = "/health-check/"
