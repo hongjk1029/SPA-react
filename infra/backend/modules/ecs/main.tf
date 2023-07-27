@@ -18,7 +18,7 @@ resource "aws_iam_role" "task_role" {
 
 # Allow ECS container to access S3
 resource "aws_iam_policy" "task_policy" {
-  name = "task_policy_${var.repo}"
+  name = "task_policy_${var.repo}_${var.env}"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -60,8 +60,8 @@ resource "aws_ecs_task_definition" "task_definition" {
       name        = var.repo,
       command     = var.command,
       entryPoint  = var.entry_point
-      environment = var.environment,
-      secrets     = var.secrets,
+      # environment = var.environment,
+      # secrets     = var.secrets,
       stopTimeout = 10, # Stop-timeout to stop a container in 10 seconds
       logConfiguration = {
         "logDriver" = "awslogs",
@@ -117,7 +117,7 @@ resource "aws_lb_listener_rule" "listener_rule" {
 }
 
 resource "aws_ecs_service" "ecs_service" {
-  name                   = "${var.repo}-service"
+  name                   = "${var.repo}-service-${var.env}"
   cluster                = var.cluster_arn
   force_new_deployment   = true
   enable_execute_command = true
@@ -133,7 +133,7 @@ resource "aws_ecs_service" "ecs_service" {
   network_configuration {
     subnets          = var.subnets_id
     security_groups  = var.security_groups_id
-    assign_public_ip = false
+    assign_public_ip = true
   }
 }
 

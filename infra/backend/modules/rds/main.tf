@@ -21,28 +21,28 @@ resource "aws_db_subnet_group" "rds_subnet_id" {
   name       = "${var.project}-${var.env}-rdssubnetgroup"
 }
 
-resource "aws_db_parameter_group" "custom_parameter_group_psql14" {
-  name   = "custom-parameter-group-psql-14"
-  family = "postgres14"
+# resource "aws_db_parameter_group" "custom_parameter_group_psql14" {
+#   name   = "custom-parameter-group-psql-14"
+#   family = "postgres14"
 
-  parameter {
-    apply_method = "pending-reboot"
-    name         = "rds.logical_replication"
-    value        = "1"
-  }
+#   parameter {
+#     apply_method = "pending-reboot"
+#     name         = "rds.logical_replication"
+#     value        = "1"
+#   }
 
-  parameter {
-    apply_method = "pending-reboot"
-    name         = "shared_preload_libraries"
-    value        = "pg_stat_statements,pglogical"
-  }
+#   parameter {
+#     apply_method = "pending-reboot"
+#     name         = "shared_preload_libraries"
+#     value        = "pg_stat_statements,pglogical"
+#   }
 
-  parameter {
-    apply_method = "pending-reboot"
-    name         = "max_wal_senders"
-    value        = "30"
-  }
-}
+#   parameter {
+#     apply_method = "pending-reboot"
+#     name         = "max_wal_senders"
+#     value        = "30"
+#   }
+# }
 
 resource "aws_db_instance" "rds_cluster" {
   allocated_storage            = var.allocated_storage
@@ -63,7 +63,7 @@ resource "aws_db_instance" "rds_cluster" {
   monitoring_interval          = 60
   apply_immediately            = true
   performance_insights_enabled = var.performance_insights_enabled
-  parameter_group_name         = aws_db_parameter_group.custom_parameter_group_psql14.name
+  # parameter_group_name         = aws_db_parameter_group.custom_parameter_group_psql14.name
 }
 
 # TODO: Need a Bastion Server
