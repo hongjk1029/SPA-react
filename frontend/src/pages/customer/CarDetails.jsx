@@ -25,7 +25,7 @@ const CarDetails = () => {
   const [priceOfMonth, setPriceOfMonth] = useState(0);
   const [mileage, setMileage] = useState(0);
 
-  const addCommas = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const addCommas = num => num !== null ? num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null
 
   useEffect(() => {
     _getVehiclesById(id);
