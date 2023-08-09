@@ -11,13 +11,6 @@
   background-size: cover;
 }
 
-.slider__item-02 {
-  background: linear-gradient(rgb(0, 13, 107, 0.5), rgb(0, 13, 107, 0.5)),
-    url("../assets/all-images/slider-img/slider-5.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 .slider__item-03 {
   background: linear-gradient(rgb(0, 13, 107, 0.5), rgb(0, 13, 107, 0.5)),
