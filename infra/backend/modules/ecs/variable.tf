@@ -16,6 +16,6 @@ variable "ecr_name" {}
 variable "listener_arn" {}
 variable "healthcheck" {}
 variable "command" {}
-variable "secrets" {}
-variable "environment" {}
+# variable "secrets" {}
+# variable "environment" {}
 variable "entry_point" {}
