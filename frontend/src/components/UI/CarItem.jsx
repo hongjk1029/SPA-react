@@ -5,7 +5,7 @@ import { BsSpeedometer } from "react-icons/bs";
 import { FaGasPump } from "react-icons/fa";
 import "../../styles/car-item.css";
 
-const addCommas = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+const addCommas = num => num !== null ? num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null
 
 const CarItem = (props) => {
   // Haven't Mapped for automatic, speed, price
@@ -32,18 +32,30 @@ const CarItem = (props) => {
               {/* ${priceOfSale} <span>/ Day</span> */}
               RM {addCommas(priceOfSale)}
             </h6>
-  
+
             <div className="car__item-info d-flex align-items-center justify-content-between mt-3 mb-4">
-              <span className=" d-flex align-items-center gap-1">
-                <i className="ri-car-line"></i> {vehicle}
-              </span>
-              <span className=" d-flex align-items-center gap-1">
-                <i><FaGasPump/></i> {fuel_type}
-              </span>
-              <span className=" d-flex align-items-center gap-1">
-                <i><BsSpeedometer/></i> {addCommas(mileage) + " km"} 
-              </span>
-            </div>
+              <table className="table table-borderless">
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="d-flex align-items-center gap-1">
+                      <i className="ri-car-line"></i> {vehicle}
+                    </span>
+                  </td>
+                  <td>
+                    <span className="d-flex align-items-center gap-1">
+                      <i><FaGasPump/></i> {fuel_type}
+                    </span>
+                  </td>
+                  <td>
+                    <span className="d-flex align-items-center gap-1">
+                      <i><BsSpeedometer/></i> {addCommas(mileage) + " km"} 
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
   
             {/* <Link to={`/cars/${vehicle_brand.brand_name}${vehicle}/${id}`}>
               <button className=" w-50 car__item-btn car__btn-rent">
